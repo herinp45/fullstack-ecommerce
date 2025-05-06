@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EcommerceApplication {
 
-	// http://localhost:8082/
-	@GetMapping("/")
-	public String hello() {
-		return "Hello World";
-	}
+//	// http://localhost:8082/
+//	@GetMapping("/")
+//	public String hello() {
+//		return "Hello World";
+//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(EcommerceApplication.class, args);
