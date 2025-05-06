@@ -14,7 +14,6 @@ This project is a full-featured e-commerce website built using modern backend an
 - Cart Management
 - Checkout & Order Placement
 - Stripe Payment Gateway Integration
-- Admin: Add/Edit/Delete Products (Optional)
 - Responsive Frontend (React)
 - Secure Backend (Spring Boot)
 - Dockerized Microservices
