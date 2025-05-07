@@ -1,8 +1,11 @@
 package com.herin.ecommerce.controller;
 
+import com.herin.ecommerce.dto.ProductRequestDTO;
+import com.herin.ecommerce.dto.ProductResponseDTO;
 import com.herin.ecommerce.model.ProductEntity;
 import com.herin.ecommerce.repository.ProductRepository;
 import com.herin.ecommerce.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +32,7 @@ public class ProductController {
      * Get all products
      */
     @GetMapping
-    public List<ProductEntity> getAllProducts() {
+    public List<ProductResponseDTO> getAllProducts() {
         return productService.getAllProducts();
     }
 
@@ -37,7 +40,7 @@ public class ProductController {
      * Add a product
      */
     @PostMapping
-    public ProductEntity addProduct(@RequestBody ProductEntity product) {
+    public ProductEntity addProduct(@Valid @RequestBody ProductRequestDTO product) {
         return productService.addProduct(product);
     }
     

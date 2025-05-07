@@ -145,4 +145,20 @@ public class ProductRequestDTO {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    /**
+     * To String method for ProductRequestDTO
+     * @return string description of ProductRequestDTO
+     */
+    @Override
+    public String toString() {
+        return "ProductRequestDTO{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", category='" + category + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
