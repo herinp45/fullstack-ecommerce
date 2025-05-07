@@ -2,6 +2,7 @@ package com.herin.ecommerce.controller;
 
 import com.herin.ecommerce.model.ProductEntity;
 import com.herin.ecommerce.repository.ProductRepository;
+import com.herin.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,14 +16,13 @@ public class ProductController {
     /**
      * Product repository
      */
-    private final ProductRepository productRepository;
-    
+    private ProductService productService;
+
     /**
      * Constructor
      */
-    @Autowired
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     /**
@@ -30,7 +30,7 @@ public class ProductController {
      */
     @GetMapping
     public List<ProductEntity> getAllProducts() {
-        return productRepository.findAll();
+        return productService.getAllProducts();
     }
 
     /**
@@ -38,7 +38,7 @@ public class ProductController {
      */
     @PostMapping
     public ProductEntity addProduct(@RequestBody ProductEntity product) {
-        return productRepository.save(product);
+        return productService.addProduct(product);
     }
     
 }
