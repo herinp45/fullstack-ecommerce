@@ -16,6 +16,7 @@ import java.util.List;
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
+
     /**
      * Product repository
      */
@@ -40,7 +41,7 @@ public class ProductController {
      * Add a product
      */
     @PostMapping
-    public ProductEntity addProduct(@Valid @RequestBody ProductRequestDTO product) {
+    public ProductResponseDTO addProduct(@Valid @RequestBody ProductRequestDTO product) {
         return productService.addProduct(product);
     }
     
