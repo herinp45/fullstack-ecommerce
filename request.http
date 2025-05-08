@@ -18,5 +18,5 @@ Content-Type: application/json
   "price": 99.99,
   "imageUrl": "https://via.placeholder.com/150",
   "category": "electronics",
-  "quantity": 10
+  "quantity": -1
 }
