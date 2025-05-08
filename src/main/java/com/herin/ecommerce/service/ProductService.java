@@ -2,6 +2,7 @@ package com.herin.ecommerce.service;
 
 import com.herin.ecommerce.dto.ProductRequestDTO;
 import com.herin.ecommerce.dto.ProductResponseDTO;
+import com.herin.ecommerce.mapper.ProductMapper;
 import com.herin.ecommerce.model.ProductEntity;
 import com.herin.ecommerce.repository.ProductRepository;
 import jakarta.validation.Valid;
@@ -17,14 +18,20 @@ public class ProductService {
     /**
      * Product repository
      */
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+
+    /**
+     * Product Mapper
+     */
+    private final ProductMapper productMapper;
 
     /**
      * Constructor
      */
-    public ProductService(ProductRepository productRepository) {
+    @Autowired
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
     /**
@@ -32,7 +39,7 @@ public class ProductService {
      */
     public List<ProductResponseDTO> getAllProducts() {
         // Convert ProductEntity to ProductResponseDTO
-        return productRepository.findAll().stream().map(entity -> mapToDTO(entity)).collect(Collectors.toList());
+        return productRepository.findAll().stream().map(entity -> productMapper.mapToDTO(entity)).collect(Collectors.toList());
     }
 
     /**
@@ -40,38 +47,9 @@ public class ProductService {
      */
     public ProductResponseDTO addProduct(ProductRequestDTO product) {
         // Convert ProductRequestDTO to ProductEntity
-        return mapToDTO(productRepository.save(mapToEntity(product)));
+        return productMapper.mapToDTO(productRepository.save(productMapper.mapToEntity(product)));
     }
 
-    /**
-     * Map a ProductRequestDTO to a ProductEntity
-     */
-    public ProductEntity mapToEntity(ProductRequestDTO dto) {
-        return new ProductEntity(
-                dto.getName(),
-                dto.getDescription(),
-                dto.getPrice(),
-                dto.getImageUrl(),
-                dto.getCategory(),
-                dto.getQuantity()
-        );
-    }
-
-    /**
-     * Map a ProductEntity to a ProductResponseDTO
-     */
-    public ProductResponseDTO mapToDTO(ProductEntity dto) {
-        return new ProductResponseDTO(
-            dto.getId(),
-            dto.getName(),
-            dto.getDescription(),
-            dto.getPrice(),
-            dto.getImageUrl(),
-            dto.getCategory(),
-            dto.getQuantity()
-        );
-    }
-    
 
     
 }

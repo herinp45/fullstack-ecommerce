@@ -13,10 +13,10 @@ POST http://localhost:8082/api/v1/products
 Content-Type: application/json
 
 {
-  "name": "Nike Air Max",
-  "description": "Running shoes",
-  "price": 120.99,
-  "imageUrl": "https://example.com/shoe.jpg",
-  "category": "Shoes",
-  "quantity": 5
+  "name": "Test Product",
+  "description": "A great product",
+  "price": 99.99,
+  "imageUrl": "https://via.placeholder.com/150",
+  "category": "electronics",
+  "quantity": 10
 }
