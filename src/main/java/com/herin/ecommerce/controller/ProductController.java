@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,10 +45,30 @@ public class ProductController {
      * Add a product
      */
     @PostMapping
-    public ResponseEntity<ProductResponseDTO> addProduct(@Valid @RequestBody ProductRequestDTO product) {
-        ProductResponseDTO response = productService.addProduct(product);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    public ProductResponseDTO addProduct(@Valid @RequestBody ProductRequestDTO product) {
+        return productService.addProduct(product);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponseDTO> getProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.getProductById(id));
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponseDTO> updatedProduct(@PathVariable Long id, @Valid @RequestBody ProductRequestDTO product) {
+        return ResponseEntity.ok(productService.updateProduct(id, product));
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
+    }
+    
+
+    
 
 
 }
