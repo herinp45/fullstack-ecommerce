@@ -74,6 +74,12 @@ public class ProductService {
 
     }
 
+    public ProductResponseDTO getProduct(Long id) {
+        ProductEntity existing = productRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+        return productMapper.mapToDTO(existing);
+    }
+
 
 
 
