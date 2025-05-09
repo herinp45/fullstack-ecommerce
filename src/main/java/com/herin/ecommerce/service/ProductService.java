@@ -7,8 +7,10 @@ import com.herin.ecommerce.model.ProductEntity;
 import com.herin.ecommerce.repository.ProductRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,6 +51,30 @@ public class ProductService {
         // Convert ProductRequestDTO to ProductEntity
         return productMapper.mapToDTO(productRepository.save(productMapper.mapToEntity(product)));
     }
+
+    public ProductResponseDTO updateProduct(Long id, ProductRequestDTO product) {
+        ProductEntity existing = productRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+
+        // Update fields manually
+        existing.setName(product.getName());
+        existing.setDescription(product.getDescription());
+        existing.setPrice(product.getPrice());
+        existing.setQuantity(product.getQuantity());
+        existing.setCategory(product.getCategory());
+        existing.setImageUrl(product.getImageUrl());
+        return productMapper.mapToDTO(productRepository.save(existing));
+    }
+
+    public void deleteProduct(Long id) {
+        ProductEntity existing = productRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+
+        productRepository.delete(existing);
+
+    }
+
+
 
 
     
