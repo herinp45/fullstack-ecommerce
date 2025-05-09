@@ -52,7 +52,11 @@ public class ProductService {
         return productMapper.mapToDTO(productRepository.save(productMapper.mapToEntity(product)));
     }
 
+    /**
+     * Update a product
+     */
     public ProductResponseDTO updateProduct(Long id, ProductRequestDTO product) {
+        // Check if the product exists
         ProductEntity existing = productRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
 
@@ -66,7 +70,11 @@ public class ProductService {
         return productMapper.mapToDTO(productRepository.save(existing));
     }
 
+    /**
+     * Delete a product
+     */
     public void deleteProduct(Long id) {
+        // Check if the product exists
         ProductEntity existing = productRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
 
@@ -74,14 +82,14 @@ public class ProductService {
 
     }
 
-    public ProductResponseDTO getProduct(Long id) {
+    /**
+     * Get a product by id
+     */
+    public ProductResponseDTO getProductById(Long id) {
+        // Check if the product exists
         ProductEntity existing = productRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
         return productMapper.mapToDTO(existing);
     }
 
-
-
-
-    
 }

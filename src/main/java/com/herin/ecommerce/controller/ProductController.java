@@ -49,26 +49,31 @@ public class ProductController {
         return productService.addProduct(product);
     }
 
+    /**
+     * Get a product by id
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponseDTO> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.getProductById(id));
 
     }
 
+    /**
+     * Update a product
+     */
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponseDTO> updatedProduct(@PathVariable Long id, @Valid @RequestBody ProductRequestDTO product) {
         return ResponseEntity.ok(productService.updateProduct(id, product));
 
     }
 
+    /**
+     * Delete a product
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }
-    
-
-    
-
 
 }

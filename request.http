@@ -20,3 +20,24 @@ Content-Type: application/json
   "category": "electronics",
   "quantity": 5
 }
+
+###
+
+GET http://localhost:8082/api/v1/products/2
+
+
+###
+PUT http://localhost:8082/api/v1/products/2
+Content-Type: application/json
+
+{
+  "name": "Herin",
+  "description": "Now with RGB lighting",
+  "price": 24.99,
+  "imageUrl": "https://via.placeholder.com/150",
+  "category": "electronics",
+  "quantity": 8
+}
+
+###
+DELETE http://localhost:8082/api/v1/products/6
