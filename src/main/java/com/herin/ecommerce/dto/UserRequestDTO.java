@@ -1,13 +1,27 @@
 package com.herin.ecommerce.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.UniqueElements;
+
 import java.util.Objects;
 
 public class UserRequestDTO {
-    //username  
+    //username
+    @NotNull(message = "Username cannot be null")
+    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
     private String username;
     //email
+    @NotNull(message = "Email is required")
+    @Email(message = "Invalid email format")
     private String email;
+    
     //password
+    @NotNull(message = "Password is required")
+    @Size(min = 8, message = "Password must be at least 8 characters long")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$", message = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character")
     private String password;
 
     //constructor
