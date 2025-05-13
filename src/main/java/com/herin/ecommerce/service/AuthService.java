@@ -1,5 +1,6 @@
 package com.herin.ecommerce.service;
 
+import com.herin.ecommerce.dto.LoginRequestDTO;
 import com.herin.ecommerce.dto.UserRequestDTO;
 import com.herin.ecommerce.dto.UserResponseDTO;
 import com.herin.ecommerce.model.UserEntity;
@@ -31,6 +32,15 @@ public class AuthService {
                 passwordEncoder.encode(userRequestDTO.getPassword()),
                 userRequestDTO.getEmail());
         userRepository.save(user);
+        return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
+    }
+
+    public UserResponseDTO login(LoginRequestDTO loginRequestDTO) {
+        UserEntity user = userRepository.findByUsernameOrEmail(loginRequestDTO.getIdentifier(), loginRequestDTO.getIdentifier())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        if (!passwordEncoder.matches(loginRequestDTO.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Wrong password");
+        }
         return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
     }
 }
