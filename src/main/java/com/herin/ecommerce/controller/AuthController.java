@@ -1,0 +1,36 @@
+package com.herin.ecommerce.controller;
+
+import com.herin.ecommerce.dto.LoginRequestDTO;
+import com.herin.ecommerce.dto.UserRequestDTO;
+import com.herin.ecommerce.dto.UserResponseDTO;
+import com.herin.ecommerce.service.AuthService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/auth")
+public class AuthController {
+    private final AuthService authService;
+
+    @Autowired
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserResponseDTO> register(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(authService.register(userRequestDTO));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserResponseDTO>  login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
+        return ResponseEntity.ok(authService.login(loginRequestDTO));
+    }
+}
