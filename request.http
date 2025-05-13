@@ -41,3 +41,27 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8082/api/v1/products/6
+
+### User
+
+## Register
+
+POST http://localhost:8082/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "h123",
+  "email": "hn@example.com",
+  "password": "StrongPass@123"
+}
+
+
+###Login
+
+POST http://localhost:8082/api/v1/auth/login
+Content-Type: application/json
+
+{
+"identifier": "h123",
+"password": "StrongPass@123"
+}
