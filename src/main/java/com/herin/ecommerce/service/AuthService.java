@@ -6,12 +6,17 @@ import com.herin.ecommerce.dto.UserResponseDTO;
 import com.herin.ecommerce.model.UserEntity;
 import com.herin.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+
+import java.util.ArrayList;
 
 @Service
-public class AuthService {
+public class AuthService implements UserDetailsService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -23,24 +28,44 @@ public class AuthService {
 
     public UserResponseDTO register(UserRequestDTO userRequestDTO) {
         if (userRepository.existsByUsername(userRequestDTO.getUsername())) {
-            throw new RuntimeException("User already exists");
+            throw new RuntimeException("Username already exists");
         }
+
         if (userRepository.existsByEmail(userRequestDTO.getEmail())) {
             throw new RuntimeException("Email already exists");
         }
-        UserEntity user = new UserEntity(userRequestDTO.getUsername(),
+
+        UserEntity user = new UserEntity(
+                userRequestDTO.getUsername(),
                 passwordEncoder.encode(userRequestDTO.getPassword()),
-                userRequestDTO.getEmail());
+                userRequestDTO.getEmail()
+        );
+
         userRepository.save(user);
         return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
     }
 
     public UserResponseDTO login(LoginRequestDTO loginRequestDTO) {
-        UserEntity user = userRepository.findByUsernameOrEmail(loginRequestDTO.getIdentifier(), loginRequestDTO.getIdentifier())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        UserEntity user = userRepository.findByUsernameOrEmail(
+                        loginRequestDTO.getIdentifier(),
+                        loginRequestDTO.getIdentifier())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
         if (!passwordEncoder.matches(loginRequestDTO.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Wrong password");
+            throw new RuntimeException("Invalid password");
         }
+
         return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                user.getPassword(),
+                new ArrayList<>()
+        );
     }
 }
