@@ -4,6 +4,7 @@ import com.herin.ecommerce.dto.LoginRequestDTO;
 import com.herin.ecommerce.dto.UserRequestDTO;
 import com.herin.ecommerce.dto.UserResponseDTO;
 import com.herin.ecommerce.model.UserEntity;
+import com.herin.ecommerce.model.UserPrincipal;
 import com.herin.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -60,12 +61,9 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findByUsername(username)
+        UserEntity user = (UserEntity) userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
-                user.getPassword(),
-                new ArrayList<>()
+        return new UserPrincipal(user);
         );
     }
 }
