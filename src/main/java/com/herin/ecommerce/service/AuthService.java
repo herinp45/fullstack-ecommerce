@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class AuthService implements UserDetailsService {
+public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -59,11 +59,5 @@ public class AuthService implements UserDetailsService {
         return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = (UserEntity) userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return new UserPrincipal(user);
-        );
-    }
+
 }
