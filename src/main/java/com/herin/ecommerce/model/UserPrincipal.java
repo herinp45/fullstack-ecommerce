@@ -47,4 +47,9 @@ public class UserPrincipal implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public UserEntity getUser() {
+        return this.user;
+    }
+
 }

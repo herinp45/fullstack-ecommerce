@@ -50,8 +50,8 @@ POST http://localhost:8082/api/v1/auth/register
 Content-Type: application/json
 
 {
-  "username": "h123",
-  "email": "hn@example.com",
+  "username": "h23451",
+  "email": "hn@xample.com",
   "password": "StrongPass@123"
 }
 
@@ -62,6 +62,6 @@ POST http://localhost:8082/api/v1/auth/login
 Content-Type: application/json
 
 {
-"identifier": "h123",
+"identifier": "hn@xample.com",
 "password": "StrongPass@123"
 }
