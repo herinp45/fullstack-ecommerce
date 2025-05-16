@@ -63,6 +63,7 @@ public class AuthService {
             UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
             UserEntity user = principal.getUser();
 
+
             return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
         }
         throw new RuntimeException("Invalid password");
