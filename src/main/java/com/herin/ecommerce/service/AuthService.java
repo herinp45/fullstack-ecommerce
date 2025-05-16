@@ -67,7 +67,7 @@ public class AuthService {
 
 
 //            return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
-            return jwtService.generateToken(loginRequestDTO.getIdentifier());
+            return jwtService.generateToken(user.getUsername());
         }
         throw new RuntimeException("Invalid password");
 
