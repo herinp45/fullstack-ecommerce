@@ -24,12 +24,14 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final JWTService jwtService;
 
     @Autowired
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JWTService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
+        this.jwtService = jwtService;
     }
 
     public UserResponseDTO register(UserRequestDTO userRequestDTO) {
@@ -51,7 +53,7 @@ public class AuthService {
         return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
     }
 
-    public UserResponseDTO login(LoginRequestDTO loginRequestDTO) {
+    public String login(LoginRequestDTO loginRequestDTO) {
         Authentication authentication =
                 authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(
@@ -64,7 +66,8 @@ public class AuthService {
             UserEntity user = principal.getUser();
 
 
-            return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
+//            return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
+            return jwtService.generateToken(loginRequestDTO.getIdentifier());
         }
         throw new RuntimeException("Invalid password");
 
