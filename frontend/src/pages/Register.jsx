@@ -10,6 +10,7 @@ function Resgister() {
         "dark:ring-white dark:ring-opacity-30 focus:outline-none focus:ring-2 " +
         "focus:ring-blue-400 focus:ring-opacity-50 transition";
 
+
     const buttonClass = "px-6 py-2 text-white font-semibold text-base tracking-wide " +
         "transition-colors duration-300 transform bg-blue-600 rounded-lg " +
         "hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-50";
@@ -21,7 +22,7 @@ function Resgister() {
                 <div className="px-6 py-4">
 
                     <h3 className="mt-3 text-xl font-medium text-center text-gray-600 dark:text-gray-200">
-                        Welcome Back
+                        Welcome New User
                     </h3>
                     <p className="mt-1 text-center text-gray-500 dark:text-gray-400">Login or Create Account</p>
                     <form>
