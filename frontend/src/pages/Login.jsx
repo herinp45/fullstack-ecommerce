@@ -6,7 +6,7 @@ function Login() {
     const [error, setError] = useState("");
 
     const inputClass = "w-full h-11 px-3 rounded-md ring-1 ring-black ring-opacity-20 " +
-        "dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 text-gray-200 " +
+        "dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 " +
         "dark:ring-white dark:ring-opacity-30 focus:outline-none focus:ring-2 " +
         "focus:ring-blue-400 focus:ring-opacity-50 transition";
 
