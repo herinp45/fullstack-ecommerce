@@ -1,6 +1,7 @@
 package com.herin.ecommerce.dto;
 
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.UniqueElements;
 
 public class LoginRequestDTO {
 

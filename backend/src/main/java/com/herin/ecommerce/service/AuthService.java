@@ -3,6 +3,7 @@ package com.herin.ecommerce.service;
 import com.herin.ecommerce.dto.LoginRequestDTO;
 import com.herin.ecommerce.dto.UserRequestDTO;
 import com.herin.ecommerce.dto.UserResponseDTO;
+import com.herin.ecommerce.exception.BadRequestException;
 import com.herin.ecommerce.model.UserEntity;
 import com.herin.ecommerce.model.UserPrincipal;
 import com.herin.ecommerce.repository.UserRepository;
@@ -36,11 +37,11 @@ public class AuthService {
 
     public UserResponseDTO register(UserRequestDTO userRequestDTO) {
         if (userRepository.existsByUsername(userRequestDTO.getUsername())) {
-            throw new RuntimeException("Username already exists");
+            throw new BadRequestException("Username already exists");
         }
 
         if (userRepository.existsByEmail(userRequestDTO.getEmail())) {
-            throw new RuntimeException("Email already exists");
+            throw new BadRequestException("Email already exists");
         }
 
         UserEntity user = new UserEntity(
@@ -69,7 +70,7 @@ public class AuthService {
 //            return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
             return jwtService.generateToken(user.getUsername());
         }
-        throw new RuntimeException("Invalid password");
+        throw new BadRequestException("Invalid password");
 
     }
 

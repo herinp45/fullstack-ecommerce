@@ -17,8 +17,11 @@ function Register() {
         }
         catch (err) {
             console.log(err);
-            if (err.response && err.response.data) {
-                alert(err.response.data);
+            if (err.response && err.response.data.error) {
+                alert(err.response.data.error);
+            }
+            else if (err.response && err.response.data) {
+                setError(err.response.data);
             }
             else {
                 alert("Something went wrong!");
@@ -50,7 +53,7 @@ function Register() {
                         <div className="mt-4 mb-5 w-full">
                             <input
                                 className={inputClass}
-                                type="text" value={username} placeholder="Username" aria-label="Username"
+                                type="text" value={error.username || username} placeholder="Username" aria-label="Username"
                                 onChange={(e)=> setUsername(e.target.value)}/>
                         </div>
                         <div className="mt-4 mb-5 w-full">
