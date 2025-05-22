@@ -1,13 +1,14 @@
-import { useState } from "react";
+import {use, useState} from "react";
 
 function Resgister() {
-    const [identifier, setIdentifier] = useState("");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log("Hi");
+        console.log({ username, email, password });
     }
 
     const inputClass = "w-full h-11 px-3 rounded-md ring-1 ring-black ring-opacity-20 " +
@@ -34,17 +35,20 @@ function Resgister() {
                         <div className="mt-4 mb-5 w-full">
                             <input
                                 className={inputClass}
-                                type="text" placeholder="Username" aria-label="Username"/>
+                                type="text" value={username} placeholder="Username" aria-label="Username"
+                                onChange={(e)=> setUsername(e.target.value)}/>
                         </div>
                         <div className="mt-4 mb-5 w-full">
                             <input
                                 className={inputClass}
-                                type="email" placeholder="Email" aria-label="Email"/>
+                                type="email" value={email} placeholder="Email" aria-label="Email"
+                                onChange={(e)=> setEmail(e.target.value)}/>
                         </div>
                         <div className="mb-5 w-full">
                             <input
                                 className={inputClass}
-                                type="password" placeholder="Set Password" aria-label="Password"/>
+                                type="password" value={password} placeholder="Set Password" aria-label="Password"
+                                onChange={(e)=> setPassword(e.target.value)}/>
                         </div>
                         <div className="mt-7 mb-5 w-full flex justify-end">
                             <button className={buttonClass}>Sign Up</button>
