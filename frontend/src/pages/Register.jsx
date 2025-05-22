@@ -9,6 +9,7 @@ function Register() {
 
     async function handleSubmit(event) {
         event.preventDefault();
+        setError("");
         try {
             const response = await axios.post("http://localhost:8082/api/v1/auth/register",
                 { username, email, password });
@@ -51,18 +52,28 @@ function Register() {
                     <p className="mt-1 text-center text-gray-500 dark:text-gray-400">Login or Create Account</p>
                     <form onSubmit={handleSubmit}>
                         <div className="mt-4 mb-5 w-full">
+                            {<div className="mb-2 font-medium text-sm text-red-600 dark:text-red-400">
+
+                                {error.username}
+                            </div>}
                             <input
                                 className={inputClass}
-                                type="text" value={error.username || username} placeholder="Username" aria-label="Username"
+                                type="text" value={username} placeholder="Username" aria-label="Username"
                                 onChange={(e)=> setUsername(e.target.value)}/>
                         </div>
                         <div className="mt-4 mb-5 w-full">
+                            {<div className="mb-2 font-medium text-sm text-red-600 dark:text-red-400">
+                                {error.email}
+                            </div>}
                             <input
                                 className={inputClass}
                                 type="email" value={email} placeholder="Email" aria-label="Email"
                                 onChange={(e)=> setEmail(e.target.value)}/>
                         </div>
                         <div className="mb-5 w-full">
+                            {<div className="mb-2 font-medium text-sm text-red-600 dark:text-red-400">
+                                {error.password}
+                            </div>}
                             <input
                                 className={inputClass}
                                 type="password" value={password} placeholder="Set Password" aria-label="Password"
