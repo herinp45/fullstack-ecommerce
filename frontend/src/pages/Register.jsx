@@ -1,14 +1,29 @@
-import {use, useState} from "react";
+import {useState} from "react";
+import axios from "axios";
 
-function Resgister() {
+function Register() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
-        console.log({ username, email, password });
+        try {
+            const response = await axios.post("http://localhost:8082/api/v1/auth/register",
+                { username, email, password });
+            alert("Registration successful!");
+            console.log(response.data);
+        }
+        catch (err) {
+            console.log(err);
+            if (err.response && err.response.data) {
+                alert(err.response.data);
+            }
+            else {
+                alert("Something went wrong!");
+            }
+        }
     }
 
     const inputClass = "w-full h-11 px-3 rounded-md ring-1 ring-black ring-opacity-20 " +
@@ -65,4 +80,4 @@ function Resgister() {
     );
 }
 
-export default Resgister;
+export default Register;

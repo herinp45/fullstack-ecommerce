@@ -49,11 +49,13 @@ DELETE http://localhost:8082/api/v1/products/6
 POST http://localhost:8082/api/v1/auth/register
 Content-Type: application/json
 
+
 {
-  "username": "h23451",
-  "email": "hn@xample.com",
-  "password": "StrongPass@123"
+  "username": "ab",
+  "email": "bademail",
+  "password": "123"
 }
+
 
 
 ###Login
