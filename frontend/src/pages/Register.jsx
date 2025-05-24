@@ -54,16 +54,12 @@ function Register() {
         <div className="flex flex-col items-center justify-center min-w-screen min-h-screen bg-gray-100 dark:bg-gray-900">
 
             {/* Alert messages */}
-            {alertMessages.map((msg, i) => (
+            {alertMessages.map((msg, index) => (
                 <Alert
-                    key={i}
+                    key={index}
                     type={alertType}
                     message={msg}
-                    onClose={() => {
-                        const copy = [...alertMessages];
-                        copy.splice(i, 1);
-                        setAlertMessages(copy);
-                    }}
+                    onClose={() => setAlertMessages(prev => prev.filter((_, i) => i !== index))}
                 />
             ))}
 
