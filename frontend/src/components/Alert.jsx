@@ -8,7 +8,7 @@ function Alert({ message = "", type = "error", onClose, duration = 5000 }) {
     };
 
     useEffect(() => {
-        if (!message.length) return null;
+        if (!message.length) return ;
         const timer = setTimeout(() => {
             onClose();
         }, duration);

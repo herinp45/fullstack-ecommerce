@@ -8,13 +8,13 @@ function Register() {
     const [password, setPassword] = useState("");
 
     const [fieldErrors, setFieldErrors] = useState({});
-    const [alertMessages, setAlertMessages] = useState([]);
+    const [alertMessage, setAlertMessage] = useState("");
     const [alertType, setAlertType] = useState("error");
 
     async function handleSubmit(event) {
         event.preventDefault();
         setFieldErrors({});
-        setAlertMessages([]);
+        setAlertMessage("");
 
         try {
             const response = await axios.post("http://localhost:8082/api/v1/auth/register", {
@@ -23,19 +23,23 @@ function Register() {
                 password,
             });
 
-            setAlertMessages(["Registration successful!"]);
+            setAlertMessage("Registration successful!");
             setAlertType("success");
 
-        } catch (err) {
+        }
+        catch (err) {
             if (err.response?.data?.error) {
                 const errorObj = err.response.data.error;
                 const msgs = typeof errorObj === "string" ? [errorObj] : Object.values(errorObj);
-                setAlertMessages(msgs);
+                setAlertMessage(msgs);
+                console.log(msgs);
                 setAlertType("error");
-            } else if (err.response?.data) {
+            }
+            else if (err.response?.data) {
                 setFieldErrors(err.response.data);
-            } else {
-                setAlertMessages(["Something went wrong!"]);
+            }
+            else {
+                setAlertMessage("Something went wrong!");
                 setAlertType("error");
             }
         }
@@ -54,14 +58,8 @@ function Register() {
         <div className="flex flex-col items-center justify-center min-w-screen min-h-screen bg-gray-100 dark:bg-gray-900">
 
             {/* Alert messages */}
-            {alertMessages.map((msg, index) => (
-                <Alert
-                    key={index}
-                    type={alertType}
-                    message={msg}
-                    onClose={() => setAlertMessages(prev => prev.filter((_, i) => i !== index))}
-                />
-            ))}
+            {alertMessage &&
+            <Alert type={alertType} message={alertMessage} onClose={() => setAlertMessage("")} />}
 
             {/* Registration Card */}
             <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg dark:bg-gray-800 shadow-md">
