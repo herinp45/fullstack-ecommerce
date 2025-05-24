@@ -1,5 +1,6 @@
 import {useState} from "react";
 import axios from "axios";
+import Alert from "../components/Alert";
 
 function Register() {
     const [username, setUsername] = useState("");
@@ -42,7 +43,8 @@ function Register() {
 
 
     return (
-        <div className="flex items-center justify-center min-w-screen min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div className="flex flex-col items-center justify-center min-w-screen min-h-screen bg-gray-100 dark:bg-gray-900">
+            <Alert type="Succes" message="Your account was registered!"/>
             <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg dark:bg-gray-800 shadow-md">
                 <div className="px-6 py-4">
 
