@@ -1,17 +1,26 @@
 import React from 'react';
 
 
-function Alert({ message = "", type = "error" }) {
+function Alert({ message = "", type = "error", onClose}) {
     if (!message.length) return null;
+
+    const colors = {
+        success: "bg-green-100 text-green-700 border-green-400",
+        error: "bg-red-100 text-red-700 border-red-400",
+    };
+
     return (
-        <div className="px-4 py-2 m-3 mb-14 bg-gray-800 rounded-xl opacity-75">
-            <div className="mx-3">
-                    <div className=" w-full text-center font-semibold text-emrald-500 dark:text-emerald-600">
-                        {type}
-                    </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-200">
-                        {message}
-                    </p>
+        <div className={`flex gap-3 px-2 py-3 m-3 border rounded-xl ${colors[type] || colors.error}`}>
+            <button
+                onClick={onClose}
+                className="font-bold  text-lg justify-items-center text-gray-600 hover:text-black"
+                aria-label="Close"
+            >
+                &times;
+            </button>
+            <div className="mt-1 w-full flex flex-col justify-items-center">
+                <div className="text-base font-semibold mb-1 capitalize">{type}</div>
+                <div>{message}</div>
             </div>
         </div>
     );
