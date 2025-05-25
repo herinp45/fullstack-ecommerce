@@ -1,11 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import Alert from "../components/Alert";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Register() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const [fieldErrors, setFieldErrors] = useState({});
     const [alertMessage, setAlertMessage] = useState("");
@@ -26,18 +28,15 @@ function Register() {
             setAlertMessage("Registration successful!");
             setAlertType("success");
 
-        }
-        catch (err) {
+        } catch (err) {
             if (err.response?.data?.error) {
                 const errorObj = err.response.data.error;
                 const msgs = typeof errorObj === "string" ? [errorObj] : Object.values(errorObj);
                 setAlertMessage(msgs);
                 setAlertType("error");
-            }
-            else if (err.response?.data) {
+            } else if (err.response?.data) {
                 setFieldErrors(err.response.data);
-            }
-            else {
+            } else {
                 setAlertMessage("Something went wrong!");
                 setAlertType("error");
             }
@@ -58,7 +57,7 @@ function Register() {
 
             {/* Alert messages */}
             {alertMessage &&
-            <Alert type={alertType} message={alertMessage} onClose={() => setAlertMessage("")} />}
+                <Alert type={alertType} message={alertMessage} onClose={() => setAlertMessage("")} />}
 
             {/* Registration Card */}
             <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg dark:bg-gray-800 shadow-md">
@@ -106,7 +105,7 @@ function Register() {
                         </div>
 
                         {/* Password */}
-                        <div className="mb-5 w-full">
+                        <div className="mb-5 w-full relative">
                             {fieldErrors.password && (
                                 <div className="mb-2 font-medium text-sm text-red-600 dark:text-red-400">
                                     {fieldErrors.password}
@@ -114,12 +113,18 @@ function Register() {
                             )}
                             <input
                                 className={inputClass}
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 placeholder="Set Password"
                                 aria-label="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+                            <span
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300 cursor-pointer"
+                                onClick={() => setShowPassword((prev) => !prev)}
+                            >
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </span>
                         </div>
 
                         {/* Submit */}
@@ -130,9 +135,9 @@ function Register() {
                 </div>
 
                 <div className="flex items-center justify-center py-4 w-full text-center bg-gray-50 dark:bg-gray-700">
-          <span className="text-sm px-3 text-gray-600 dark:text-gray-200">
-            Already have an account?
-          </span>
+                    <span className="text-sm px-3 text-gray-600 dark:text-gray-200">
+                        Already have an account?
+                    </span>
                     <a href="#" className="text-sm font-bold text-blue-500 dark:text-blue-400 hover:underline">
                         Login
                     </a>
