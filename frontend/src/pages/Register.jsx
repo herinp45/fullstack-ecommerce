@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Alert from "../components/Alert";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Register() {
     const [username, setUsername] = useState("");
@@ -138,9 +139,9 @@ function Register() {
                     <span className="text-sm px-3 text-gray-600 dark:text-gray-200">
                         Already have an account?
                     </span>
-                    <a href="#" className="text-sm font-bold text-blue-500 dark:text-blue-400 hover:underline">
+                    <Link to={"/login"} className="text-sm font-bold text-blue-500 dark:text-blue-400 hover:underline">
                         Login
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

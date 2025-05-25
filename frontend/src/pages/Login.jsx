@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Alert from "../components/Alert";
+import {Link} from "react-router-dom";
 
 function Login() {
     const [identifier, setIdentifier] = useState("");
@@ -108,9 +109,9 @@ function Login() {
                     <span className="text-sm px-3 text-gray-600 dark:text-gray-200">
                         Don't have an account?
                     </span>
-                    <a href="#" className="text-sm font-bold text-blue-500 dark:text-blue-400 hover:underline">
+                    <Link to="/register" className="text-sm font-bold text-blue-500 dark:text-blue-400 hover:underline">
                         Register
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
