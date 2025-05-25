@@ -1,6 +1,5 @@
 package com.herin.ecommerce.service;
 
-import com.herin.ecommerce.dto.UserResponseDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

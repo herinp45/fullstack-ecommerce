@@ -1,5 +1,6 @@
 package com.herin.ecommerce.service;
 
+import com.herin.ecommerce.exception.BadRequestException;
 import com.herin.ecommerce.model.UserEntity;
 import com.herin.ecommerce.model.UserPrincipal;
 import com.herin.ecommerce.repository.UserRepository;
@@ -22,7 +23,7 @@ public class AuthUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String identifier) throws UsernameNotFoundException {
         UserEntity user = (UserEntity) userRepository.findByUsernameOrEmail(identifier,identifier)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new BadRequestException("User not found"));
         return new UserPrincipal(user);
     }
 }

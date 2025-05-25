@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {

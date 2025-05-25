@@ -11,7 +11,7 @@ function Register() {
     const [alertMessage, setAlertMessage] = useState("");
     const [alertType, setAlertType] = useState("error");
 
-    async function handleSubmit(event) {
+    async function register(event) {
         event.preventDefault();
         setFieldErrors({});
         setAlertMessage("");
@@ -32,7 +32,6 @@ function Register() {
                 const errorObj = err.response.data.error;
                 const msgs = typeof errorObj === "string" ? [errorObj] : Object.values(errorObj);
                 setAlertMessage(msgs);
-                console.log(msgs);
                 setAlertType("error");
             }
             else if (err.response?.data) {
@@ -71,7 +70,7 @@ function Register() {
                         Login or Create Account
                     </p>
 
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={register}>
                         {/* Username */}
                         <div className="mt-4 mb-5 w-full">
                             {fieldErrors.username && (
