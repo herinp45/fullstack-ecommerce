@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Alert from "../components/Alert";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Register() {
     const [username, setUsername] = useState("");
@@ -13,6 +13,10 @@ function Register() {
     const [fieldErrors, setFieldErrors] = useState({});
     const [alertMessage, setAlertMessage] = useState("");
     const [alertType, setAlertType] = useState("error");
+
+    // navigate
+    const navigate = useNavigate();
+
 
     async function register(event) {
         event.preventDefault();
@@ -28,16 +32,21 @@ function Register() {
 
             setAlertMessage("Registration successful!");
             setAlertType("success");
+            navigate("/products");
 
-        } catch (err) {
+
+        }
+        catch (err) {
             if (err.response?.data?.error) {
                 const errorObj = err.response.data.error;
                 const msgs = typeof errorObj === "string" ? [errorObj] : Object.values(errorObj);
                 setAlertMessage(msgs);
                 setAlertType("error");
-            } else if (err.response?.data) {
+            }
+            else if (err.response?.data) {
                 setFieldErrors(err.response.data);
-            } else {
+            }
+            else {
                 setAlertMessage("Something went wrong!");
                 setAlertType("error");
             }
@@ -71,12 +80,13 @@ function Register() {
                     </p>
 
                     <form onSubmit={register}>
+
                         {/* Username */}
                         <div className="mt-4 mb-5 w-full">
                             {fieldErrors.username && (
-                                <div className="mb-2 font-medium text-sm text-red-600 dark:text-red-400">
-                                    {fieldErrors.username}
-                                </div>
+                            <div className="mb-2 font-medium text-sm text-red-600 dark:text-red-400">
+                                {fieldErrors.username}
+                            </div>
                             )}
                             <input
                                 className={inputClass}
@@ -106,12 +116,13 @@ function Register() {
                         </div>
 
                         {/* Password */}
+                        {fieldErrors.password && (
+                            <div className="mb-2 font-medium text-sm text-red-600 dark:text-red-400">
+                                {fieldErrors.password}
+                            </div>
+                        )}
                         <div className="mb-5 w-full relative">
-                            {fieldErrors.password && (
-                                <div className="mb-2 font-medium text-sm text-red-600 dark:text-red-400">
-                                    {fieldErrors.password}
-                                </div>
-                            )}
+
                             <input
                                 className={inputClass}
                                 type={showPassword ? "text" : "password"}
