@@ -2,7 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Alert from "../components/Alert";
-import {Link} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
+import {useAuth} from "../context/AuthContext";
 
 function Login() {
     const [identifier, setIdentifier] = useState("");
@@ -12,6 +13,12 @@ function Login() {
     const [fieldErrors, setFieldErrors] = useState({});
     const [alertMessage, setAlertMessage] = useState("");
     const [alertType, setAlertType] = useState("error");
+
+    // navigate
+    const navigate = useNavigate();
+
+    // AuthContext
+    const { login: saveToken } = useAuth();
 
     async function login(event) {
         event.preventDefault();
@@ -28,6 +35,8 @@ function Login() {
             setAlertType("success");
             setAlertMessage("Login successful!");
             localStorage.setItem("authToken",response.data.token);
+            saveToken(response.data.token);
+            navigate("/products");
         } catch (err) {
             if (err.response?.data?.error) {
                 const errorObj = err.response.data.error;
