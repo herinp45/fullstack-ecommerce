@@ -65,5 +65,5 @@ Content-Type: application/json
 
 {
 "identifier": "h23451",
-"password": "StrongPass@123"
+"password": "StrngPass@123"
 }

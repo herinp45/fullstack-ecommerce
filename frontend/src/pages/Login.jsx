@@ -37,15 +37,18 @@ function Login() {
             localStorage.setItem("authToken",response.data.token);
             saveToken(response.data.token);
             navigate("/products");
-        } catch (err) {
+        }
+        catch (err) {
             if (err.response?.data?.error) {
                 const errorObj = err.response.data.error;
                 const msgs = typeof errorObj === "string" ? [errorObj] : Object.values(errorObj);
                 setAlertMessage(msgs);
                 setAlertType("error");
-            } else if (err.response?.data) {
+            }
+            else if (err.response?.data) {
                 setFieldErrors(err.response.data);
-            } else {
+            }
+            else {
                 setAlertType("error");
                 setAlertMessage("Something went wrong!");
             }

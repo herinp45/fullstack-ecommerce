@@ -55,24 +55,25 @@ public class AuthService {
     }
 
     public String login(LoginRequestDTO loginRequestDTO) {
-        Authentication authentication =
-                authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(
-                                loginRequestDTO.getIdentifier(),
-                                loginRequestDTO.getPassword()
-                        )
-                );
-        if (authentication.isAuthenticated()) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequestDTO.getIdentifier(),
+                            loginRequestDTO.getPassword()
+                    )
+            );
+
             UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
             UserEntity user = principal.getUser();
 
-
-//            return new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail());
             return jwtService.generateToken(user.getUsername());
-        }
-        throw new BadRequestException("Invalid password");
 
+        }
+        catch (Exception e) {
+            throw new BadRequestException("Invalid username or password");
+        }
     }
+
 
 
 }
