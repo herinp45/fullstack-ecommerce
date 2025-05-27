@@ -8,6 +8,9 @@ function App() {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/products" element={<PrivateRoute>
+                    <ProductList />
+                </PrivateRoute>} />
             </Routes>
         </BrowserRouter>
     );
