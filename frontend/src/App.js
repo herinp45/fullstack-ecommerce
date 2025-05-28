@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import PrivateRoute from "./routes/PrivateRoute";
 import ProductList from "./pages/ProductList";
 import Spinner from "./components/Spinner";
+import Cart from "./pages/Cart";
 
 function App() {
     return (
@@ -23,7 +24,7 @@ function App() {
                 <Route path="/"  element={<Spinner />} />
 
                 {/* Cart route */}
-                <Routes path="/cart" element={<PrivateRoute>
+                <Route path="/cart" element={<PrivateRoute>
                     <Cart />
                 </PrivateRoute>} />
 

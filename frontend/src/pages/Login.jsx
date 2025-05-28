@@ -36,7 +36,10 @@ function Login() {
             setAlertMessage("Login successful!");
             localStorage.setItem("authToken",response.data.token);
             saveToken(response.data.token);
-            navigate("/products");
+            // Redirect to products page
+            setTimeout(() => {
+                navigate("/products");
+            }, 2000);
         }
         catch (err) {
             if (err.response?.data?.error) {
