@@ -38,8 +38,12 @@ function Register() {
         }
         catch (err) {
             if (err.response?.data?.error) {
+                // Handle specific error messages from the server
                 const errorObj = err.response.data.error;
+
+                // If the error is a string, wrap it in an array; otherwise, use Object.values
                 const msgs = typeof errorObj === "string" ? [errorObj] : Object.values(errorObj);
+
                 setAlertMessage(msgs);
                 setAlertType("error");
             }
