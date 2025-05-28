@@ -32,7 +32,11 @@ function Register() {
 
             setAlertMessage("Registration successful!");
             setAlertType("success");
-            navigate("/products");
+
+            // Redirect to products page
+            setTimeout(() => {
+                navigate("/products");
+            }, 1000);
 
 
         }
