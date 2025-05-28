@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PrivateRoute from "./routes/PrivateRoute";
 import ProductList from "./pages/ProductList";
+import Spinner from "./components/Spinner";
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                 <Route path="/products" element={<PrivateRoute>
                     <ProductList />
                 </PrivateRoute>} />
+                <Route path="/"  element={<Spinner />} />
             </Routes>
         </BrowserRouter>
     );
