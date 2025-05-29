@@ -1,4 +1,4 @@
-package com.herin.ecommerce.dto;
+package com.herin.ecommerce.dto.UserDTO;
 
 import java.util.Objects;
 

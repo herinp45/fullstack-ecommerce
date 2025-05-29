@@ -1,10 +1,9 @@
-package com.herin.ecommerce.dto;
+package com.herin.ecommerce.dto.UserDTO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.Objects;
 

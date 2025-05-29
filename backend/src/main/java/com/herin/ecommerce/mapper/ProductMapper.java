@@ -1,7 +1,7 @@
 package com.herin.ecommerce.mapper;
 
-import com.herin.ecommerce.dto.ProductRequestDTO;
-import com.herin.ecommerce.dto.ProductResponseDTO;
+import com.herin.ecommerce.dto.ProductDTO.ProductRequestDTO;
+import com.herin.ecommerce.dto.ProductDTO.ProductResponseDTO;
 import com.herin.ecommerce.model.ProductEntity;
 import org.springframework.stereotype.Component;
 

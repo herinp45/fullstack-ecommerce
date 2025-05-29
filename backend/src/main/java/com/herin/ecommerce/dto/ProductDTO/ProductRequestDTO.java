@@ -1,4 +1,4 @@
-package com.herin.ecommerce.dto;
+package com.herin.ecommerce.dto.ProductDTO;
 
 import java.math.BigDecimal;
 import jakarta.validation.constraints.NotBlank;

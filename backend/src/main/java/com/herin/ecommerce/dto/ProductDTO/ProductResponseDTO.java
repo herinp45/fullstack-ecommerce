@@ -1,6 +1,4 @@
-package com.herin.ecommerce.dto;
-
-import com.herin.ecommerce.model.ProductEntity;
+package com.herin.ecommerce.dto.ProductDTO;
 
 import java.math.BigDecimal;
 import java.util.Objects;

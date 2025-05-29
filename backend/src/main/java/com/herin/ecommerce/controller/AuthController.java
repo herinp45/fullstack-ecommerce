@@ -1,8 +1,8 @@
 package com.herin.ecommerce.controller;
 
-import com.herin.ecommerce.dto.LoginRequestDTO;
-import com.herin.ecommerce.dto.UserRequestDTO;
-import com.herin.ecommerce.dto.UserResponseDTO;
+import com.herin.ecommerce.dto.UserDTO.LoginRequestDTO;
+import com.herin.ecommerce.dto.UserDTO.UserRequestDTO;
+import com.herin.ecommerce.dto.UserDTO.UserResponseDTO;
 import com.herin.ecommerce.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,15 +1,13 @@
 package com.herin.ecommerce.service;
 
-import com.herin.ecommerce.dto.ProductRequestDTO;
-import com.herin.ecommerce.dto.ProductResponseDTO;
+import com.herin.ecommerce.dto.ProductDTO.ProductRequestDTO;
+import com.herin.ecommerce.dto.ProductDTO.ProductResponseDTO;
 import com.herin.ecommerce.mapper.ProductMapper;
 import com.herin.ecommerce.model.ProductEntity;
 import com.herin.ecommerce.repository.ProductRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
