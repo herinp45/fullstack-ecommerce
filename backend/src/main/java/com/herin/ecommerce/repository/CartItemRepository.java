@@ -5,6 +5,7 @@ import com.herin.ecommerce.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CartItemRepository extends JpaRepository<CartItemEntity, Long> {
 
@@ -15,4 +16,6 @@ public interface CartItemRepository extends JpaRepository<CartItemEntity, Long> 
      * @return the List of CartItemEntities if found, otherwise null
      */
     List<CartItemEntity> findByUserId(Long userId);
+
+    Optional<CartItemEntity> findByUserIdAndProductId(Long userId, Long productId);
 }

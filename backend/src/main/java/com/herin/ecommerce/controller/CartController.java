@@ -1,5 +1,6 @@
 package com.herin.ecommerce.controller;
 
+import com.herin.ecommerce.dto.CartDTO.CartRequestDTO;
 import com.herin.ecommerce.model.CartItemEntity;
 import com.herin.ecommerce.model.UserEntity;
 import com.herin.ecommerce.model.UserPrincipal;
@@ -8,10 +9,7 @@ import com.herin.ecommerce.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,6 +38,14 @@ public class CartController {
     @GetMapping
     public ResponseEntity<List<CartItemEntity>> getCartItems(@AuthenticationPrincipal UserPrincipal userPrincipal) {
             return ResponseEntity.ok(cartService.getCartItemsByUserId(userPrincipal.getUser().getId()));
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<?> addCartItems(@RequestBody CartRequestDTO cartRequestDTO,
+                                                             @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        long userID = userPrincipal.getUser().getId();
+        cartService.addCartItem(userID, cartRequestDTO);
+
     }
 
 }
