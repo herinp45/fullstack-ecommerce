@@ -62,8 +62,12 @@ Content-Type: application/json
 
 POST http://localhost:8082/api/v1/auth/login
 Content-Type: application/json
-
 {
 "identifier": "h23451",
 "password": "StrongPass@123"
 }
+
+###Cart
+GET http://localhost:8082/api/v1/cart
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg1NTMyMzUsImV4cCI6MTc0ODU1NjgzNX0.pXdExBa8S-f-0qlZSnTS_8riPB2szw6-uc0AIprXpwc
+
