@@ -6,20 +6,21 @@ GET https://examples.http-client.intellij.net/get
 
 ### GET request to findAll Product
 GET http://localhost:8082/api/v1/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg4Nzk3NjAsImV4cCI6MTc0ODg4MzM2MH0.mpEI4XLYRuVVff3Cf2KWe-86jP70Zg3bQOyxB1KoviA
 
 ###
 
 POST http://localhost:8082/api/v1/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg2MzI1NzcsImV4cCI6MTc0ODYzNjE3N30.wxuPYmOMfXP2S_i435joHTFbIpM5WBqDtca3ENw3Ko8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg4Nzk3NjAsImV4cCI6MTc0ODg4MzM2MH0.mpEI4XLYRuVVff3Cf2KWe-86jP70Zg3bQOyxB1KoviA
 Content-Type: application/json
 
 {
-  "name": "Test Product",
-  "description": "A great product",
-  "price": 99.99,
+  "name": "Pizaa",
+  "description": "Cheese great product",
+  "price": 9.99,
   "imageUrl": "https://via.placeholder.com/150",
   "category": "electronics",
-  "quantity": 5
+  "quantity": 9
 }
 
 ###
@@ -32,7 +33,7 @@ PUT http://localhost:8082/api/v1/products/2
 Content-Type: application/json
 
 {
-  "name": "Herin",
+  "name": "pizzaaa",
   "description": "Now with RGB lighting",
   "price": 24.99,
   "imageUrl": "https://via.placeholder.com/150",
@@ -80,9 +81,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg4N
 Content-Type: application/json
 
 {
-  "productId": 23,
-  "quantity": 6
+  "productId": 8,
+  "quantity": 9
 }
+
+
+### Delete item from cart
+DELETE http://localhost:8082/api/v1/cart/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg4Nzk3NjAsImV4cCI6MTc0ODg4MzM2MH0.mpEI4XLYRuVVff3Cf2KWe-86jP70Zg3bQOyxB1KoviA
 
 
 

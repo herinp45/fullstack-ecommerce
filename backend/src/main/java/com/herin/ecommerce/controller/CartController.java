@@ -49,11 +49,11 @@ public class CartController {
         return ResponseEntity.ok("Item added to cart");
     }
 
-    @DeleteMapping("/{productId}")
-    public ResponseEntity<?> deleteCartItems(@PathVariable Long productId,
+    @DeleteMapping("/{cartItemId}")
+    public ResponseEntity<?> deleteCartItems(@PathVariable Long cartItemId,
                                                             @AuthenticationPrincipal UserPrincipal userPrincipal) {
         long userId = userPrincipal.getUser().getId();
-        cartService.deleteCartItem(userId, productId);
+        cartService.deleteCartItem(userId, cartItemId);
         return ResponseEntity.ok("Item deleted from cart");
     }
 

@@ -2,7 +2,9 @@ package com.herin.ecommerce.mapper;
 
 import com.herin.ecommerce.dto.CartDTO.CartResponseDTO;
 import com.herin.ecommerce.model.CartItemEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CartMapper {
 
     private final ProductMapper productMapper;

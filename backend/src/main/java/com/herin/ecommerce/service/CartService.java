@@ -50,11 +50,17 @@ public class CartService {
 
     public void addCartItem(long userId, CartRequestDTO cartRequestDTO) {
         Long productId = cartRequestDTO.getProductId();
+        int requestedQty = cartRequestDTO.getQuantity() <= 0 ? 1 : cartRequestDTO.getQuantity();
+
         ProductEntity product = productRepository.findById(productId)
                 .orElseThrow(() -> new BadRequestException("Product not found"));
 
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new BadRequestException("User not found"));
+
+        if (product.getQuantity() < requestedQty) {
+            throw new BadRequestException("Not enough product in stock");
+        }
 
         Optional<CartItemEntity> existingCartItem = cartItemRepository.findByUserIdAndProductId(userId, productId);
 
@@ -74,13 +80,15 @@ public class CartService {
 
     }
 
-    public void deleteCartItem(long userId, Long productId) {
+    public void deleteCartItem(long userId, Long cartId) {
 
-        Optional<CartItemEntity> existingCartItem = cartItemRepository.findByUserIdAndProductId(userId, productId);
-        if (existingCartItem.isEmpty()) {
-            throw new BadRequestException("Cart item not found for user and product.");
+        CartItemEntity item = cartItemRepository.findById(cartId)
+                .orElseThrow(() -> new BadRequestException("Cart item not found"));
+
+        if (item.getUser().getId() != userId) {
+            throw new BadRequestException("Unauthorized access to cart item");
         }
 
-        cartItemRepository.delete(existingCartItem.get());
+        cartItemRepository.delete(item);
     }
 }
