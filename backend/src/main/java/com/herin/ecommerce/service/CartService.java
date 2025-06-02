@@ -75,5 +75,6 @@ public class CartService {
             throw new BadRequestException("Cart item not found for user and product.");
         }
 
-        cartItemRepository.delete(existingCartItem.get());    }
+        cartItemRepository.delete(existingCartItem.get());
+    }
 }

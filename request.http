@@ -71,12 +71,12 @@ Content-Type: application/json
 
 ###Cart
 GET http://localhost:8082/api/v1/cart
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg2MzI1NzcsImV4cCI6MTc0ODYzNjE3N30.wxuPYmOMfXP2S_i435joHTFbIpM5WBqDtca3ENw3Ko8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg4Nzk3NjAsImV4cCI6MTc0ODg4MzM2MH0.mpEI4XLYRuVVff3Cf2KWe-86jP70Zg3bQOyxB1KoviA
 
 
 ### Add item to cartqa
 POST http://localhost:8082/api/v1/cart/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg2MzI1NzcsImV4cCI6MTc0ODYzNjE3N30.wxuPYmOMfXP2S_i435joHTFbIpM5WBqDtca3ENw3Ko8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg4Nzk3NjAsImV4cCI6MTc0ODg4MzM2MH0.mpEI4XLYRuVVff3Cf2KWe-86jP70Zg3bQOyxB1KoviA
 Content-Type: application/json
 
 {
