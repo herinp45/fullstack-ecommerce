@@ -45,10 +45,10 @@ public class CartService {
     public void addCartItem(long userId, CartRequestDTO cartRequestDTO) {
         Long productId = cartRequestDTO.getProductId();
         ProductEntity product = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new BadRequestException("Product not found"));
 
         UserEntity user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new BadRequestException("User not found"));
 
         Optional<CartItemEntity> existingCartItem = cartItemRepository.findByUserIdAndProductId(userId, productId);
 
@@ -70,5 +70,10 @@ public class CartService {
 
     public void deleteCartItem(long userId, Long productId) {
 
-    }
+        Optional<CartItemEntity> existingCartItem = cartItemRepository.findByUserIdAndProductId(userId, productId);
+        if (existingCartItem.isEmpty()) {
+            throw new BadRequestException("Cart item not found for user and product.");
+        }
+
+        cartItemRepository.delete(existingCartItem.get());    }
 }
