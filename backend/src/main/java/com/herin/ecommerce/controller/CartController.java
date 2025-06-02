@@ -1,6 +1,7 @@
 package com.herin.ecommerce.controller;
 
 import com.herin.ecommerce.dto.CartDTO.CartRequestDTO;
+import com.herin.ecommerce.dto.CartDTO.CartResponseDTO;
 import com.herin.ecommerce.model.CartItemEntity;
 import com.herin.ecommerce.model.UserEntity;
 import com.herin.ecommerce.model.UserPrincipal;
@@ -36,7 +37,7 @@ public class CartController {
      * @return ResponseEntity<List<CartItemEntity>> list of cart items
      */
     @GetMapping
-    public ResponseEntity<List<CartItemEntity>> getCartItems(@AuthenticationPrincipal UserPrincipal userPrincipal) {
+    public ResponseEntity<List<CartResponseDTO>> getCartItems(@AuthenticationPrincipal UserPrincipal userPrincipal) {
             return ResponseEntity.ok(cartService.getCartItemsByUserId(userPrincipal.getUser().getId()));
     }
 

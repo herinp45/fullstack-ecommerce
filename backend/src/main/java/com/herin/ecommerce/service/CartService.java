@@ -1,7 +1,9 @@
 package com.herin.ecommerce.service;
 
 import com.herin.ecommerce.dto.CartDTO.CartRequestDTO;
+import com.herin.ecommerce.dto.CartDTO.CartResponseDTO;
 import com.herin.ecommerce.exception.BadRequestException;
+import com.herin.ecommerce.mapper.CartMapper;
 import com.herin.ecommerce.model.CartItemEntity;
 import com.herin.ecommerce.model.ProductEntity;
 import com.herin.ecommerce.model.UserEntity;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CartService {
@@ -20,6 +23,7 @@ public class CartService {
     private final CartItemRepository cartItemRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final CartMapper cartMapper;
 
     /**
      * Constructor for CartService.
@@ -27,10 +31,11 @@ public class CartService {
      * @param cartItemRepository the repository to manage cart items
      */
     @Autowired
-    public CartService(CartItemRepository cartItemRepository, UserRepository userRepository, ProductRepository productRepository) {
+    public CartService(CartItemRepository cartItemRepository, UserRepository userRepository, ProductRepository productRepository, CartMapper cartMapper) {
         this.cartItemRepository = cartItemRepository;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
+        this.cartMapper = cartMapper;
     }
 
     /**
@@ -38,8 +43,9 @@ public class CartService {
      *
      * @param userId the ID of the user whose cart items are to be retrieved
      */
-    public List<CartItemEntity> getCartItemsByUserId(Long userId) {
-        return cartItemRepository.findByUserId(userId);
+    public List<CartResponseDTO> getCartItemsByUserId(Long userId) {
+        return cartItemRepository.findByUserId(userId).stream()
+                .map(cartMapper::mapToDTO).collect(Collectors.toList());
     }
 
     public void addCartItem(long userId, CartRequestDTO cartRequestDTO) {
