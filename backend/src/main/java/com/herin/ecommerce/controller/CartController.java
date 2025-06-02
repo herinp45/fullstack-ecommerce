@@ -45,7 +45,15 @@ public class CartController {
                                                              @AuthenticationPrincipal UserPrincipal userPrincipal) {
         long userID = userPrincipal.getUser().getId();
         cartService.addCartItem(userID, cartRequestDTO);
+        return ResponseEntity.ok("Item added to cart");
+    }
 
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<?> deleteCartItems(@PathVariable Long productId,
+                                                            @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        long userId = userPrincipal.getUser().getId();
+        cartService.deleteCartItem(userId, productId);
+        return ResponseEntity.ok("Item deleted from cart");
     }
 
 }
