@@ -50,13 +50,11 @@ public class CartService {
 
     public void addCartItem(long userId, CartRequestDTO cartRequestDTO) {
         Long productId = cartRequestDTO.getProductId();
-        int requestedQty = cartRequestDTO.getQuantity() <= 0 ? 1 : cartRequestDTO.getQuantity();
+        int requestedQty = Math.max(cartRequestDTO.getQuantity(), 1);
 
-        ProductEntity product = productRepository.findById(productId)
-                .orElseThrow(() -> new BadRequestException("Product not found"));
+        ProductEntity product = getProductOrThrow(productId);
+        UserEntity user = getUserOrThrow(userId);
 
-        UserEntity user = userRepository.findById(userId)
-                .orElseThrow(() -> new BadRequestException("User not found"));
 
         if (product.getQuantity() < requestedQty) {
             throw new BadRequestException("Not enough product in stock");
@@ -80,7 +78,7 @@ public class CartService {
 
     }
 
-    public void deleteCartItem(long userId, Long cartId) {
+    public void deleteCartItem(long userId, long cartId) {
 
         CartItemEntity item = cartItemRepository.findById(cartId)
                 .orElseThrow(() -> new BadRequestException("Cart item not found"));
@@ -91,4 +89,36 @@ public class CartService {
 
         cartItemRepository.delete(item);
     }
+
+    public void patchCartItemQty(long userId, CartRequestDTO cartRequestDTO) {
+
+        Long productId = cartRequestDTO.getProductId();
+        int requestedQty = Math.max(cartRequestDTO.getQuantity(), 1);
+
+        ProductEntity product = getProductOrThrow(productId);
+        UserEntity user = getUserOrThrow(userId);
+
+        if (product.getQuantity() < requestedQty) {
+            throw new BadRequestException("Not enough product in stock");
+        }
+
+        Optional<CartItemEntity> existingCartItem = cartItemRepository.findByUserIdAndProductId(userId, productId);
+
+        if (existingCartItem.isPresent()) {
+            existingCartItem.get().setQuantity(cartRequestDTO.getQuantity());
+            cartItemRepository.save(existingCartItem.get());
+        }
+
+    }
+
+    private ProductEntity getProductOrThrow(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new BadRequestException("Product not found"));
+    }
+
+    private UserEntity getUserOrThrow(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new BadRequestException("User not found"));
+    }
+
 }
