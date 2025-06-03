@@ -2,6 +2,7 @@ package com.herin.ecommerce.service;
 
 import com.herin.ecommerce.dto.CartDTO.CartRequestDTO;
 import com.herin.ecommerce.dto.CartDTO.CartResponseDTO;
+import com.herin.ecommerce.dto.CartDTO.QuantityUpdateRequest;
 import com.herin.ecommerce.exception.BadRequestException;
 import com.herin.ecommerce.mapper.CartMapper;
 import com.herin.ecommerce.model.CartItemEntity;
@@ -90,26 +91,26 @@ public class CartService {
         cartItemRepository.delete(item);
     }
 
-    public void patchCartItemQty(long userId, Long cartItemId, CartRequestDTO cartRequestDTO) {
+    public void patchCartItemQty(long userId, Long cartItemId, QuantityUpdateRequest quantityUpdateRequest) {
+        CartItemEntity cartItem = cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new BadRequestException("No such Cart Item Exist"));
 
-        Long productId = cartRequestDTO.getProductId();
-        int requestedQty = Math.max(cartRequestDTO.getQuantity(), 1);
+        int requestedQty = Math.max(quantityUpdateRequest.getQuantity(), 1);
+        ProductEntity product = cartItem.getProduct();
+        UserEntity user = cartItem.getUser();
 
-        ProductEntity product = getProductOrThrow(productId);
-        UserEntity user = getUserOrThrow(userId);
+        if (user.getId() != userId) {
+            throw new BadRequestException("Unauthorized access to cart item");
+        }
 
         if (product.getQuantity() < requestedQty) {
             throw new BadRequestException("Not enough product in stock");
         }
 
-        Optional<CartItemEntity> existingCartItem = cartItemRepository.findByUserIdAndProductId(userId, productId);
-
-        if (existingCartItem.isPresent()) {
-            existingCartItem.get().setQuantity(cartRequestDTO.getQuantity());
-            cartItemRepository.save(existingCartItem.get());
-        }
-
+        cartItem.setQuantity(requestedQty);
+        cartItemRepository.save(cartItem);
     }
+
 
     private ProductEntity getProductOrThrow(Long productId) {
         return productRepository.findById(productId)

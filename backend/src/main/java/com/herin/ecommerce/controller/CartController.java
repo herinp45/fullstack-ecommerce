@@ -2,6 +2,7 @@ package com.herin.ecommerce.controller;
 
 import com.herin.ecommerce.dto.CartDTO.CartRequestDTO;
 import com.herin.ecommerce.dto.CartDTO.CartResponseDTO;
+import com.herin.ecommerce.dto.CartDTO.QuantityUpdateRequest;
 import com.herin.ecommerce.model.CartItemEntity;
 import com.herin.ecommerce.model.UserEntity;
 import com.herin.ecommerce.model.UserPrincipal;
@@ -58,10 +59,10 @@ public class CartController {
     }
 
     @PatchMapping("/{cartItemId}")
-    public ResponseEntity<?> patchCartItemsQty(@PathVariable Long cartItemId, @RequestBody CartRequestDTO cartRequestDTO,
+    public ResponseEntity<?> patchCartItemsQty(@PathVariable Long cartItemId, @RequestBody QuantityUpdateRequest quantityUpdateRequest,
                                                @AuthenticationPrincipal UserPrincipal userPrincipal) {
         long userId = userPrincipal.getUser().getId();
-        cartService.patchCartItemQty(userId, cartItemId, cartRequestDTO);
+        cartService.patchCartItemQty(userId, cartItemId, quantityUpdateRequest);
         return ResponseEntity.ok("Quantity updated");
     }
 
