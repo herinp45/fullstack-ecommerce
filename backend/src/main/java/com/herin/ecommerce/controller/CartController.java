@@ -57,4 +57,12 @@ public class CartController {
         return ResponseEntity.ok("Item deleted from cart");
     }
 
+    @PatchMapping("/{cartItemId}")
+    public ResponseEntity<?> patchCartItemsQty(@PathVariable Long cartItemId, @RequestBody CartRequestDTO cartRequestDTO,
+                                               @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        long userId = userPrincipal.getUser().getId();
+        cartService.patchCartItemQty(userId, cartItemId, cartRequestDTO);
+        return ResponseEntity.ok("Quantity updated");
+    }
+
 }

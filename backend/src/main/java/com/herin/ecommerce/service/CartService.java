@@ -90,7 +90,7 @@ public class CartService {
         cartItemRepository.delete(item);
     }
 
-    public void patchCartItemQty(long userId, CartRequestDTO cartRequestDTO) {
+    public void patchCartItemQty(long userId, Long cartItemId, CartRequestDTO cartRequestDTO) {
 
         Long productId = cartRequestDTO.getProductId();
         int requestedQty = Math.max(cartRequestDTO.getQuantity(), 1);
