@@ -43,7 +43,15 @@ public class ProductService {
     public List<ProductResponseDTO> getAllProducts(int page, int size, String search) {
         // Convert ProductEntity to ProductResponseDTO
         Pageable pageable = PageRequest.of(page, size);
-        Page<ProductEntity> products = productRepository.findAll(pageable);
+        Page<ProductEntity> products;
+        if (search.isEmpty()) {
+            products = productRepository.findAll(pageable);
+        }
+        else {
+            products = productRepository.
+                    findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrCategoryContainingIgnoreCase(
+                            search, search, search, pageable);
+        }
 
         return products.getContent().stream().map(productMapper::mapToDTO).collect(Collectors.toList());
     }
