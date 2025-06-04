@@ -6,7 +6,7 @@ GET https://examples.http-client.intellij.net/get
 
 ### GET request to findAll Product
 GET http://localhost:8082/api/v1/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg4Nzk3NjAsImV4cCI6MTc0ODg4MzM2MH0.mpEI4XLYRuVVff3Cf2KWe-86jP70Zg3bQOyxB1KoviA
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg5NzIzODgsImV4cCI6MTc0ODk3NTk4OH0.0nFR0FhoLp_ZZ5TE3dsdEHblqooGGkiO4bOzk495tGQ
 
 ###
 
@@ -72,23 +72,33 @@ Content-Type: application/json
 
 ###Cart
 GET http://localhost:8082/api/v1/cart
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg4Nzk3NjAsImV4cCI6MTc0ODg4MzM2MH0.mpEI4XLYRuVVff3Cf2KWe-86jP70Zg3bQOyxB1KoviA
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg5NzIzODgsImV4cCI6MTc0ODk3NTk4OH0.0nFR0FhoLp_ZZ5TE3dsdEHblqooGGkiO4bOzk495tGQ
 
 
 ### Add item to cartqa
 POST http://localhost:8082/api/v1/cart/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg4Nzk3NjAsImV4cCI6MTc0ODg4MzM2MH0.mpEI4XLYRuVVff3Cf2KWe-86jP70Zg3bQOyxB1KoviA
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg5NzIzODgsImV4cCI6MTc0ODk3NTk4OH0.0nFR0FhoLp_ZZ5TE3dsdEHblqooGGkiO4bOzk495tGQ
 Content-Type: application/json
 
 {
-  "productId": 8,
+  "productId": 10,
   "quantity": 9
 }
 
 
 ### Delete item from cart
 DELETE http://localhost:8082/api/v1/cart/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg4Nzk3NjAsImV4cCI6MTc0ODg4MzM2MH0.mpEI4XLYRuVVff3Cf2KWe-86jP70Zg3bQOyxB1KoviA
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg5NzIzODgsImV4cCI6MTc0ODk3NTk4OH0.0nFR0FhoLp_ZZ5TE3dsdEHblqooGGkiO4bOzk495tGQ
+
+### Patch Qty from cart
+PATCH http://localhost:8082/api/v1/cart/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg5NzIzODgsImV4cCI6MTc0ODk3NTk4OH0.0nFR0FhoLp_ZZ5TE3dsdEHblqooGGkiO4bOzk495tGQ
+Content-Type: application/json
+
+{
+  "quantity": 4
+}
+
 
 
 
