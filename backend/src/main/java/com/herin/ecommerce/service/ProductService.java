@@ -40,7 +40,7 @@ public class ProductService {
     /**
      * Get all products
      */
-    public List<ProductResponseDTO> getAllProducts(int page, int size) {
+    public List<ProductResponseDTO> getAllProducts(int page, int size, String search) {
         // Convert ProductEntity to ProductResponseDTO
         Pageable pageable = PageRequest.of(page, size);
         Page<ProductEntity> products = productRepository.findAll(pageable);

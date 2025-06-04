@@ -31,8 +31,16 @@ public class ProductController {
      * Get all products
      */
     @GetMapping
-    public List<ProductResponseDTO> getAllProducts() {
-        return productService.getAllProducts();
+    public List<ProductResponseDTO> getAllProducts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String search
+    ) {
+        if (search == null || search.isBlank()) {
+            search = "";
+        }
+
+        return productService.getAllProducts(page, size, search);
     }
 
     /**
