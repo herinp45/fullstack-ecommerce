@@ -6,6 +6,9 @@ import com.herin.ecommerce.mapper.ProductMapper;
 import com.herin.ecommerce.model.ProductEntity;
 import com.herin.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -37,9 +40,12 @@ public class ProductService {
     /**
      * Get all products
      */
-    public List<ProductResponseDTO> getAllProducts() {
+    public List<ProductResponseDTO> getAllProducts(int page, int size) {
         // Convert ProductEntity to ProductResponseDTO
-        return productRepository.findAll().stream().map(entity -> productMapper.mapToDTO(entity)).collect(Collectors.toList());
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ProductEntity> products = productRepository.findAll(pageable);
+
+        return products.getContent().stream().map(productMapper::mapToDTO).collect(Collectors.toList());
     }
 
     /**
