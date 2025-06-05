@@ -5,13 +5,13 @@ GET https://examples.http-client.intellij.net/get
 ###
 
 ### GET request to findAll Product
-GET http://localhost:8082/api/v1/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg5NzIzODgsImV4cCI6MTc0ODk3NTk4OH0.0nFR0FhoLp_ZZ5TE3dsdEHblqooGGkiO4bOzk495tGQ
+GET http://localhost:8082/api/v1/products?page=0&size=3&search=shoe
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDkwNzI1NjQsImV4cCI6MTc0OTA3NjE2NH0._V0yjSMLo2cdbIryC5PvQCRGNyLlw8mxl3rLVejt0Is
 
 ###
 
 POST http://localhost:8082/api/v1/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg4Nzk3NjAsImV4cCI6MTc0ODg4MzM2MH0.mpEI4XLYRuVVff3Cf2KWe-86jP70Zg3bQOyxB1KoviA
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDkwNzI1NjQsImV4cCI6MTc0OTA3NjE2NH0._V0yjSMLo2cdbIryC5PvQCRGNyLlw8mxl3rLVejt0Is
 Content-Type: application/json
 
 {
@@ -19,7 +19,7 @@ Content-Type: application/json
   "description": "Cheese great product",
   "price": 9.99,
   "imageUrl": "https://via.placeholder.com/150",
-  "category": "electronics",
+  "category": "shoe",
   "quantity": 9
 }
 
