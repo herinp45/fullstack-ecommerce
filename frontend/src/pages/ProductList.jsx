@@ -28,9 +28,8 @@ function ProductList() {
 
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold mb-6">Product List</h1>
-
+        <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 dark:bg-gray-900">
+            <h1 className="text-3xl font-bold pt-4 pb-8 text-gray-600 dark:text-gray-200">Product List</h1>
             <ul className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {products.map((product) => (
                     <li key={product.id}>
