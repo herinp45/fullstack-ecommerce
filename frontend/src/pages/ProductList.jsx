@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Alert from "../components/Alert";
 import ProductCard from "../components/ProductCard";
+import ProductListHeader from "../components/ProductListHeader";
 
 function ProductList() {
     const [products, setProducts] = useState([]);
@@ -27,9 +28,11 @@ function ProductList() {
     }, []);
 
     return (
+        <>
+            <ProductListHeader />
         <div className="w-full overflow-hidden min-h-screen mx-auto px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-            <h1 className="text-3xl font-bold pt-4 pb-8 text-gray-600 dark:text-gray-200">Product List</h1>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-10 mb-10">
+
+            <ul className="grid mt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-10 mb-10">
                 {products.map((product) => (
                     <li key={product.id}>
                         <ProductCard
@@ -42,6 +45,7 @@ function ProductList() {
                 ))}
             </ul>
         </div>
+        </>
     );
 }
 
