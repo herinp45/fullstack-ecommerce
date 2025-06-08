@@ -1,3 +1,5 @@
+import ImageSlider from "./ImageSlider";
+
 function ProductListHeader() {
     const src =
         "https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2664&q=80";
@@ -18,12 +20,7 @@ function ProductListHeader() {
                     </p>
                 </div>
 
-                <img
-                    src={src}
-                    alt="Gundam featured product"
-                    className="rounded-xl border-r-2 border-gray-500 dark:border-gray-200 shadow-lg p-4 h-[25rem] w-3/4 max-w-md object-cover
-                     transition-transform duration-300 hover:scale-105"
-                />
+                <ImageSlider src={src} />
             </div>
         </div>
     );
