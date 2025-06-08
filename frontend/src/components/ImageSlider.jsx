@@ -1,4 +1,5 @@
-function ImageSlider({src}) {
+
+function ImageSlider({src, slideProducts}) {
     return (
         <>
             <img
