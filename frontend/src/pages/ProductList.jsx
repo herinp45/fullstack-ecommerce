@@ -10,7 +10,6 @@ function ProductList() {
     async function getProducts() {
         try {
             const token = localStorage.getItem("authToken");
-            console.log(token);
             const response = await axios.get("http://localhost:8082/api/v1/products", {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -18,7 +17,8 @@ function ProductList() {
             });
 
             setProducts(response.data);
-        } catch (err) {
+        }
+        catch (err) {
             console.log(err);
         }
     }
@@ -29,8 +29,8 @@ function ProductList() {
 
     return (
         <>
-            <ProductListHeader slideProducts={products.slice(1, 5)}/>
-        <div className="w-full overflow-hidden min-h-screen mx-auto px-4 sm:px-6 lg:px-8 bg-gray-200 dark:bg-gray-900">
+            <ProductListHeader slideProducts={products.length >= 5 ? products.slice(1, 5) : []} />
+            <div className="w-full overflow-hidden min-h-screen mx-auto px-4 sm:px-6 lg:px-8 bg-gray-200 dark:bg-gray-900">
 
             <ul className="grid mt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-10 mb-10">
                 {products.map((product) => (

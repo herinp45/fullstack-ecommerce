@@ -20,7 +20,7 @@ function ProductListHeader({slideProducts}) {
                     </p>
                 </div>
 
-                <ImageSlider src={src} slideProducts/>
+                <ImageSlider src={src} slideProducts={slideProducts}/>
             </div>
         </div>
     );
