@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Alert from "../components/Alert";
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useAuth} from "../context/AuthContext";
 
 function Login() {
@@ -10,7 +10,6 @@ function Login() {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
-    const [fieldErrors, setFieldErrors] = useState({});
     const [alertMessage, setAlertMessage] = useState("");
     const [alertType, setAlertType] = useState("error");
 
@@ -22,7 +21,6 @@ function Login() {
 
     async function login(event) {
         event.preventDefault();
-        setFieldErrors({});
         setAlertMessage("");
 
         try {
@@ -48,9 +46,6 @@ function Login() {
                 const msgs = typeof errorObj === "string" ? [errorObj] : Object.values(errorObj);
                 setAlertMessage(msgs);
                 setAlertType("error");
-            }
-            else if (err.response?.data) {
-                setFieldErrors(err.response.data);
             }
             else {
                 setAlertType("error");
