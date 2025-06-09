@@ -3,12 +3,15 @@ import axios from "axios";
 import Alert from "../components/Alert";
 import ProductCard from "../components/ProductCard";
 import ProductListHeader from "../components/ProductListHeader";
+import Spinner from "../components/Spinner";
 
 function ProductList() {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     async function getProducts() {
         try {
+            setLoading(true);
             const token = localStorage.getItem("authToken");
             const response = await axios.get("http://localhost:8082/api/v1/products", {
                 headers: {
@@ -21,6 +24,9 @@ function ProductList() {
         catch (err) {
             console.log(err);
         }
+        finally {
+            setLoading(false);
+        }
     }
 
     useEffect(() => {
@@ -31,19 +37,20 @@ function ProductList() {
         <>
             <ProductListHeader slideProducts={products.length >= 5 ? products.slice(1, 5) : []} />
             <div className="w-full overflow-hidden min-h-screen mx-auto px-4 sm:px-6 lg:px-8 bg-gray-200 dark:bg-gray-900">
-
-            <ul className="grid mt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-10 mb-10">
-                {products.map((product) => (
-                    <li key={product.id}>
-                        <ProductCard
-                            name={product.name}
-                            description={product.description}
-                            img={product.img}
-                            price={product.price}
-                        />
-                    </li>
-                ))}
-            </ul>
+                {loading ? <Spinner/> :
+                    <ul
+                    className="grid mt-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-10 mb-10">
+                    {products.map((product) => (
+                        <li key={product.id}>
+                            <ProductCard
+                                name={product.name}
+                                description={product.description}
+                                img={product.img}
+                                price={product.price}
+                            />
+                        </li>
+                    ))}
+                </ul>}
         </div>
         </>
     );
