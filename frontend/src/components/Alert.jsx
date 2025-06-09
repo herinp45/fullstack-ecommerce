@@ -14,7 +14,7 @@ function Alert({ message = "", type = "error", onClose, duration = 5000 }) {
         }, duration);
 
         return () => clearTimeout(timer);
-    }, [onClose, duration]);
+    }, [onClose, duration, message.length]);
 
     return (
         <div

@@ -6,24 +6,40 @@ import ProductListHeader from "../components/ProductListHeader";
 import Spinner from "../components/Spinner";
 
 function ProductList() {
+
+    // State variables to manage products, loading state, and alerts
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [alertMessage, setAlertMessage] = useState("");
     const [alertType, setAlertType] = useState("error");
 
+    // State variables for pagination and search
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(10);
+    const [searchTerm, setSearchTerm] = useState("pizaa");
+
+
+    // Function to fetch products from the API
     async function getProducts() {
+        setAlertMessage("");
         try {
             setLoading(true);
             const token = localStorage.getItem("authToken");
             const response = await axios.get("http://localhost:8082/api/v1/products", {
                 headers: {
-                    Authorization: `Bearer ${token}`
-                }
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                params: {
+                    page: page,
+                    size: size,
+                    search: searchTerm,
+                },
             });
 
             setProducts(response.data);
-            setAlertType("success");
-            setAlertMessage("Products loaded successfully!");
+            // setAlertType("success");
+            // setAlertMessage("Products loaded successfully!");
         }
         catch (err) {
             console.log(err);
