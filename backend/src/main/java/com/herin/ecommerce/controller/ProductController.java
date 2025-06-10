@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -32,7 +33,7 @@ public class ProductController {
      */
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
-    public List<ProductResponseDTO> getAllProducts(
+    public Map<String, Object> getAllProducts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(required = false) String search

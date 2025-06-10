@@ -13,8 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -40,7 +41,7 @@ public class ProductService {
     /**
      * Get all products
      */
-    public List<ProductResponseDTO> getAllProducts(int page, int size, String search) {
+    public Map<String, Object> getAllProducts(int page, int size, String search) {
         // Convert ProductEntity to ProductResponseDTO
         Pageable pageable = PageRequest.of(page, size);
         Page<ProductEntity> products;
@@ -53,7 +54,15 @@ public class ProductService {
                             search, search, search, pageable);
         }
 
-        return products.getContent().stream().map(productMapper::mapToDTO).collect(Collectors.toList());
+
+        List<ProductResponseDTO> productResponseDTO =  products.getContent().stream().map(productMapper::mapToDTO).toList();
+        Map<String, Object> response = new HashMap<>();
+        response.put("products", productResponseDTO);
+        response.put("currentPage", products.getNumber());
+        response.put("totalItems", products.getTotalElements());
+        response.put("totalPages", products.getTotalPages());
+
+        return response;
     }
 
     /**
