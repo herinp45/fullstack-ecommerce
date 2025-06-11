@@ -62,7 +62,7 @@ function Login() {
 
     const buttonClass =
         "px-6 py-2 text-white font-semibold text-base tracking-wide " +
-        "transition-colors duration-300 transform bg-blue-600 rounded-lg " +
+        "transition-all duration-300 transform rounded-lg bg-blue-600 " +
         "hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-50";
 
     return (
@@ -76,7 +76,8 @@ function Login() {
             <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg dark:bg-gray-800 shadow-md">
                 <div className="px-6 py-4">
                     <h3 className="mt-3 text-xl font-medium text-center text-gray-600 dark:text-gray-200">
-                        Welcome Back
+                        <span className="text-blue-600 dark:text-blue-500">Welcome </span>
+                        Back
                     </h3>
                     <p className="mt-1 text-center text-gray-500 dark:text-gray-400">
                         Login or Create Account

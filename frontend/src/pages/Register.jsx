@@ -67,8 +67,9 @@ function Register() {
         "dark:ring-opacity-30 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 transition";
 
     const buttonClass =
-        "px-6 py-2 text-white font-semibold text-base tracking-wide transition-colors duration-300 transform " +
-        "bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-50";
+        "px-6 py-2 text-white font-semibold text-base tracking-wide " +
+        "transition-all duration-300 transform rounded-lg bg-blue-600 " +
+        "hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-50";
 
     return (
         <div className="flex flex-col items-center justify-center min-w-screen min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -81,7 +82,8 @@ function Register() {
             <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg dark:bg-gray-800 shadow-md">
                 <div className="px-6 py-4">
                     <h3 className="mt-3 text-xl font-medium text-center text-gray-600 dark:text-gray-200">
-                        Welcome New User
+                        <span className="text-blue-600 dark:text-blue-500">Welcome </span>
+                        New User
                     </h3>
                     <p className="mt-1 text-center text-gray-500 dark:text-gray-400">
                         Login or Create Account
@@ -89,7 +91,7 @@ function Register() {
 
                     <form onSubmit={register}>
 
-                        {/* Username */}
+                    {/* Username */}
                         <div className="mt-4 mb-5 w-full">
                             {fieldErrors.username && (
                             <div className="mb-2 font-medium text-sm text-red-600 dark:text-red-400">
