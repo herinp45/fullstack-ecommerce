@@ -5,6 +5,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import ProductList from "./pages/ProductList";
 import Spinner from "./components/Spinner";
 import Cart from "./pages/Cart";
+import ProductDetailPage from "./pages/ProductDetailPage";
 
 function App() {
     return (
@@ -19,6 +20,10 @@ function App() {
                 {/* Product routes */}
                 <Route path="/products" element={<PrivateRoute>
                     <ProductList />
+                </PrivateRoute>} />
+
+                <Route path="/product/:id" element={<PrivateRoute>
+                    <ProductDetailPage />
                 </PrivateRoute>} />
 
                 <Route path="/"  element={<Spinner />} />
