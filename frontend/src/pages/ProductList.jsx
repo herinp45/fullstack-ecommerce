@@ -12,6 +12,7 @@ function ProductList() {
     const [alertMessage, setAlertMessage] = useState("");
     const [alertType, setAlertType] = useState("error");
 
+    // Pagination state
     const [page, setPage] = useState(0);
     const [size, setSize] = useState(10);
     const [totalPages, setTotalPages] = useState(1);
@@ -79,6 +80,7 @@ function ProductList() {
                         {products.map((product) => (
                             <li key={product.id}>
                                 <ProductCard
+                                    id={product.id}
                                     name={product.name}
                                     description={product.description}
                                     img={product.img}

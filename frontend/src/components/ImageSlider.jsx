@@ -21,7 +21,7 @@ function ImageSlider({ src, slideProducts }) {
     const current = slideProducts[currentIndex];
 
     return (
-        <Link to={`/products/${current.id}`}>
+        <Link to={`/product/${current.id}`}>
             <img
                 src={src}
                 alt={current.name}
