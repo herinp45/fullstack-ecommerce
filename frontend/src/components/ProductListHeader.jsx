@@ -12,7 +12,8 @@ function ProductListHeader({slideProducts}) {
                     <h1 className="text-4xl font-extrabold tracking-tight">
                         <span className="text-blue-500">Product</span> List
                     </h1>
-                    <div className="h-1 w-1/4 bg-blue-500 rounded-full mx-auto lg:mx-0 my-4" />
+                    <div className="h-1 w-1/4 bg-blue-500 rounded-full mx-auto lg:mx-0 my-4
+                    backdrop-blur-2xl bg-gradient-to-r from-blue-500 to-purple-500" />
                     <p className="text-gray-700 dark:text-gray-300 mt-2">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
                         praesentium cumque iure dicta incidunt est ipsam, officia dolor
