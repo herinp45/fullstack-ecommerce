@@ -1,15 +1,44 @@
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+import axios from "axios";
+
 function ProductDetailPage() {
-    const name = "Product Detail Page";
-    const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididun" +
+
+    const {id} = useParams();
+
+    const [product, setProduct] = useState([]);
+
+    useEffect(() => {
+        async function fetchProductDetails() {
+            try {
+                const response = await axios.get(`http://localhost:8082/api/v1/products/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+                setProduct(response.data);
+            } catch (error) {
+                console.error("Error fetching product details:", error);
+            }
+        }
+        fetchProductDetails();
+    }, [id]);
+
+
+    const name = product.name || "Product Name";
+    const description = product.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididun" +
         "t ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut " +
         "aliquip ex ea commodo consequat.";
-    const img = "https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2664&q=80";
-    const price = "$99.99";
-    const itemsInCart = 1; // Example value, this could be fetched from a state or context
+    const img = product.img || "https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2664&q=80";
+    const price = product.price || "$99.99";
+    const itemsInCart = product.item || 1; // Example value, this could be fetched from a state or context
 
   return (
+
       <div className="text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-900 min-h-screen
       flex items-center justify-center">
+
           <div className="container h-3/4 w-3/4 px-5 py-24 mx-auto">
               <div className="lg:w-4/5 h-full mx-auto flex flex-wrap">
                   <img alt={name} src={img}
