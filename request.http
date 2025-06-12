@@ -25,7 +25,8 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8082/api/v1/products/2
+GET http://localhost:8082/api/v1/products/8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDk3NTEyNDAsImV4cCI6MTc0OTc1NDg0MH0.rL48VTiir0p5RDtBL0Y2gZwc850Prn_Lv1o6-2wUA3s
 
 
 ###
