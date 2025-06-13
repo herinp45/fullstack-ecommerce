@@ -6,6 +6,7 @@ import ProductList from "./pages/ProductList";
 import Spinner from "./components/Spinner";
 import Cart from "./pages/Cart";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import Layout from "./components/Layout";
 
 function App() {
     return (
@@ -13,25 +14,24 @@ function App() {
             <Routes>
                 {/* Define your routes here */}
                 <Route path="/login" element={<Login />} />
-
-                {/* Register route */}
                 <Route path="/register" element={<Register />} />
+                <Route path="/" element={<Spinner />} />
 
                 {/* Product routes */}
-                <Route path="/products" element={<PrivateRoute>
-                    <ProductList />
-                </PrivateRoute>} />
+                <Route element={<Layout />}>
+                    <Route path="/products" element={<PrivateRoute>
+                        <ProductList />
+                    </PrivateRoute>} />
 
-                <Route path="/product/:id" element={<PrivateRoute>
-                    <ProductDetailPage />
-                </PrivateRoute>} />
+                    <Route path="/product/:id" element={<PrivateRoute>
+                        <ProductDetailPage />
+                    </PrivateRoute>} />
 
-                <Route path="/"  element={<Spinner />} />
-
-                {/* Cart route */}
-                <Route path="/cart" element={<PrivateRoute>
-                    <Cart />
-                </PrivateRoute>} />
+                    {/* Cart route */}
+                    <Route path="/cart" element={<PrivateRoute>
+                        <Cart />
+                    </PrivateRoute>} />
+                </Route>
 
             </Routes>
         </BrowserRouter>
