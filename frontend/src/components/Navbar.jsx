@@ -22,17 +22,14 @@ function Navbar() {
         const root = document.documentElement;
         if (isDarkMode) {
             root.classList.remove('dark');
-            root.classList.add('light');
             localStorage.setItem('theme', 'light');
-        }
-        else {
+        } else {
             root.classList.add('dark');
-            root.classList.remove('light');
             localStorage.setItem('theme', 'dark');
         }
     }
 
-    // SVG icons for cart and search
+    // SVG icons
     const cartSvg = (
         <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none"
              xmlns="http://www.w3.org/2000/svg">
@@ -44,9 +41,8 @@ function Navbar() {
     );
     const searchSvg = (
         <svg
-            className="w-5 h-5 text-gray-500 dark:text-gray-400"
+            className="w-5 h-5"
             fill="none"
-            stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
         >
@@ -54,8 +50,25 @@ function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
+                stroke="currentColor"
                 d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"
             />
+        </svg>
+    );
+
+    const darkModeSvg = (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                  d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+        </svg>
+    );
+
+    const lightModeSvg = (
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24"
+             stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                  d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364l-1.414 1.414M7.05 16.95l-1.414 1.414M16.95 16.95l1.414 1.414M6.636 6.636L5.222 5.222M12 8a4 4 0 100 8 4 4 0 000-8z"/>
         </svg>
     );
 
@@ -80,6 +93,7 @@ function Navbar() {
                             <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
                                 <input
                                     type="text"
+                                    onBlur={() => setIsSearchOpen(false)}
                                     placeholder="Search products..."
                                     className="w-full px-4 py-2 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800
                                     border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2
@@ -98,9 +112,15 @@ function Navbar() {
 
 
                         <button
-                            className="px-2 py-2 text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400"
+                            className="px-2 py-2 text-gray-800 dark:text-gray-200 hover:text-blue-600
+                            dark:hover:text-blue-400 transform hover:scale-110"
                             onClick={toggleDarkMode}>
-                            {isDarkMode ? "🌙" : "☀️"}
+                            <span
+                                key={isDarkMode ? "dark-mode" : "light-mode"}
+                                className="transition-all duration-3000 ease-in-out">
+                                {isDarkMode ? darkModeSvg : lightModeSvg}
+                            </span>
+
                         </button>
 
                         <Link
@@ -113,7 +133,7 @@ function Navbar() {
                 </div>
             </div>
         </nav>
-);
+    );
 }
 
 export default Navbar;
