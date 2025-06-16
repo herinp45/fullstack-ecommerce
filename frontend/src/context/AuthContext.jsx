@@ -22,12 +22,15 @@ export const AuthProvider = ({ children }) => {
         try {
             const payload = JSON.parse(atob(token.split(".")[1]));
             return payload.exp * 1000 < Date.now();
-        } catch (e) {
+        }
+        catch (e) {
             return true;
         }
     };
 
-    const isAuthenticated = useMemo(() => !!token && !isTokenExpired(token), [token]);
+    const isAuthenticated = useMemo(() =>
+        !!token && !isTokenExpired(token),
+        [token]);
 
     useEffect(() => {
         try {
@@ -45,16 +48,18 @@ export const AuthProvider = ({ children }) => {
     }, [token]);
 
 
-    const value = useMemo(() => ({ token, login, logout, loading, isAuthenticated }), [token, isAuthenticated, loading]);
+    const value = useMemo(() =>
+        ({ token, login, logout, loading, isAuthenticated }),
+        [token, isAuthenticated, loading]);
 
     return (
-        <AuthContext.Provider value={value}>
+        <AuthContext value={value}>
             {children}
-        </AuthContext.Provider>
+        </AuthContext>
     );
 };
 
-//
+// Custom hook to use the AuthContext
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {
