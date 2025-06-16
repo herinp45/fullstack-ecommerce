@@ -1,9 +1,36 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 function Navbar() {
 
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    // Set initial dark mode state based on localStorage
+    useEffect(() => {
+        const darkMode = localStorage.getItem('theme')
+        if (darkMode === 'dark') {
+            setIsDarkMode(true);
+            document.documentElement.classList.add('dark');
+        }
+    }, []);
+
+    // Toggle dark mode
+    const toggleDarkMode = () => {
+        setIsDarkMode(prevState => !prevState);
+        const root = document.documentElement;
+        if (isDarkMode) {
+            root.classList.remove('dark');
+            root.classList.add('light');
+            localStorage.setItem('theme', 'light');
+        }
+        else {
+            root.classList.add('dark');
+            root.classList.remove('light');
+            localStorage.setItem('theme', 'dark');
+        }
+    }
 
     // SVG icons for cart and search
     const cartSvg = (
@@ -71,8 +98,9 @@ function Navbar() {
 
 
                         <button
-                            className="px-2 py-2 text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400">
-                            🌙
+                            className="px-2 py-2 text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400"
+                            onClick={toggleDarkMode}>
+                            {isDarkMode ? "🌙" : "☀️"}
                         </button>
 
                         <Link

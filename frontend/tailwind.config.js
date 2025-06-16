@@ -1,6 +1,7 @@
 // tailwind.config.js
 module.exports = {
   content: ["./src/**/*.{js,jsx}"],
+    darkMode: "class", // Enable dark mode support
   theme: {
     extend: {
       animation: {
