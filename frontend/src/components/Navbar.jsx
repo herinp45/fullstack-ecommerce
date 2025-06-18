@@ -64,6 +64,27 @@ function Navbar() {
         </svg>
     );
 
+    const hamBurgerSvg = (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-6 h-6 text-current"
+            viewBox="0 0 24 24"
+            fill="none"
+        >
+            <path
+                d="M4 6h16M4 12h16M4 18h16"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+
+
+
+
+
     const lightModeSvg = (
         <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24"
              stroke="currentColor">
@@ -81,59 +102,70 @@ function Navbar() {
                     </span>
                 </Link>
 
-                <div className="flex items-center space-x-4">
-                    <div className="relative">
-                        <button
-                            onClick={() => setIsSearchOpen(!isSearchOpen)}
-                            className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 px-2 py-2"
-                        >
-                            {searchSvg}
-                        </button>
-                        {isSearchOpen && (
-                            <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-                                <input
-                                    type="text"
-                                    onBlur={() => setIsSearchOpen(false)}
-                                    placeholder="Search products..."
-                                    className="w-full px-4 py-2 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800
+                <div className="flex items-center space-x-2 md:space-x-4">
+                    <div className="flex items-center space-x-2 md:space-x-4">
+
+                        <div className="relative">
+                            <button
+                                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                                className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 px-2 py-2"
+                            >
+                                {searchSvg}
+                            </button>
+                            {isSearchOpen && (
+                                <div
+                                    className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                                    <input
+                                        type="text"
+                                        onBlur={() => setIsSearchOpen(false)}
+                                        placeholder="Search products..."
+                                        className="w-full px-4 py-2 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800
                                     border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2
                                     focus:ring-blue-500"
-                                />
-                            </div>
-                        )}
+                                    />
+                                </div>
+                            )}
+
+                        </div>
+                        <div className="md:hidden">
+                            <button className="px-2 py-2 text-gray-800 dark:text-gray-200 hover:text-blue-600">
+                                {hamBurgerSvg}
+                            </button>
+                        </div>
                     </div>
-                    <div className="flex items-center space-x-4">
+
+                    <div className="hidden md:flex items-center space-x-4">
                         <Link
                             to="/products"
                             className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 px-2 py-2"
-                        >
-                            Products
-                        </Link>
+                                >
+                                    Products
+                                </Link>
 
 
-                        <button
-                            className="px-2 py-2 text-gray-800 dark:text-gray-200 hover:text-blue-600
+                                <button
+                                    className="px-2 py-2 text-gray-800 dark:text-gray-200 hover:text-blue-600
                             dark:hover:text-blue-400 transform hover:scale-110"
-                            onClick={toggleDarkMode}>
+                                    onClick={toggleDarkMode}>
                             <span
                                 key={isDarkMode ? "dark-mode" : "light-mode"}
                                 className="transition-all duration-3000 ease-in-out">
                                 {isDarkMode ? darkModeSvg : lightModeSvg}
                             </span>
 
-                        </button>
+                                </button>
 
-                        <Link
-                            to="/cart"
-                            className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 px-2 py-2"
-                        >
-                            {cartSvg}
-                        </Link>
+                                <Link
+                                    to="/cart"
+                                    className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 px-2 py-2"
+                                >
+                                    {cartSvg}
+                                </Link>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
         </nav>
-    );
+);
 }
 
 export default Navbar;
