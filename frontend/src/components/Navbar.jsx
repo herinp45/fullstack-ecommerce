@@ -142,7 +142,6 @@ function Navbar() {
                                     Products
                                 </Link>
 
-
                                 <button
                                     className="px-2 py-2 text-gray-800 dark:text-gray-200 hover:text-blue-600
                             dark:hover:text-blue-400 transform hover:scale-110"
