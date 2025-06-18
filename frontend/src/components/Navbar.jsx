@@ -26,7 +26,6 @@ function Navbar() {
         }
     };
 
-    // SVGs
     const searchSvg = (
         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24">
             <path
@@ -88,56 +87,66 @@ function Navbar() {
                     H<span className="text-blue-600">tag</span>
                 </Link>
 
-                {/* Search button and input */}
+                {/* Search and icons */}
                 <div className="flex items-center justify-end space-x-6 relative">
-                <div className="relative md:mt-2">
-                    <button
-                        onClick={() => setIsSearchOpen((prev) => !prev)}
-                        className="text-gray-800 dark:text-white"
-                    >
-                        {searchSvg}
-                    </button>
-                    {isSearchOpen && (
-                        <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-lg">
-                            <input
-                                type="text"
-                                placeholder="Search..."
-                                onBlur={() => setIsSearchOpen(false)}
-                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            />
-                        </div>
-                    )}
-                </div>
+                    {/* Search Button */}
+                    <div className="relative md:mt-2">
+                        <button
+                            onClick={() => setIsSearchOpen((prev) => !prev)}
+                            className="text-gray-800 dark:text-white hover:text-blue-600"
+                        >
+                            {searchSvg}
+                        </button>
+                        {isSearchOpen && (
+                            <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-lg">
+                                <input
+                                    type="text"
+                                    placeholder="Search..."
+                                    onBlur={() => setIsSearchOpen(false)}
+                                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                            </div>
+                        )}
+                    </div>
 
-                {/* Desktop menu */}
-                <div className="hidden md:flex items-center space-x-6 w-1/4">
-                    <Link to="/products" className="text-gray-800 dark:text-white hover:text-blue-600">
-                        Products
-                    </Link>
-                    <button onClick={toggleDarkMode} className="text-gray-800 dark:text-white hover:text-blue-600">
-                        {isDarkMode ? darkModeSvg : lightModeSvg}
-                    </button>
-                    <Link to="/cart" className="text-gray-800 dark:text-white hover:text-blue-600">
-                        {cartSvg}
-                    </Link>
-                </div>
+                    {/* Desktop menu */}
+                    <div className="hidden md:flex items-center space-x-6 w-1/4">
+                        <Link to="/products" className="text-gray-800 dark:text-white hover:text-blue-600">
+                            Products
+                        </Link>
+                        <button onClick={toggleDarkMode} className="text-gray-800 dark:text-white hover:text-blue-600">
+                            {isDarkMode ? darkModeSvg : lightModeSvg}
+                        </button>
+                        <Link to="/cart" className="text-gray-800 dark:text-white hover:text-blue-600">
+                            {cartSvg}
+                        </Link>
+                    </div>
 
-                {/* Mobile hamburger */}
-                <div className="md:hidden">
-                    <button onClick={() => setIsMobileMenuOpen((prev) => !prev)} className="text-gray-800 dark:text-white">
-                        {isMobileMenuOpen ? closeSvg : hamburgerSvg}
-                    </button>
+                    {/* Mobile hamburger */}
+                    <div className="md:hidden">
+                        <button onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                                className="text-gray-800 dark:text-white hover:text-blue-600
+                                 transition duration-300">
+                            {isMobileMenuOpen ? closeSvg : hamburgerSvg}
+                        </button>
+                    </div>
                 </div>
             </div>
 
             {/* Mobile menu */}
             {isMobileMenuOpen && (
-                <div className="fixed top-0 right-0 h-full w-1/2 bg-white dark:bg-gray-900 shadow-lg p-6 z-40 transition-all">
+                <div className="fixed top-0 right-0 h-full w-1/2 bg-white dark:bg-gray-900 shadow-lg p-6 z-40 md:hidden">
                     <div className="flex flex-col space-y-6">
-                        <button onClick={() => setIsMobileMenuOpen(false)} className="self-end text-gray-800 dark:text-white">
+                        <button onClick={() => setIsMobileMenuOpen(false)}
+                                className="text-gray-800 dark:text-white hover:text-blue-600
+                                transition-transform duration-300 ml-auto ">
                             {closeSvg}
                         </button>
-                        <Link to="/products" onClick={() => setIsMobileMenuOpen(false)} className="text-lg text-gray-800 dark:text-white hover:text-blue-500">
+                        <Link
+                            to="/products"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="text-lg text-gray-800 dark:text-white hover:text-blue-600"
+                        >
                             Products
                         </Link>
                         <button
@@ -145,19 +154,22 @@ function Navbar() {
                                 toggleDarkMode();
                                 setIsMobileMenuOpen(false);
                             }}
-                            className="text-lg text-gray-800 dark:text-white hover:text-blue-500 flex items-center space-x-2"
+                            className="text-lg text-gray-800 dark:text-white hover:text-blue-600 flex items-center space-x-2"
                         >
                             {isDarkMode ? darkModeSvg : lightModeSvg}
                             <span>{isDarkMode ? "Light Mode" : "Dark Mode"}</span>
                         </button>
-                        <Link to="/cart" onClick={() => setIsMobileMenuOpen(false)} className="text-lg text-gray-800 dark:text-white hover:text-blue-500 flex items-center space-x-2">
+                        <Link
+                            to="/cart"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="text-lg text-gray-800 dark:text-white hover:text-blue-600 flex items-center space-x-2"
+                        >
                             {cartSvg}
                             <span>Cart</span>
                         </Link>
                     </div>
                 </div>
             )}
-            </div>
         </nav>
     );
 }
