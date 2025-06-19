@@ -7,6 +7,7 @@ import Spinner from "./components/Spinner";
 import Cart from "./pages/Cart";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import Layout from "./components/Layout";
+import SearchResults from "./pages/SearchResults";
 
 function App() {
     return (
@@ -30,6 +31,10 @@ function App() {
                     {/* Cart route */}
                     <Route path="/cart" element={<PrivateRoute>
                         <Cart />
+                    </PrivateRoute>} />
+
+                    <Route path="/search" element={<PrivateRoute>
+                        <SearchResults />
                     </PrivateRoute>} />
                 </Route>
 
