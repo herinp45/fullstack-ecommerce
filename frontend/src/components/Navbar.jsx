@@ -71,7 +71,7 @@ function Navbar() {
     );
 
     return (
-        <nav className="relative bg-white dark:bg-gray-900 shadow-md z-50">
+        <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md ">
             <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4">
                 {/* Logo */}
                 <Link to="/" className="text-3xl font-bold text-black dark:text-white">

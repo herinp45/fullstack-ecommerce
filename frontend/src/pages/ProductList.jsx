@@ -1,11 +1,13 @@
 import ProductListHeader from "../components/ProductListHeader";
 import ProductGrid from "../components/ProductGrid";
+import { useState } from "react";
 
 function ProductList() {
+    const [headerProducts, setHeaderProducts] = useState([]);
     return (
         <>
-            <ProductListHeader />
-            <ProductGrid />
+            <ProductListHeader slideProducts={headerProducts.length >= 5 ? headerProducts.slice(1, 5) : []}/>
+            <ProductGrid onDataLoaded={(products) => {setHeaderProducts(products)}} />
         </>
     );
 }

@@ -4,7 +4,7 @@ import Alert from "./Alert";
 import ProductCard from "./ProductCard";
 import Spinner from "./Spinner";
 
-function ProductGrid({ searchTerm }) {
+function ProductGrid({ searchTerm, onDataLoaded }) {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [alertMessage, setAlertMessage] = useState("");
@@ -33,13 +33,17 @@ function ProductGrid({ searchTerm }) {
                 });
 
                 setProducts(response.data.products);
+                // Call the onDataLoaded callback if provided
+                onDataLoaded?.(response.data.products);
                 setTotalPages(response.data.totalPages);
-            } catch (err) {
+            }
+            catch (err) {
                 const errorMsg = err.response?.data?.error;
                 const msgs = typeof errorMsg === "string" ? [errorMsg] : Object.values(errorMsg || {});
                 setAlertMessage(msgs.length > 0 ? msgs : "Failed to load products.");
                 setAlertType("error");
-            } finally {
+            }
+            finally {
                 setLoading(false);
             }
         };
