@@ -1,20 +1,30 @@
 import {useEffect, useRef, useState} from "react";
-
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function SearchBar() {
+
+    // State to manage search bar visibility and search term
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const searchDivRef = useRef(null);
     const [searchTerm, setSearchTerm] = useState("");
 
+    // Get the query from the URL
+    const navigate = useNavigate();
+
     // Handle search submission
     const handleSubmitSearch = (e) => {
         e.preventDefault();
-        if (searchTerm.trim() === "") {
-            setIsSearchOpen(false);
+        try {
+            const query = searchTerm.trim();
+            if (!query) return;
+            console.log("Navigating to search:", query);
+            navigate(`/search?q=${encodeURIComponent(query)}`);
         }
-
-    }
-
+        catch (err) {
+            console.error("Search error:", err);
+        }
+    };
 
 
     // State to manage search bar visibility

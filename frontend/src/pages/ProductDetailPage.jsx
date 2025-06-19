@@ -18,7 +18,8 @@ function ProductDetailPage() {
                     }
                 });
                 setProduct(response.data);
-            } catch (error) {
+            }
+            catch (error) {
                 console.error("Error fetching product details:", error);
             }
         }
