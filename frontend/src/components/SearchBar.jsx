@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function SearchBar() {
 
@@ -8,6 +8,7 @@ function SearchBar() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const searchDivRef = useRef(null);
     const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
 
     // Get the query from the URL
     const navigate = useNavigate();
@@ -26,6 +27,23 @@ function SearchBar() {
         }
     };
 
+    useEffect(() => {
+        const timmer = setTimeout(async () => {
+            if (searchTerm.length > 0) {
+                const response = await axios.get("http://localhost:8082/api/v1/products", {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                        "Content-Type": "application/json"
+                    },
+                    params: {
+                        search: searchTerm
+                    }
+                });
+                setSearchResults(response.data.products);
+            }
+        }, 500);
+        return () => clearTimeout(timmer);
+    }, [searchTerm]);
 
     // State to manage search bar visibility
     useEffect(() => {
@@ -77,11 +95,25 @@ function SearchBar() {
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </form>
-                    <div>
-                        {/* Placeholder for search results */}
-                        <p className="text-gray-500 dark:text-gray-400 mt-2">
-                            Search results will appear here...
-                        </p>
+
+                    {/* Placeholder for search results */}
+                    <div className="mt-2 max-h-60 overflow-y-auto">
+                        {
+                            searchResults.length > 0 ? (
+                                <ul>
+                                    {searchResults.map((product) => (
+                                        <li key={product.id} className="py-2 px-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                            <Link to={`/product/${product.id}`} className="text-gray-800 dark:text-white">
+                                                {product.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) :  searchTerm.trim() ? (
+                                <p className="text-sm text-gray-500 dark:text-gray-400">No results found.</p>
+                            ) : (
+                                <p className="text-sm text-gray-500 dark:text-gray-400">Start typing to search...</p>
+                            )}
 
                     </div>
                 </div>
