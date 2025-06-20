@@ -59,64 +59,68 @@ function Navbar() {
     );
 
     const hamburgerSvg = (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
     );
 
     const closeSvg = (
-        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
     );
 
     return (
-        <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md ">
+        <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md w-full">
             <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4">
                 {/* Logo */}
                 <Link to="/" className="text-3xl font-bold text-black dark:text-white">
                     H<span className="text-blue-600">tag</span>
                 </Link>
 
-                {/* Search and icons */}
-                <div className="flex items-center justify-end space-x-6 relative">
-                    {/* Search Button */}
-                   <SearchBar />
+                {/* Right Section */}
+                <div className="flex items-center gap-6">
+                    {/* Search */}
+                    <div className="mt-1 md:mt-0">
+                        <SearchBar />
+                    </div>
 
                     {/* Desktop menu */}
-                    <div className="hidden md:flex items-center space-x-6 w-1/4">
-                        <Link to="/products" className="text-gray-800 dark:text-white
-                        hover:text-blue-600 hover:dark:text-blue-400">
+                    <div className="hidden md:flex items-center gap-6">
+                        <Link to="/products" className="text-gray-800 dark:text-white hover:text-blue-600 hover:dark:text-blue-400">
                             Products
                         </Link>
-                        <button onClick={toggleDarkMode} className="text-gray-800 dark:text-white
-                        hover:text-blue-600 hover:dark:text-blue-400">
+                        <button
+                            onClick={toggleDarkMode}
+                            className="w-6 h-6 text-gray-800 dark:text-white hover:text-blue-600 hover:dark:text-blue-400"
+                        >
                             {isDarkMode ? darkModeSvg : lightModeSvg}
                         </button>
-                        <Link to="/cart" className="text-gray-800 dark:text-white
-                        hover:text-blue-600 hover:dark:text-blue-400">
+                        <Link to="/cart" className="w-6 h-6 text-gray-800 dark:text-white hover:text-blue-600 hover:dark:text-blue-400">
                             {cartSvg}
                         </Link>
                     </div>
 
-                    {/* Mobile hamburger */}
-                    <div className="md:hidden">
-                        <button onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-                                className="text-gray-800 dark:text-white hover:text-blue-600
-                                 transition duration-300 hover:dark:text-blue-400">
+                    {/* Mobile menu toggle */}
+                    <div className="md:hidden flex items-center">
+                        <button
+                            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                            className="text-gray-800 dark:text-white hover:text-blue-600 hover:dark:text-blue-400"
+                        >
                             {isMobileMenuOpen ? closeSvg : hamburgerSvg}
                         </button>
                     </div>
                 </div>
             </div>
 
-            {/* Mobile menu */}
+            {/* Mobile Drawer Menu */}
             {isMobileMenuOpen && (
                 <div className="fixed top-0 right-0 h-full w-1/2 bg-white dark:bg-gray-900 shadow-lg p-6 z-40 md:hidden">
                     <div className="flex flex-col space-y-6">
-                        <button onClick={() => setIsMobileMenuOpen(false)}
-                                className="text-gray-800 dark:text-white hover:text-blue-600
-                                transition-transform duration-300 ml-auto hover:dark:text-blue-400">
+                        <button
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="text-gray-800 dark:text-white hover:text-blue-600 ml-auto hover:dark:text-blue-400"
+                        >
                             {closeSvg}
                         </button>
                         <Link
@@ -131,8 +135,7 @@ function Navbar() {
                                 toggleDarkMode();
                                 setIsMobileMenuOpen(false);
                             }}
-                            className="text-lg text-gray-800 dark:text-white hover:text-blue-600 flex items-center space-x-2
-                            hover:dark:text-blue-400"
+                            className="text-lg text-gray-800 dark:text-white flex items-center space-x-2 hover:text-blue-600 hover:dark:text-blue-400"
                         >
                             {isDarkMode ? darkModeSvg : lightModeSvg}
                             <span>{isDarkMode ? "Light Mode" : "Dark Mode"}</span>
@@ -140,8 +143,7 @@ function Navbar() {
                         <Link
                             to="/cart"
                             onClick={() => setIsMobileMenuOpen(false)}
-                            className="text-lg text-gray-800 dark:text-white hover:text-blue-600 flex items-center space-x-2
-                            hover:dark:text-blue-400"
+                            className="text-lg text-gray-800 dark:text-white flex items-center space-x-2 hover:text-blue-600 hover:dark:text-blue-400"
                         >
                             {cartSvg}
                             <span>Cart</span>
