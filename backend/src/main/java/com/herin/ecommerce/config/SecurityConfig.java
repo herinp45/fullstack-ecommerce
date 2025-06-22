@@ -24,8 +24,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
-
-
     private final JwtFilter jwtFilter;
 
     @Autowired

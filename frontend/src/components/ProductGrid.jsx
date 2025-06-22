@@ -70,7 +70,7 @@ function ProductGrid({ searchTerm, onDataLoaded }) {
                                     id={product.id}
                                     name={product.name}
                                     description={product.description}
-                                    img={product.img}
+                                    img={product.imageUrl}
                                     price={product.price}
                                 />
                             </li>

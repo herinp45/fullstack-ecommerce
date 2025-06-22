@@ -11,17 +11,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDkwN
 ###
 
 POST http://localhost:8082/api/v1/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDkwNzI1NjQsImV4cCI6MTc0OTA3NjE2NH0._V0yjSMLo2cdbIryC5PvQCRGNyLlw8mxl3rLVejt0Is
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NTA2MDY3NzYsImV4cCI6MTc1MDYxMDM3Nn0.LUur9NoRZUc2Z5ALvSryUCe9QZ5WXzxdJ7Pm5v1Zz-Y
 Content-Type: application/json
 
 {
-  "name": "Pizaa",
-  "description": "Cheese great product",
-  "price": 9.99,
-  "imageUrl": "https://via.placeholder.com/150",
-  "category": "shoe",
-  "quantity": 9
+  "name": "Apple Earphone",
+  "description": "Experience high-fidelity sound with the official Apple wired earphones. Featuring a built-in remote and microphone, these earphones let you adjust volume, control playback, and answer calls effortlessly. Designed for comfort and durability, they provide clear vocals, deep bass, and crisp highs — making them perfect for music, podcasts, and calls on the go.",
+  "price": 39.99,
+  "imageUrl": "/assets/apple_earphone_image.png",
+  "category": "electronics",
+  "quantity": 25
 }
+
 
 ###
 

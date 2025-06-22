@@ -8,9 +8,9 @@ function ProductCard({ id, img, description, name, price }) {
                 transition duration-300 ease-in-out">
             <Link to={`/product/${id}`} className="block max-w-sm mx-auto">
                 <img
-                    src={src}
+                    src={img || src}
                     alt={name}
-                    className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105 md:h-56"
+                    className="h-48 w-full object-contain transition-transform duration-300 group-hover:scale-105 md:h-56"
                 />
             </Link>
             <div className="p-4 sm:p-6">
