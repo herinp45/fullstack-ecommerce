@@ -11,17 +11,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDkwN
 ###
 
 POST http://localhost:8082/api/v1/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NTA2MDY3NzYsImV4cCI6MTc1MDYxMDM3Nn0.LUur9NoRZUc2Z5ALvSryUCe9QZ5WXzxdJ7Pm5v1Zz-Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NTA2MTY5MjAsImV4cCI6MTc1MDYyMDUyMH0.SXtAaKz8yIm2O22ltQtofL3ZkoTijwmnu9sPHHb9dNQ
 Content-Type: application/json
 
 {
-  "name": "Apple Earphone",
-  "description": "Experience high-fidelity sound with the official Apple wired earphones. Featuring a built-in remote and microphone, these earphones let you adjust volume, control playback, and answer calls effortlessly. Designed for comfort and durability, they provide clear vocals, deep bass, and crisp highs — making them perfect for music, podcasts, and calls on the go.",
-  "price": 39.99,
-  "imageUrl": "/assets/apple_earphone_image.png",
-  "category": "electronics",
-  "quantity": 25
+  "name": "Nike Air Max White",
+  "description": "Step into comfort and style with the Nike Air Max White sneakers. Designed with breathable mesh, responsive cushioning, and a sleek silhouette, these shoes offer all-day support whether you're on a run or hitting the streets. The minimalist white finish pairs effortlessly with any outfit.",
+  "price": 129.99,
+  "imageUrl": "/assets/nike_shoe_white.jpg",
+  "category": "footwear",
+  "quantity": 40
 }
+
+
+
+
 
 
 ###

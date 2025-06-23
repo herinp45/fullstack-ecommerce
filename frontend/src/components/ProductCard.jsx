@@ -7,11 +7,15 @@ function ProductCard({ id, img, description, name, price }) {
                 shadow-md hover:shadow-lg dark:hover:shadow-white/10
                 transition duration-300 ease-in-out">
             <Link to={`/product/${id}`} className="block max-w-sm mx-auto">
-                <img
-                    src={img || src}
-                    alt={name}
-                    className="h-48 w-full object-contain transition-transform duration-300 group-hover:scale-105 md:h-56"
-                />
+                <div className="w-full h-full bg-gray-100 flex items-center justify-center overflow-hidden rounded
+                    group-hover:scale-105 transition-transform duration-300 ease-in-out">
+                    <img
+                        src={img || src}
+                        alt={name}
+                        className="object-contain w-full h-full"
+                    />
+                </div>
+
             </Link>
             <div className="p-4 sm:p-6">
                 <p className="text-sm font-medium text-gray-500 dark:text-gray-400">${price}</p>

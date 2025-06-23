@@ -23,12 +23,16 @@ function ImageSlider({ src, slideProducts }) {
     return (
         <Link to={`/product/${current.id}`}>
             <img
-                src={src}
+                src={current.imageUrl || src}
                 alt={current.name}
-                className="rounded-xl border-r-2 mx-auto border-gray-500 dark:border-gray-200 shadow-lg p-4 h-[25rem] w-3/4
-                max-w-md object-cover transition-transform duration-300 hover:scale-105"
+                key={current.id}
+                className="rounded-xl border-r-2 mx-auto border-gray-500 dark:border-gray-200 shadow-lg p-4
+               h-[22rem] w-11/12 max-w-md object-contain bg-white
+               transition-transform duration-700 hover:scale-105 animate-slide-in"
             />
         </Link>
+
+
     );
 }
 
