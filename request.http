@@ -5,8 +5,8 @@ GET https://examples.http-client.intellij.net/get
 ###
 
 ### GET request to findAll Product
-GET http://localhost:8082/api/v1/products?page=0&size=3&search=shoe
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDkwNzI1NjQsImV4cCI6MTc0OTA3NjE2NH0._V0yjSMLo2cdbIryC5PvQCRGNyLlw8mxl3rLVejt0Is
+GET http://localhost:8082/api/v1/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA2OTc2NTksImV4cCI6MTc1MDcwMTI1OX0.20jiG806Te2GRpASyzzeQDDajg40wqsOjRVvzpVgf4k
 
 ###
 
@@ -72,22 +72,22 @@ POST http://localhost:8082/api/v1/auth/login
 Content-Type: application/json
 
 {
-"identifier": "h23451",
-"password": "StrongPass@123"
+"identifier": "lipi45",
+"password": "Lipi@9168"
 }
 
 ###Cart
 GET http://localhost:8082/api/v1/cart
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg5NzIzODgsImV4cCI6MTc0ODk3NTk4OH0.0nFR0FhoLp_ZZ5TE3dsdEHblqooGGkiO4bOzk495tGQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA2OTc2NTksImV4cCI6MTc1MDcwMTI1OX0.20jiG806Te2GRpASyzzeQDDajg40wqsOjRVvzpVgf4k
 
 
 ### Add item to cartqa
 POST http://localhost:8082/api/v1/cart/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg5NzIzODgsImV4cCI6MTc0ODk3NTk4OH0.0nFR0FhoLp_ZZ5TE3dsdEHblqooGGkiO4bOzk495tGQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA2OTc2NTksImV4cCI6MTc1MDcwMTI1OX0.20jiG806Te2GRpASyzzeQDDajg40wqsOjRVvzpVgf4k
 Content-Type: application/json
 
 {
-  "productId": 10,
+  "productId": 17,
   "quantity": 9
 }
 
