@@ -83,11 +83,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA2O
 
 ### Add item to cartqa
 POST http://localhost:8082/api/v1/cart/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA2OTc2NTksImV4cCI6MTc1MDcwMTI1OX0.20jiG806Te2GRpASyzzeQDDajg40wqsOjRVvzpVgf4k
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA3MTEzNTMsImV4cCI6MTc1MDcxNDk1M30.WEKgfuVcihDagtAJNTBuZli0JF76of42P9dPOzk8iAE
 Content-Type: application/json
 
 {
-  "productId": 17,
+  "productId": 21,
   "quantity": 9
 }
 

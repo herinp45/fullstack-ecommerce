@@ -1,12 +1,44 @@
 function CartItemCard({item}) {
     return (
-        <li key={item.id} className="flex items-center justify-between bg- p-4 rounded-lg shadow">
-            <div>
-                <h2 className="text-lg font-semibold text-gray-600">{item.product.name}</h2>
-                <p className="text-gray-600">${item.product.price}</p>
+        <li
+            key={item.id}
+            className="flex flex-col sm:flex-row items-center dark:bg-gray-950 bg-white p-4 gap-4 rounded-xl shadow-md border dark:border-gray-800 transition-all duration-300"
+        >
+            {/* Product Image */}
+            <img
+                src={item.product.imageUrl || "https://via.placeholder.com/150"}
+                alt={item.product.name}
+                className="w-24 h-24 object-contain rounded-lg border dark:border-gray-700"
+            />
+
+            {/* Product Info */}
+            <div className="flex-1 text-center sm:text-left">
+                <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                    {item.product.name}
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400">${item.product.price}</p>
             </div>
-            <span className="text-gray-500">Quantity: {item.quantity}</span>
+
+            {/* Quantity Control */}
+            <div className="flex items-center justify-center sm:justify-end gap-4">
+                <button
+                    className="text-gray-600 dark:text-gray-300 hover:text-red-600 text-xl font-bold px-2"
+                    onClick={() => console.log("Decrease quantity")}
+                >
+                    −
+                </button>
+                <span className="text-gray-800 dark:text-gray-200 font-medium">
+                    {item.quantity}
+                </span>
+                <button
+                    className="text-gray-600 dark:text-gray-300 hover:text-blue-500 text-xl font-bold px-2"
+                    onClick={() => console.log("Increase quantity")}
+                >
+                    +
+                </button>
+            </div>
         </li>
+
     )
 }
 
