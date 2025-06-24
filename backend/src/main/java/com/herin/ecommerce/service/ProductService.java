@@ -4,6 +4,7 @@ import com.herin.ecommerce.dto.ProductDTO.ProductRequestDTO;
 import com.herin.ecommerce.dto.ProductDTO.ProductResponseDTO;
 import com.herin.ecommerce.mapper.ProductMapper;
 import com.herin.ecommerce.model.ProductEntity;
+import com.herin.ecommerce.repository.CartItemRepository;
 import com.herin.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
@@ -25,6 +27,11 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     /**
+     *
+     */
+    private final CartItemRepository cartItemRepository;
+
+    /**
      * Product Mapper
      */
     private final ProductMapper productMapper;
@@ -33,8 +40,9 @@ public class ProductService {
      * Constructor
      */
     @Autowired
-    public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
+    public ProductService(ProductRepository productRepository, CartItemRepository cartItemRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
+        this.cartItemRepository = cartItemRepository;
         this.productMapper = productMapper;
     }
 
@@ -94,10 +102,13 @@ public class ProductService {
     /**
      * Delete a product
      */
+    @Transactional
     public void deleteProduct(Long id) {
         // Check if the product exists
         ProductEntity existing = productRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+        // Check if the product is in any cart
+        cartItemRepository.deleteByProductId(id);
 
         productRepository.delete(existing);
 
