@@ -6,7 +6,7 @@ GET https://examples.http-client.intellij.net/get
 
 ### GET request to findAll Product
 GET http://localhost:8082/api/v1/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA2OTc2NTksImV4cCI6MTc1MDcwMTI1OX0.20jiG806Te2GRpASyzzeQDDajg40wqsOjRVvzpVgf4k
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA3MTMyOTcsImV4cCI6MTc1MDcxNjg5N30.Gt8JYTnNHCFB7JCj43goQCjnDRCc_uUayVPvZBuOzyU
 
 ###
 
@@ -48,7 +48,9 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8082/api/v1/products/6
+DELETE http://localhost:8082/api/v1/products/19
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA3MTM0OTcsImV4cCI6MTc1MDcxNzA5N30.rrSNqXT-EJEAtl5FKxXXT9E3Fr1TnM97SAruVo0HUuE
+
 
 ### User
 

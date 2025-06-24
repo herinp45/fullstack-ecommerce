@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
+import CartPopup from "./CartPopup";
 
 function Navbar() {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const [isCartOpen, setIsCartOpen] = useState(false);
 
     useEffect(() => {
         const darkMode = localStorage.getItem("theme");
@@ -72,6 +75,7 @@ function Navbar() {
 
     return (
         <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md w-full">
+            {isCartOpen && (<CartPopup onClose={() => setIsCartOpen(false)}/>)}
             <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4">
                 {/* Logo */}
                 <Link to="/" className="text-3xl font-bold text-black dark:text-white">
@@ -96,9 +100,9 @@ function Navbar() {
                         >
                             {isDarkMode ? darkModeSvg : lightModeSvg}
                         </button>
-                        <Link to="/cart" className="w-6 h-6 text-gray-800 dark:text-white hover:text-blue-600 hover:dark:text-blue-400">
+                        <button onClick={()=>{setIsCartOpen(true)}} className="w-6 h-6 text-gray-800 dark:text-white hover:text-blue-600 hover:dark:text-blue-400">
                             {cartSvg}
-                        </Link>
+                        </button>
                     </div>
 
                     {/* Mobile menu toggle */}
