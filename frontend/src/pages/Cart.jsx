@@ -1,5 +1,5 @@
 import axios from "axios";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
 import CartItemCard from "../components/CartItemCard";
 
@@ -14,9 +14,9 @@ function Cart() {
                 const response = await axios.get("http://localhost:8082/api/v1/cart", {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-                        "Content-Type": "application/json"
-                    }
-                })
+                        "Content-Type": "application/json",
+                    },
+                });
                 setCartItems(response.data || []);
             }
             catch (error) {
@@ -26,19 +26,23 @@ function Cart() {
                 setLoading(false);
             }
         };
-        fetchCartItems();}
-         , [] );
+        fetchCartItems();
+    }, []);
+
     return (
         <>
             {loading ? (
                 <Spinner />
             ) : (
-                <div className="container mx-auto p-6">
-                    <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+                <div className="flex flex-col items-center  min-h-screen px-4 py-8 dark:bg-gray-900 bg-gray-100">
+                    <h1 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
+                        Your Cart
+                    </h1>
+
                     {cartItems.length === 0 ? (
-                        <p className="text-gray-500">Your cart is empty.</p>
+                        <p className="text-gray-500 dark:text-gray-400 text-lg">Your cart is empty.</p>
                     ) : (
-                        <ul className="space-y-4">
+                        <ul className="space-y-4 w-full max-w-2xl">
                             {cartItems.map((item) => (
                                 <CartItemCard key={item.id} item={item} />
                             ))}

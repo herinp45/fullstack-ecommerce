@@ -2,7 +2,8 @@ function CartItemCard({item}) {
     return (
         <li
             key={item.id}
-            className="flex flex-col sm:flex-row items-center dark:bg-gray-950 bg-white p-4 gap-4 rounded-xl shadow-md border dark:border-gray-800 transition-all duration-300"
+            className="flex flex-col sm:flex-row items-center dark:bg-gray-950 bg-white p-4 gap-4 rounded-xl shadow-md
+             border dark:border-gray-800 transition-all duration-300 max-w-screen-xl mx-auto hover:shadow-lg hover:scale-105"
         >
             {/* Product Image */}
             <img
@@ -22,7 +23,7 @@ function CartItemCard({item}) {
             {/* Quantity Control */}
             <div className="flex items-center justify-center sm:justify-end gap-4">
                 <button
-                    className="text-gray-600 dark:text-gray-300 hover:text-red-600 text-xl font-bold px-2"
+                    className="text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-500 text-xl font-bold px-2"
                     onClick={() => console.log("Decrease quantity")}
                 >
                     −
@@ -31,7 +32,7 @@ function CartItemCard({item}) {
                     {item.quantity}
                 </span>
                 <button
-                    className="text-gray-600 dark:text-gray-300 hover:text-blue-500 text-xl font-bold px-2"
+                    className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-500 text-xl font-bold px-2"
                     onClick={() => console.log("Increase quantity")}
                 >
                     +
