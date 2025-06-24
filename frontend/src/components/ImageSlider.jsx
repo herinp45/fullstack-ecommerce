@@ -29,7 +29,7 @@ function ImageSlider({ src, slideProducts }) {
                     key={current.id}
                     className="rounded-xl border-r-2 mx-auto border-gray-500 dark:border-gray-200 shadow-lg p-4
                    h-[22rem] w-11/12 max-w-md object-contain bg-white
-                   transition-transform duration-700 hover:scale-105 animate-slide-in"
+                   transition-transform duration-700 hover:scale-105 animate:fade-in-down"
                 />
             </div>
         </Link>

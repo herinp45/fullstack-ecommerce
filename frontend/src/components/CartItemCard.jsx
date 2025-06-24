@@ -3,7 +3,7 @@ function CartItemCard({item}) {
         <li
             key={item.id}
             className="flex flex-col sm:flex-row items-center dark:bg-gray-950 bg-white p-4 gap-4 rounded-xl shadow-md
-             border dark:border-gray-800 transition-all duration-300 max-w-screen-xl mx-auto hover:shadow-lg hover:scale-105"
+             border dark:border-gray-800 transition-all duration-300 max-w-screen-xl mx-auto hover:shadow-lg md:hover:scale-105"
         >
             {/* Product Image */}
             <img
