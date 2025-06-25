@@ -49,13 +49,19 @@ public class CartService {
                 .map(cartMapper::mapToDTO).collect(Collectors.toList());
     }
 
-    public void addCartItem(long userId, CartRequestDTO cartRequestDTO) {
+    /**
+     * Adds an item to the cart for a given user.
+     *
+     * @param userId the ID of the user
+     * @param cartRequestDTO the request containing product ID and quantity
+     * @return the added cart item as a DTO
+     */
+    public CartResponseDTO addCartItem(long userId, CartRequestDTO cartRequestDTO) {
         Long productId = cartRequestDTO.getProductId();
         int requestedQty = Math.max(cartRequestDTO.getQuantity(), 1);
 
         ProductEntity product = getProductOrThrow(productId);
         UserEntity user = getUserOrThrow(userId);
-
 
         if (product.getQuantity() < requestedQty) {
             throw new BadRequestException("Not enough product in stock");
@@ -63,21 +69,23 @@ public class CartService {
 
         Optional<CartItemEntity> existingCartItem = cartItemRepository.findByUserIdAndProductId(userId, productId);
 
+        CartItemEntity savedItem;
         if (existingCartItem.isPresent()) {
-            existingCartItem.get().setQuantity(cartRequestDTO.getQuantity());
-            cartItemRepository.save(existingCartItem.get());
+            CartItemEntity item = existingCartItem.get();
+            item.setQuantity(cartRequestDTO.getQuantity());
+            savedItem = cartItemRepository.save(item);
         }
         else {
             CartItemEntity newItem = new CartItemEntity();
             newItem.setUser(user);
             newItem.setProduct(product);
             newItem.setQuantity(cartRequestDTO.getQuantity());
-            cartItemRepository.save(newItem);
-
+            savedItem = cartItemRepository.save(newItem);
         }
 
-
+        return cartMapper.mapToDTO(savedItem);
     }
+
 
     public void deleteCartItem(long userId, long cartId) {
 
@@ -91,7 +99,16 @@ public class CartService {
         cartItemRepository.delete(item);
     }
 
-    public void patchCartItemQty(long userId, Long cartItemId, QuantityUpdateRequest quantityUpdateRequest) {
+
+    /**
+     * Updates the quantity of a cart item.
+     *
+     * @param userId the ID of the user
+     * @param cartItemId the ID of the cart item to update
+     * @param quantityUpdateRequest the request containing the new quantity
+     * @return the updated cart item as a DTO
+     */
+    public CartResponseDTO patchCartItemQty(long userId, Long cartItemId, QuantityUpdateRequest quantityUpdateRequest) {
         CartItemEntity cartItem = cartItemRepository.findById(cartItemId)
                 .orElseThrow(() -> new BadRequestException("No such Cart Item Exist"));
 
@@ -109,7 +126,9 @@ public class CartService {
 
         cartItem.setQuantity(requestedQty);
         cartItemRepository.save(cartItem);
+        return cartMapper.mapToDTO(cartItem);
     }
+
 
 
     private ProductEntity getProductOrThrow(Long productId) {
