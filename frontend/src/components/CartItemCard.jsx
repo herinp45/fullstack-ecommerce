@@ -1,4 +1,7 @@
+import {useCart} from "../context/CartContext";
+
 function CartItemCard({item}) {
+    const {addCartItem, removeCartItem, updateCartItemQuantity} = useCart();
     return (
         <li
             key={item.id}
@@ -24,7 +27,7 @@ function CartItemCard({item}) {
             <div className="flex items-center justify-center sm:justify-end gap-4">
                 <button
                     className="text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-500 text-xl font-bold px-2"
-                    onClick={() => console.log("Decrease quantity")}
+                    onClick={ () =>  updateCartItemQuantity(item.id, item.quantity - 1)}
                 >
                     −
                 </button>
@@ -33,7 +36,7 @@ function CartItemCard({item}) {
                 </span>
                 <button
                     className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-500 text-xl font-bold px-2"
-                    onClick={() => console.log("Increase quantity")}
+                    onClick={ () =>  updateCartItemQuantity(item.id, item.quantity + 1)}
                 >
                     +
                 </button>

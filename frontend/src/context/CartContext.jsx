@@ -1,4 +1,4 @@
-import {createContext, useEffect, useState} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 import axios from "axios";
 
 const CartContext = createContext();
@@ -28,9 +28,9 @@ export const CartProvider = ({ children }) => {
             }
         };
         
-        const addCartItem = async (cartId) => {
+        const addCartItem = async (id) => {
             try {
-                const response = await axios.post("http://localhost:8082/api/v1/cart/add", { cartId }, {
+                const response = await axios.post("http://localhost:8082/api/v1/cart/add", { id }, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json",
@@ -43,30 +43,34 @@ export const CartProvider = ({ children }) => {
             }
         }
 
-        const removeCartItem = async (cartId) => {
+        const removeCartItem = async (id) => {
             try {
-                await axios.delete(`http://localhost:8082/api/v1/cart/${cartId}`, {
+                await axios.delete(`http://localhost:8082/api/v1/cart/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json",
                     },
                 });
-                setCartItems((prevItems) => prevItems.filter(item => item.cartId !== cartId));
+                setCartItems((prevItems) => prevItems.filter(item => item.id !== id));
             }
             catch (error) {
                 setError("Failed to remove item from cart. Please try again later.");
             }
         }
 
-        const updateCartItemQuantity = async (cartId, quantity) => {
+        const updateCartItemQuantity = async (id, quantity) => {
             try {
-                const response = await axios.patch(`http://localhost:8082/api/v1/cart/${cartId}`, { quantity }, {
+                const response = await axios.patch(`http://localhost:8082/api/v1/cart/${id}`, { quantity }, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json",
                     },
                 });
-                setCartItems((prevItems) => prevItems.map(item => item.cartId === cartId ? response.data : item));
+                setCartItems(prevItems =>
+                    prevItems.map(item =>
+                        item.id === id ? { ...item, quantity } : item
+                    )
+                );
             }
             catch (error) {
                 setError("Failed to update item quantity. Please try again later.");

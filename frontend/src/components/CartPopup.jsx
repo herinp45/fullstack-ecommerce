@@ -1,6 +1,8 @@
 import CartItemCard from "./CartItemCard";
+import {useCart} from "../context/CartContext";
 
-function CartPopup({ cartItems, onClose }) {
+function CartPopup({ onClose }) {
+    const { cartItems } = useCart();
     return (
         <div className="fixed top-0 right-0 h-screen w-full md:w-1/2 z-50 bg-gray-100 dark:bg-gray-900 shadow-lg overflow-y-auto p-6">
             <button

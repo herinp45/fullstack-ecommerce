@@ -80,7 +80,7 @@ Content-Type: application/json
 
 ###Cart
 GET http://localhost:8082/api/v1/cart
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA2OTc2NTksImV4cCI6MTc1MDcwMTI1OX0.20jiG806Te2GRpASyzzeQDDajg40wqsOjRVvzpVgf4k
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA4NzM2OTgsImV4cCI6MTc1MDg3NzI5OH0.P-OZS-DpLV4H72GObgI30W1KvrkH9oKxpH46RbneXIU
 
 
 ### Add item to cartqa
@@ -99,12 +99,12 @@ DELETE http://localhost:8082/api/v1/cart/3
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg5NzIzODgsImV4cCI6MTc0ODk3NTk4OH0.0nFR0FhoLp_ZZ5TE3dsdEHblqooGGkiO4bOzk495tGQ
 
 ### Patch Qty from cart
-PATCH http://localhost:8082/api/v1/cart/6
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NDg5NzIzODgsImV4cCI6MTc0ODk3NTk4OH0.0nFR0FhoLp_ZZ5TE3dsdEHblqooGGkiO4bOzk495tGQ
+PATCH http://localhost:8082/api/v1/cart/8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA4NzM2OTgsImV4cCI6MTc1MDg3NzI5OH0.P-OZS-DpLV4H72GObgI30W1KvrkH9oKxpH46RbneXIU
 Content-Type: application/json
 
 {
-  "quantity": 4
+  "quantity": 7
 }
 
 

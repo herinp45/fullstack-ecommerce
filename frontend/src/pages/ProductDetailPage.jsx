@@ -1,15 +1,21 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import Spinner from "../components/Spinner";
+import {useCart} from "../context/CartContext";
 
 function ProductDetailPage() {
 
     const {id} = useParams();
 
     const [product, setProduct] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const {addCartItem} = useCart();
 
     useEffect(() => {
         async function fetchProductDetails() {
+            setLoading(true);
             try {
                 const response = await axios.get(`http://localhost:8082/api/v1/products/${id}`, {
                     headers: {
@@ -21,6 +27,9 @@ function ProductDetailPage() {
             }
             catch (error) {
                 console.error("Error fetching product details:", error);
+            }
+            finally {
+                setLoading(false);
             }
         }
         fetchProductDetails();
@@ -37,7 +46,8 @@ function ProductDetailPage() {
 
   return (
 
-      <div className="text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-900 min-h-screen
+    loading ? (<Spinner />) :
+        (<div className="text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-900 min-h-screen
       flex items-center justify-center">
 
           <div className="container h-3/4 w-3/4 px-5 py-24 mx-auto">
@@ -76,7 +86,7 @@ function ProductDetailPage() {
               </div>
 
           </div>
-      </div>
+      </div>)
   );
 }
 

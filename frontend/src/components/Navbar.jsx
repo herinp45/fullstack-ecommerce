@@ -10,30 +10,7 @@ function Navbar() {
 
     const [isCartOpen, setIsCartOpen] = useState(false);
 
-    const [cartItems, setCartItems] = useState([]);
-    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchCartItems = async () => {
-            setLoading(true);
-            try {
-                const response = await axios.get("http://localhost:8082/api/v1/cart", {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-                        "Content-Type": "application/json",
-                    },
-                });
-                setCartItems(response.data || []);
-            }
-            catch (error) {
-                console.error("Error fetching cart items:", error);
-            }
-            finally {
-                setLoading(false);
-            }
-        };
-        fetchCartItems();
-    }, []);
     useEffect(() => {
         const darkMode = localStorage.getItem("theme");
         if (darkMode === "dark") {
@@ -102,8 +79,7 @@ function Navbar() {
 
     return (
         <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md w-full">
-            {isCartOpen && (<CartPopup onClose={() => setIsCartOpen(false)} closeSvg={closeSvg}
-            cartItems={cartItems}/>)}
+            {isCartOpen && (<CartPopup onClose={() => setIsCartOpen(false)} closeSvg={closeSvg}/>)}
             <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4">
                 {/* Logo */}
                 <Link to="/" className="text-3xl font-bold text-black dark:text-white">
