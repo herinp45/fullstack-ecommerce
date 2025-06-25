@@ -86,7 +86,12 @@ public class CartService {
         return cartMapper.mapToDTO(savedItem);
     }
 
-
+    /**
+     * Deletes a cart item for a given user.
+     *
+     * @param userId the ID of the user
+     * @param cartId the ID of the cart item to delete
+     */
     public void deleteCartItem(long userId, long cartId) {
 
         CartItemEntity item = cartItemRepository.findById(cartId)

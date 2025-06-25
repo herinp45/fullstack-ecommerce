@@ -43,14 +43,45 @@ public class CartController {
             return ResponseEntity.ok(cartService.getCartItemsByUserId(userPrincipal.getUser().getId()));
     }
 
+    /**
+     * Add items to the cart
+     *
+     * @param cartRequestDTO CartRequestDTO containing product ID and quantity
+     * @param userPrincipal UserPrincipal instance of the authenticated user
+     * @return ResponseEntity<CartResponseDTO> added cart item
+     */
     @PostMapping("/add")
-    public ResponseEntity<?> addCartItems(@RequestBody CartRequestDTO cartRequestDTO,
-                                                             @AuthenticationPrincipal UserPrincipal userPrincipal) {
+    public ResponseEntity<CartResponseDTO> addCartItems(@RequestBody CartRequestDTO cartRequestDTO,
+                                                        @AuthenticationPrincipal UserPrincipal userPrincipal) {
         long userID = userPrincipal.getUser().getId();
-        cartService.addCartItem(userID, cartRequestDTO);
-        return ResponseEntity.ok("Item added to cart");
+        CartResponseDTO dto = cartService.addCartItem(userID, cartRequestDTO);
+        return ResponseEntity.ok(dto);
     }
 
+    /**
+     * Update the quantity of a cart item
+     *
+     * @param cartItemId ID of the cart item to update
+     * @param quantityUpdateRequest QuantityUpdateRequest containing new quantity
+     * @param userPrincipal UserPrincipal instance of the authenticated user
+     * @return ResponseEntity<CartResponseDTO> updated cart item
+     */
+    @PatchMapping("/{cartItemId}")
+    public ResponseEntity<CartResponseDTO> patchCartItemsQty(@PathVariable Long cartItemId,
+                                                             @RequestBody QuantityUpdateRequest quantityUpdateRequest,
+                                                             @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        long userId = userPrincipal.getUser().getId();
+        CartResponseDTO dto = cartService.patchCartItemQty(userId, cartItemId, quantityUpdateRequest);
+        return ResponseEntity.ok(dto);
+    }
+
+    /**
+     * Delete a cart item
+     *
+     * @param cartItemId ID of the cart item to delete
+     * @param userPrincipal UserPrincipal instance of the authenticated user
+     * @return ResponseEntity<?> response indicating success
+     */
     @DeleteMapping("/{cartItemId}")
     public ResponseEntity<?> deleteCartItems(@PathVariable Long cartItemId,
                                                             @AuthenticationPrincipal UserPrincipal userPrincipal) {
@@ -59,12 +90,5 @@ public class CartController {
         return ResponseEntity.ok("Item deleted from cart");
     }
 
-    @PatchMapping("/{cartItemId}")
-    public ResponseEntity<?> patchCartItemsQty(@PathVariable Long cartItemId, @RequestBody QuantityUpdateRequest quantityUpdateRequest,
-                                               @AuthenticationPrincipal UserPrincipal userPrincipal) {
-        long userId = userPrincipal.getUser().getId();
-        cartService.patchCartItemQty(userId, cartItemId, quantityUpdateRequest);
-        return ResponseEntity.ok("Quantity updated");
-    }
 
 }
