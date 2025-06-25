@@ -4,7 +4,7 @@ import axios from "axios";
 const CartContext = createContext();
 
 
-function CartProvider({children}) {
+export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -28,9 +28,9 @@ function CartProvider({children}) {
             }
         };
         
-        const addCartItem = async (productId) => {
+        const addCartItem = async (cartId) => {
             try {
-                const response = await axios.post("http://localhost:8082/api/v1/cart/add", { productId }, {
+                const response = await axios.post("http://localhost:8082/api/v1/cart/add", { cartId }, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json",
@@ -43,36 +43,61 @@ function CartProvider({children}) {
             }
         }
 
-        const removeCartItem = async (productId) => {
+        const removeCartItem = async (cartId) => {
             try {
-                await axios.delete(`http://localhost:8082/api/v1/cart/${productId}`, {
+                await axios.delete(`http://localhost:8082/api/v1/cart/${cartId}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json",
                     },
                 });
-                setCartItems((prevItems) => prevItems.filter(item => item.productId !== productId));
+                setCartItems((prevItems) => prevItems.filter(item => item.cartId !== cartId));
             }
             catch (error) {
                 setError("Failed to remove item from cart. Please try again later.");
             }
         }
 
-        const updateCartItemQuantity = async (productId, quantity) => {
+        const updateCartItemQuantity = async (cartId, quantity) => {
             try {
-                const response = await axios.patch(`http://localhost:8082/api/v1/cart/${productId}`, { quantity }, {
+                const response = await axios.patch(`http://localhost:8082/api/v1/cart/${cartId}`, { quantity }, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json",
                     },
                 });
-                setCartItems((prevItems) => prevItems.map(item => item.productId === productId ? response.data : item));
+                setCartItems((prevItems) => prevItems.map(item => item.cartId === cartId ? response.data : item));
             }
             catch (error) {
                 setError("Failed to update item quantity. Please try again later.");
             }
         }
 
+    useEffect(() => {
+        fetchCartItems();
+    }
+    , []);
+    return (
+        <CartContext.Provider value={{
+            cartItems,
+            loading,
+            error,
+            addCartItem,
+            removeCartItem,
+            updateCartItemQuantity
+        }}>
+            {children}
+        </CartContext.Provider>
+    );
+
+}
+
+export const useCart = () => {
+    const context = useContext(CartContext);
+    if (!context) {
+        throw new Error("useCart must be used within a CartProvider");
+    }
+    return context;
 }
 
 
