@@ -21,7 +21,7 @@ function ProductCard({ id, img, description, name, price }) {
             <div className="p-4 sm:p-6">
                 <p className="text-sm font-medium text-gray-500 dark:text-gray-400">${price}</p>
                 <h2 className="text-lg font-bold text-gray-800 dark:text-white mt-1">{name}</h2>
-                <p className="mt-2 text-sm text-gray-600 dark:text-gray-300 line-clamp-3">{description}</p>
+                <p className="mt-2 mb-7 text-sm text-gray-600 dark:text-gray-300 line-clamp-2">{description}</p>
                 <AddToCartControls id={id}/>
             </div>
 

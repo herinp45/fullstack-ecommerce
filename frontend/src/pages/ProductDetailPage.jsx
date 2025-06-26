@@ -72,11 +72,13 @@ function ProductDetailPage() {
                       <p className="leading-relaxed text-sm">{description}</p>
                       <div className="h-0.5 opacity-60 w-full backdrop-blur-2xl bg-gradient-to-r from-blue-500 to-purple-500 my-4
                       bg-blue-500 rounded-full mx-auto lg:mx-0"/>
-                      <div className="flex">
+                      <div className="flex items-center justify-between gap-4 mt-4">
                             <span className="title-font font-medium text-2xl text-gray-900 dark:text-white">
                                 ${price}
                             </span>
+                          <div>
                           <AddToCartControls id={product.id}/>
+                          </div>
                       </div>
 
 

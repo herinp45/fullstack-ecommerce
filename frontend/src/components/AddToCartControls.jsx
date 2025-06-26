@@ -39,32 +39,35 @@ function AddToCartControls({ id }) {
     };
 
     return (
-        <div className="flex flex-col justify-center sm:flex-row items-center gap-3 mt-5">
-            {quantity > 0 ?
-                (<div className="flex w-10 h-10 items-center justify-center text-gray-800 dark:text-white">
+        <div className="h-10 flex justify-center items-center gap-1">
+            {quantity > 0 ? (
+                <div className="flex items-center">
+                    <button
+                        className="h-10 w-10 text-red-500  rounded-l hover:text-red-400 font-bold text-lg"
+                        onClick={decreaseQty}
+                    >
+                        −
+                    </button>
+                    <span className="h-10 w-10 flex items-center justify-center ">
+        {quantity}
+      </span>
+                    <button
+                        className="h-10 w-10 text-blue-500  rounded-r hover:text-blue-400 font-bold text-lg"
+                        onClick={increaseQty}
+                    >
+                        +
+                    </button>
+                </div>
+            ) : (
                 <button
-                    className="px-3 py-1 text-red-400 font-semibold rounded-r transition hover:text-red-500"
-                    onClick={decreaseQty}
+                    className="h-10 px-6 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    onClick={handleAddToCart}
                 >
-                    −
+                    Add to Cart
                 </button>
-                <span className="px-4 py-1">{quantity}</span>
-                <button
-                    className="px-3 py-1 text-blue-400 font-semibold rounded-r transition hover:text-blue-500"
-                    onClick={increaseQty}
-                >
-                    +
-                </button>
-            </div>):
-
-                (<button
-                onClick={handleAddToCart}
-                className="text-white bg-blue-500 border-0 py-2 px-6 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-                Add to Cart
-            </button>)
-}
+            )}
         </div>
+
     );
 }
 
