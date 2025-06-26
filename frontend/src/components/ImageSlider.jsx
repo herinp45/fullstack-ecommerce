@@ -27,6 +27,7 @@ function ImageSlider({ src, slideProducts }) {
                     src={current.imageUrl || src}
                     alt={current.name}
                     key={current.id}
+                    loading={"lazy"}
                     className="rounded-xl border-r-2 mx-auto border-gray-500 dark:border-gray-200 shadow-lg p-4
                    h-[22rem] w-11/12 max-w-md object-contain bg-white
                    transition-transform duration-1500 hover:scale-105 animate-fade-in"

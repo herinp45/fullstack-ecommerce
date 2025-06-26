@@ -11,6 +11,7 @@ function CartItemCard({item}) {
             {/* Product Image */}
             <img
                 src={item.product.imageUrl || "https://via.placeholder.com/150"}
+                loading="lazy"
                 alt={item.product.name}
                 className="w-24 h-24 object-contain rounded-lg border dark:border-gray-700"
             />

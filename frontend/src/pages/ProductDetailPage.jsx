@@ -57,6 +57,7 @@ function ProductDetailPage() {
                   >
                       <img
                           src={img}
+                          loading={"lazy"}
                           alt={name}
                           className="w-full h-full object-contain"
                       />
