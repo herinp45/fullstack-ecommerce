@@ -28,9 +28,10 @@ export const CartProvider = ({ children }) => {
             }
         };
         
-        const addCartItem = async (id) => {
+        const addCartItem = async (productId) => {
             try {
-                const response = await axios.post("http://localhost:8082/api/v1/cart/add", { id }, {
+                const response = await axios.post("http://localhost:8082/api/v1/cart/add",
+                    { productId: productId, quantity: 1 }, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json",

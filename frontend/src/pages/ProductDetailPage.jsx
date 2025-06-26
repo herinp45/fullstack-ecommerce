@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
 import {useCart} from "../context/CartContext";
+import AddToCartControls from "../components/AddToCartControls";
 
 function ProductDetailPage() {
 
@@ -75,11 +76,7 @@ function ProductDetailPage() {
                             <span className="title-font font-medium text-2xl text-gray-900 dark:text-white">
                                 ${price}
                             </span>
-                          <button
-                              className="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded"
-                          >
-                              Add to Cart
-                          </button>
+                          <AddToCartControls id={product.id}/>
                       </div>
 
 
