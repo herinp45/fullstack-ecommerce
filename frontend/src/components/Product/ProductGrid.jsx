@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Alert from "./Alert";
+import Alert from "../Alert";
 import ProductCard from "./ProductCard";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 
 function ProductGrid({ searchTerm, onDataLoaded }) {
     const [products, setProducts] = useState([]);

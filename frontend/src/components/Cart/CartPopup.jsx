@@ -1,5 +1,5 @@
 import CartItemCard from "./CartItemCard";
-import {useCart} from "../context/CartContext";
+import {useCart} from "../../context/CartContext";
 import {useNavigate} from "react-router-dom";
 
 function CartPopup({ onClose }) {

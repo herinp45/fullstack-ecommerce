@@ -1,5 +1,5 @@
-import ProductListHeader from "../components/ProductListHeader";
-import ProductGrid from "../components/ProductGrid";
+import ProductListHeader from "../components/Product/ProductListHeader";
+import ProductGrid from "../components/Product/ProductGrid";
 import { useState } from "react";
 
 function ProductList() {

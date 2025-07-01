@@ -6,7 +6,7 @@ import ProductList from "./pages/ProductList";
 import Spinner from "./components/Spinner";
 import Cart from "./pages/Cart";
 import ProductDetailPage from "./pages/ProductDetailPage";
-import Layout from "./components/Layout";
+import Layout from "./components/Product/Layout";
 import SearchResults from "./pages/SearchResults";
 
 function App() {

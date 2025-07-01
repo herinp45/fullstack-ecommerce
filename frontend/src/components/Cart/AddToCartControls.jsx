@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../../context/CartContext";
 
 function AddToCartControls({ id }) {
     const { cartItems, addCartItem , updateCartItemQuantity, removeCartItem} = useCart();

@@ -1,7 +1,7 @@
 import Spinner from "../components/Spinner";
-import CartItemCard from "../components/CartItemCard";
+import CartItemCard from "../components/Cart/CartItemCard";
 import {useCart} from "../context/CartContext";
-import OrderSummary from "../components/OrderSummary";
+import OrderSummary from "../components/Cart/OrderSummary";
 
 function Cart() {
     const {cartItems, loading, subTotal}  = useCart();

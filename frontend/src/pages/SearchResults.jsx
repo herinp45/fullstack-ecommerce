@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import ProductGrid from "../components/ProductGrid";
+import ProductGrid from "../components/Product/ProductGrid";
 
 
 function SearchResults() {

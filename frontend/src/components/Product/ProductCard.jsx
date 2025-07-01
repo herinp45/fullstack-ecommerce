@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import AddToCartControls from "./AddToCartControls";
+import AddToCartControls from "../Cart/AddToCartControls";
 
 function ProductCard({ id, img, description, name, price }) {
     const src = "https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2664&q=80";
