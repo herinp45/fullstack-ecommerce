@@ -78,6 +78,8 @@ export const CartProvider = ({ children }) => {
             }
         }
 
+        const subTotal = cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0).toFixed(2);
+
     useEffect(() => {
         fetchCartItems();
     }
@@ -87,6 +89,7 @@ export const CartProvider = ({ children }) => {
             cartItems,
             loading,
             error,
+            subTotal,
             addCartItem,
             removeCartItem,
             updateCartItemQuantity
