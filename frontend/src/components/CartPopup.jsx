@@ -1,8 +1,12 @@
 import CartItemCard from "./CartItemCard";
 import {useCart} from "../context/CartContext";
+import {useNavigate} from "react-router-dom";
 
 function CartPopup({ onClose }) {
     const { cartItems } = useCart();
+
+    const navigate = useNavigate();
+
     return (
         <div className="fixed top-0 right-0 h-screen w-full md:w-1/2 z-50 bg-gray-100 dark:bg-gray-900 shadow-lg overflow-y-auto p-6">
             <button
@@ -31,6 +35,13 @@ function CartPopup({ onClose }) {
                     ))}
                 </ul>
             )}
+
+            <button className="mt-6 w-full font-semibold border-2 border-blue-600 text-blue-500 hover:text-white py-2 rounded
+            hover:bg-blue-600 transition-colors"
+                onClick={() => {
+                navigate("/cart");
+                onClose();
+            }}>Shopping Bag</button>
         </div>
     );
 }

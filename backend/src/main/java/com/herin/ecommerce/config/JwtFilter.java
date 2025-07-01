@@ -22,9 +22,9 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
 
 
-    private JWTService jwtService;
+    private final JWTService jwtService;
 
-    private ApplicationContext context;
+    private final ApplicationContext context;
 
     @Autowired
     public JwtFilter(JWTService jwtService, ApplicationContext context) {
