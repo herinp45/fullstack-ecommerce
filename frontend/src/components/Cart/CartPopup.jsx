@@ -3,7 +3,7 @@ import {useCart} from "../../context/CartContext";
 import {useNavigate} from "react-router-dom";
 
 function CartPopup({ onClose }) {
-    const { cartItems } = useCart();
+    const { cartItems, subTotal } = useCart();
 
     const navigate = useNavigate();
 
@@ -35,13 +35,24 @@ function CartPopup({ onClose }) {
                     ))}
                 </ul>
             )}
+            <div className="mt-8 text-xl flex justify-between text-gray-800 border-t p-4 dark:text-white font-semibold">
+                <span>Total</span>
+                <span>
+                        ${subTotal}
+                    </span>
+            </div>
 
             <button className="mt-6 w-full font-semibold border-2 border-blue-600 text-blue-500 hover:text-white py-2 rounded
             hover:bg-blue-600 transition-colors"
-                onClick={() => {
-                navigate("/cart");
+                    onClick={() => {
+                        navigate("/cart");
                 onClose();
             }}>Shopping Bag</button>
+            <button className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+                onClick={() => {
+                navigate("/checkout");
+                onClose();
+            }}>Checkout</button>
         </div>
     );
 }
