@@ -1,5 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import axios from "axios";
+import {useAuth} from "./AuthContext";
 
 const CartContext = createContext();
 
@@ -8,6 +9,8 @@ export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const {token} = useAuth();
 
         const fetchCartItems = async () => {
             setLoading(true);
@@ -81,9 +84,11 @@ export const CartProvider = ({ children }) => {
         const subTotal = cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0).toFixed(2);
 
     useEffect(() => {
-        fetchCartItems();
+        if (token) {
+            fetchCartItems();
+        }
     }
-    , []);
+    , [token]);
     return (
         <CartContext.Provider value={{
             cartItems,
