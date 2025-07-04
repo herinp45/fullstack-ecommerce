@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCart } from "../context/CartContext";
 import Alert from "../components/Alert";
+import axios from "axios";
 
 function CheckOut() {
     const { cartItems, subTotal } = useCart();
@@ -9,7 +10,7 @@ function CheckOut() {
     const [alertMessage, setAlertMessage] = useState("");
     const [alertType, setAlertType] = useState("error");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
@@ -32,8 +33,32 @@ function CheckOut() {
         }
 
         // Proceed with placing the order (API call or Stripe logic)
-        setAlertType("success");
-        setAlertMessage("Order placed successfully!");
+        try {
+            const response = await axios.post(
+                "http://localhost:8082/api/v1/stripe/create-checkout-session",
+                {
+                    productNames: cartItems.map(item => item.product.name),
+                    pricesInCents: cartItems.map(item => Math.round(item.product.price * 100)),
+                    quantities: cartItems.map(item => item.quantity),
+                    successUrl: "http://localhost:3000/success",
+                    cancelUrl: "http://localhost:3000/cancel",
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                    }
+                }
+            );
+
+            if (response.data.url) {
+                window.location.href = response.data.url;
+            }
+        }
+        catch (error) {
+            setAlertType("error");
+            setAlertMessage("Failed to create checkout session. Please try again later.");
+        }
+
     };
 
     return (

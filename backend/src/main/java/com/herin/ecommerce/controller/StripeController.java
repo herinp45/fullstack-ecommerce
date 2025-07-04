@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/stripe")
+@CrossOrigin(origins = "http://localhost:3000")
 public class StripeController {
     private final StripeService stripeService;
 
@@ -26,9 +28,7 @@ public class StripeController {
     }
 
     @PostMapping("/create-checkout-session")
-    public ResponseEntity<Map<String, String>> createCheckoutSession(
-            @RequestBody StripeRequestDTO stripeRequestDTO
-            )  {
+    public ResponseEntity<Map<String, String>> createCheckoutSession(@RequestBody StripeRequestDTO stripeRequestDTO)  {
         try {
             // Extract data from the request DTO
             List<String> productNames = stripeRequestDTO.getProductNames();
