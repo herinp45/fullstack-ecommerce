@@ -1,4 +1,4 @@
-package com.yourapp.service;
+package com.herin.ecommerce.service;
 
 import com.stripe.Stripe;
 import com.stripe.model.checkout.Session;
@@ -23,6 +23,7 @@ public class StripeService {
     public String createCheckoutSession(
             List<String> productNames,
             List<Long> pricesInCents,
+            List<Long> quantities,
             String successUrl,
             String cancelUrl
     ) throws Exception {
@@ -38,6 +39,8 @@ public class StripeService {
                 .setMode(SessionCreateParams.Mode.PAYMENT)
                 .setSuccessUrl(successUrl)
                 .setCancelUrl(cancelUrl);
+
+        // Add line items for each product
         for (int i = 0; i < productNames.size(); i++) {
             SessionCreateParams.LineItem.PriceData.ProductData productData =
                     SessionCreateParams.LineItem.PriceData.ProductData.builder()
@@ -52,7 +55,7 @@ public class StripeService {
             SessionCreateParams.LineItem lineItem =
                     SessionCreateParams.LineItem.builder()
                             .setPriceData(priceData)
-                            .setQuantity(1L) // Set quantity to 1 for each product
+                            .setQuantity(quantities.get(i)) // Set quantity to 1 for each product
                             .build();
             builder.addLineItem(lineItem);
         }
