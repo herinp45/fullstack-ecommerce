@@ -18,7 +18,10 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/" element={<Spinner />} />
-                <Route path="/checkout" element={<CheckOut />} />
+                <Route path="/checkout" element={<PrivateRoute>
+                    <CheckOut />
+                </PrivateRoute>
+                } />
 
                 {/* Product routes */}
                 <Route element={<Layout />}>
