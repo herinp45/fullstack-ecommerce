@@ -9,6 +9,7 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import Layout from "./components/Product/Layout";
 import SearchResults from "./pages/SearchResults";
 import CheckOut from "./pages/CheckOut";
+import CheckOutResultPage from "./pages/CheckOutResultPage";
 
 function App() {
     return (
@@ -25,23 +26,14 @@ function App() {
 
                 {/* Product routes */}
                 <Route element={<Layout />}>
-                    <Route path="/products" element={<PrivateRoute>
-                        <ProductList />
-                    </PrivateRoute>} />
-
-                    <Route path="/product/:id" element={<PrivateRoute>
-                        <ProductDetailPage />
-                    </PrivateRoute>} />
-
-                    {/* Cart route */}
-                    <Route path="/cart" element={<PrivateRoute>
-                        <Cart />
-                    </PrivateRoute>} />
-
-                    <Route path="/search" element={<PrivateRoute>
-                        <SearchResults />
-                    </PrivateRoute>} />
+                    <Route path="/products" element={<PrivateRoute><ProductList /></PrivateRoute>} />
+                    <Route path="/product/:id" element={<PrivateRoute><ProductDetailPage /></PrivateRoute>} />
+                    <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
+                    <Route path="/search" element={<PrivateRoute><SearchResults /></PrivateRoute>} />
+                    <Route path="/success" element={<PrivateRoute><CheckOutResultPage success={true} /></PrivateRoute>} />
+                    <Route path="/cancel" element={<PrivateRoute><CheckOutResultPage success={false} /></PrivateRoute>} />
                 </Route>
+
 
             </Routes>
         </BrowserRouter>
