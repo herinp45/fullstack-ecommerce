@@ -26,7 +26,7 @@ function CheckOutResultPage({ success }) {
             </p>
 
             <Link
-                to={success ? "/" : "/checkout"}
+                to={success ? "/products" : "/checkout"}
                 className={`inline-block px-6 py-2 rounded font-semibold transition ${
                     success
                         ? "bg-blue-600 hover:bg-blue-700 text-white"
