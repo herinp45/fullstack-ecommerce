@@ -10,6 +10,16 @@ services:
       - .env.docker
     depends_on:
       - db
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.docker
+    depends_on:
+      - backend
 
   db:
     image: postgres:latest
