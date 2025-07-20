@@ -2,5 +2,5 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: 'http://44.220.136.49:8082/api', // Replace with your backend server URL
+    baseURL:  process.env.REACT_APP_API_URL, // Replace with your backend server URL
 });
