@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useCart } from "../context/CartContext";
 import Alert from "../components/Alert";
-import axios from "axios";
+import axios from "../api/axios";
 
 function CheckOut() {
     const { cartItems, subTotal } = useCart();

@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import axios from "axios";
+import axios from "../api/axios";
 import Spinner from "../components/Spinner";
 import {useCart} from "../context/CartContext";
 import AddToCartControls from "../components/Cart/AddToCartControls";

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios from "../api/axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Alert from "../components/Alert";
 import {Link, useNavigate} from "react-router-dom";

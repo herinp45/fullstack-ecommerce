@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../api/axios"; // Adjust the import path as necessary
 import Alert from "../Alert";
 import ProductCard from "./ProductCard";
 import Spinner from "../Spinner";

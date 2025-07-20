@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import CartPopup from "./Cart/CartPopup";
-import axios from "axios";
 
 function Navbar() {
     const [isDarkMode, setIsDarkMode] = useState(false);
