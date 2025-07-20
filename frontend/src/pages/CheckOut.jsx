@@ -35,7 +35,7 @@ function CheckOut() {
         // Proceed with placing the order (API call or Stripe logic)
         try {
             const response = await axios.post(
-                "http://localhost:8082/api/v1/stripe/create-checkout-session",
+                "/v1/stripe/create-checkout-session",
                 {
                     productNames: cartItems.map(item => item.product.name),
                     pricesInCents: cartItems.map(item => Math.round(item.product.price * 100)),

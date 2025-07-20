@@ -30,7 +30,7 @@ function SearchBar() {
     useEffect(() => {
         const timmer = setTimeout(async () => {
             if (searchTerm.length > 0) {
-                const response = await axios.get("http://localhost:8082/api/v1/products", {
+                const response = await axios.get("/v1/products", {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json"

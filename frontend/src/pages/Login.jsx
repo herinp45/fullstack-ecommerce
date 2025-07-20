@@ -25,7 +25,7 @@ function Login() {
 
         try {
 
-            const response = await axios.post("http://localhost:8082/api/v1/auth/login", {
+            const response = await axios.post("/v1/auth/login", {
                 identifier,
                 password,
             });

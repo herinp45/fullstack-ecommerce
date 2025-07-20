@@ -24,7 +24,7 @@ function Register() {
         setAlertMessage("");
 
         try {
-            const response = await axios.post("http://localhost:8082/api/v1/auth/register", {
+            const response = await axios.post("/v1/auth/register", {
                 username,
                 email,
                 password,
