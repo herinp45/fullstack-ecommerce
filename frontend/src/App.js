@@ -3,13 +3,13 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PrivateRoute from "./routes/PrivateRoute";
 import ProductList from "./pages/ProductList";
-import Spinner from "./components/Spinner";
 import Cart from "./pages/Cart";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import Layout from "./components/Product/Layout";
 import SearchResults from "./pages/SearchResults";
 import CheckOut from "./pages/CheckOut";
 import CheckOutResultPage from "./pages/CheckOutResultPage";
+import Home from "./pages/Home";
 
 function App() {
     return (
@@ -18,7 +18,6 @@ function App() {
                 {/* Define your routes here */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/" element={<Spinner />} />
                 <Route path="/checkout" element={<PrivateRoute>
                     <CheckOut />
                 </PrivateRoute>
@@ -26,6 +25,7 @@ function App() {
 
                 {/* Product routes */}
                 <Route element={<Layout />}>
+                    <Route path="/" element={<PrivateRoute><Home /></PrivateRoute>} />
                     <Route path="/products" element={<PrivateRoute><ProductList /></PrivateRoute>} />
                     <Route path="/product/:id" element={<PrivateRoute><ProductDetailPage /></PrivateRoute>} />
                     <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
