@@ -7,4 +7,4 @@ const axiosInstance = axios.create({
     },
 });
 
-export default axiosInstance; // ✅ MUST use default export
+export default axiosInstance;

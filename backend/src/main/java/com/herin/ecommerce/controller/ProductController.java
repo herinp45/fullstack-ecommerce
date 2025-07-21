@@ -31,7 +31,6 @@ public class ProductController {
     /**
      * Get all products
      */
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public Map<String, Object> getAllProducts(
             @RequestParam(defaultValue = "0") int page,
