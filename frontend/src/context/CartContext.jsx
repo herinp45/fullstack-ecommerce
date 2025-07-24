@@ -64,7 +64,7 @@ export const CartProvider = ({ children }) => {
 
         const updateCartItemQuantity = async (id, quantity) => {
             try {
-                const response = await axios.patch(`/api/v1/cart/${id}`, { quantity }, {
+                await axios.patch(`/api/v1/cart/${id}`, { quantity }, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json",

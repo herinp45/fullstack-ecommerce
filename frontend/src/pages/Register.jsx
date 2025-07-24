@@ -24,7 +24,7 @@ function Register() {
         setAlertMessage("");
 
         try {
-            const response = await axios.post("/api/v1/auth/register", {
+            await axios.post("/api/v1/auth/register", {
                 username,
                 email,
                 password,
@@ -32,6 +32,7 @@ function Register() {
 
             setAlertMessage("Registration successful!");
             setAlertType("success");
+
 
             // Redirect to products page
             setTimeout(() => {

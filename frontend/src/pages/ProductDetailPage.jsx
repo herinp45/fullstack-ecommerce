@@ -2,7 +2,6 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "../api/axios";
 import Spinner from "../components/Spinner";
-import {useCart} from "../context/CartContext";
 import AddToCartControls from "../components/Cart/AddToCartControls";
 
 function ProductDetailPage() {
@@ -11,8 +10,6 @@ function ProductDetailPage() {
 
     const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const {addCartItem} = useCart();
 
     useEffect(() => {
         async function fetchProductDetails() {
@@ -43,7 +40,6 @@ function ProductDetailPage() {
         "aliquip ex ea commodo consequat.";
     const img = product.imageUrl || "https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2664&q=80";
     const price = product.price || "$99.99";
-    const itemsInCart = product.item || 1; // Example value, this could be fetched from a state or context
 
   return (
 
