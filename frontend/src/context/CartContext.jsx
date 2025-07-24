@@ -15,7 +15,7 @@ export const CartProvider = ({ children }) => {
         const fetchCartItems = async () => {
             setLoading(true);
             try {
-                const response = await axios.get("/v1/cart", {
+                const response = await axios.get("/api/v1/cart", {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export const CartProvider = ({ children }) => {
         
         const addCartItem = async (productId) => {
             try {
-                const response = await axios.post("/v1/cart/add",
+                const response = await axios.post("/api/v1/cart/add",
                     { productId: productId, quantity: 1 }, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -49,7 +49,7 @@ export const CartProvider = ({ children }) => {
 
         const removeCartItem = async (id) => {
             try {
-                await axios.delete(`/v1/cart/${id}`, {
+                await axios.delete(`/api/v1/cart/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ export const CartProvider = ({ children }) => {
 
         const updateCartItemQuantity = async (id, quantity) => {
             try {
-                const response = await axios.patch(`/v1/cart/${id}`, { quantity }, {
+                const response = await axios.patch(`/api/v1/cart/${id}`, { quantity }, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json",

@@ -20,7 +20,7 @@ function ProductGrid({ searchTerm, onDataLoaded }) {
             try {
                 setLoading(true);
                 const token = localStorage.getItem("authToken");
-                const response = await axios.get("/v1/products", {
+                const response = await axios.get("/api/v1/products", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         "Content-Type": "application/json",

@@ -10,8 +10,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA3M
 
 ###
 
-POST http://localhost:8082/api/v1/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoMjM0NTEiLCJpYXQiOjE3NTA2MTY5MjAsImV4cCI6MTc1MDYyMDUyMH0.SXtAaKz8yIm2O22ltQtofL3ZkoTijwmnu9sPHHb9dNQ
+POST http://18.222.238.25:8082/api/v1/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMzIiLCJpYXQiOjE3NTMxMjQ3NzgsImV4cCI6MTc1MzEyODM3OH0.hEFFT5NGW0NJ8H6D7_thcfWFZc6p_zc-dHsyuI5iHlE
 Content-Type: application/json
 
 {

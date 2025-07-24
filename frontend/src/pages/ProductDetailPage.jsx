@@ -18,7 +18,7 @@ function ProductDetailPage() {
         async function fetchProductDetails() {
             setLoading(true);
             try {
-                const response = await axios.get(`/v1/products/${id}`, {
+                const response = await axios.get(`/api/v1/products/${id}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                         "Content-Type": "application/json"

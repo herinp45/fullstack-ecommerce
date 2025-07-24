@@ -35,13 +35,13 @@ function CheckOut() {
         // Proceed with placing the order (API call or Stripe logic)
         try {
             const response = await axios.post(
-                "/v1/stripe/create-checkout-session",
+                "/api/v1/stripe/create-checkout-session",
                 {
                     productNames: cartItems.map(item => item.product.name),
                     pricesInCents: cartItems.map(item => Math.round(item.product.price * 100)),
                     quantities: cartItems.map(item => item.quantity),
-                    successUrl: "http://localhost:3000/success",
-                    cancelUrl: "http://localhost:3000/cancel",
+                    successUrl: `http://my-frontendecom-bucket.s3-website.us-east-2.amazonaws.com/success`,
+                    cancelUrl: `http://my-frontendecom-bucket.s3-website.us-east-2.amazonaws.com/cancel`,
                 },
                 {
                     headers: {
@@ -57,6 +57,7 @@ function CheckOut() {
         catch (error) {
             setAlertType("error");
             setAlertMessage("Failed to create checkout session. Please try again later.");
+            console.error("Checkout error:", error);
         }
 
     };

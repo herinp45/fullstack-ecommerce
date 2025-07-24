@@ -18,7 +18,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/stripe")
-@CrossOrigin(origins = "*")
 public class StripeController {
     private final StripeService stripeService;
 
