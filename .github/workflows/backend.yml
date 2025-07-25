@@ -22,6 +22,9 @@ jobs:
             java-version: '17'
             distribution: 'temurin'
 
+    - name: Make the Maven wrapper executable
+      run: chmod +x ./mvnw
+
     - name: Build the backend
       working-directory: backend
       run: ./mvnw clean package -DskipTests
