@@ -52,3 +52,4 @@ jobs:
           docker pull ${{ secrets.DOCKER_IMAGE_NAME }}
           docker-compose down
           docker-compose up -d
+          
