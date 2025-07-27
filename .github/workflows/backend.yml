@@ -36,7 +36,6 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image
-      working-directory: backend
       run: docker build -t ${{ secrets.DOCKER_IMAGE_NAME }} .
 
     - name: Push Docker image to DockerHub
