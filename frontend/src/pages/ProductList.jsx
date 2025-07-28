@@ -1,13 +1,16 @@
 import ProductListHeader from "../components/Product/ProductListHeader";
 import ProductGrid from "../components/Product/ProductGrid";
-import { useState } from "react";
+import {useCallback, useState} from "react";
 
 function ProductList() {
     const [headerProducts, setHeaderProducts] = useState([]);
+    const onDataLoaded = useCallback((products) => {
+        setHeaderProducts(products);
+    }, []);
     return (
         <>
             <ProductListHeader slideProducts={headerProducts.length >= 5 ? headerProducts.slice(1, 5) : []}/>
-            <ProductGrid onDataLoaded={(products) => {setHeaderProducts(products)}} />
+            <ProductGrid onDataLoaded={onDataLoaded} />
         </>
     );
 }
