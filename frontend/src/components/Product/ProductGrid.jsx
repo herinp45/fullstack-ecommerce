@@ -49,7 +49,7 @@ function ProductGrid({ searchTerm, onDataLoaded }) {
         };
 
         fetchData();
-    }, [page, size, searchTerm, onDataLoaded]);
+    }, [page, size, searchTerm]);
 
     return (
         <>
