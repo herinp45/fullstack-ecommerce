@@ -15,7 +15,7 @@ public class CORSConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins("http://my-frontendecom-bucket.s3-website.us-east-2.amazonaws.com")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE","PATCH", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);  // if sending cookies or Authorization headers
             }
