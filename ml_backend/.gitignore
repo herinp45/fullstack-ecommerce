@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+.env
+
+# Virtual environment
+venv/
+ENV/
+env/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# PyTorch/Model files
+*.pt
+*.pth
+
+# FAISS index or embeddings (optional — if you rebuild on startup)
+*.npy
+*.pkl
+
+# Flask uploads
+uploads/
+
+# Logs
+*.log
