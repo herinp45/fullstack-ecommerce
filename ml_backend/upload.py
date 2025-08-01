@@ -9,7 +9,7 @@ from model import model, transform
 
 upload_bp = Blueprint('upload', __name__)
 
-@upload_bp.route('/upload', methods=['POST'])
+@upload_bp.route('api/v1/upload_image', methods=['POST'])
 def upload_image():
     if 'image' not in request.files:
         return jsonify({'error': 'No image part in the request'}), 400
