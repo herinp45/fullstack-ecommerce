@@ -9,7 +9,7 @@ from model import model, transform
 
 upload_bp = Blueprint('upload', __name__)
 
-@upload_bp.route('api/v1/upload_image', methods=['POST'])
+@upload_bp.route('/api/v1/upload_image', methods=['POST'])
 def upload_image():
     if 'image' not in request.files:
         return jsonify({'error': 'No image part in the request'}), 400
@@ -17,7 +17,9 @@ def upload_image():
     img = Image.open(file.stream).convert('RGB')
 
     #Extract features
-    img_tensor = transform(img).unsqueeze(0)
+    img_tensor = transform(img).unsqueeze(0) # Transforms to size (1, 3, 224, 224)
+
+    # Ensure the model is in evaluation mode
     with torch.no_grad():
         features = model(img_tensor).squeeze().numpy()
 
