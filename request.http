@@ -107,6 +107,17 @@ Content-Type: application/json
   "quantity": 7
 }
 
+### Test /upload-image
+POST http://localhost:5000/api/v1/upload_image
+Content-Type: multipart/form-data
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="nike_shoe_white.jpg"
+Content-Type: image/jpeg
+
+< ./frontend/public/assets/nike_shoe_white.jpg
+--boundary--
+
 
 
 
