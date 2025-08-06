@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 
-from upload import upload_bp
+from script.src.upload import upload_bp
 
 app = Flask(__name__)
 # Enable CORS for all routes
