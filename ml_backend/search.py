@@ -9,12 +9,18 @@ import pickle
 import numpy as np
 
 from model import model, transform
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+INDEX_PATH = os.path.join(BASE_DIR, "embeddings", "index.faiss")
+OPEN_PATH = os.path.join(BASE_DIR, "embeddings", "ids.pkl")
+
 
 search_bp = Blueprint('search', __name__)
 
 # Load FAISS index and product paths
-index = faiss.read_index("embeddings/index.faiss")
-with open("embeddings/ids.pkl", "rb") as f:
+index = faiss.read_index(INDEX_PATH)
+with open(OPEN_PATH, "rb") as f:
     product_ids = pickle.load(f)
 
 @search_bp.route("/search-image", methods=["POST"])

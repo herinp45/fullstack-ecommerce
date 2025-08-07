@@ -1,13 +1,17 @@
 
-import os
 import faiss
 import pickle
 import torch
 import numpy as np
 from PIL import Image
 from model import model, transform
+import os
 
-product_dir = "static"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # path to current file
+product_dir = os.path.join(BASE_DIR, 'static')
+
+
+
 image_paths = [os.path.join(product_dir, f) for f in os.listdir(product_dir) if f.endswith('.jpg')]
 
 vectors = []

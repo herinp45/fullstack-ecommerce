@@ -3,7 +3,7 @@ import torchvision.transforms as transforms
 import torch.nn as nn
 
 
-model = models.resnet50(pretrained=True)
+model = models.resnet50(weights=models.ResNet50_Weights.IMAGENET1K_V2)  # Load pre-trained ResNet-50 model
 model = nn.Sequential(*list(model.children())[:-1])  # Remove the last fully connected layer
 model.eval()  # Set the model to evaluation mode
 

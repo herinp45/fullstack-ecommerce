@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 
 from upload import upload_bp
+from search import search_bp
 
 app = Flask(__name__)
 # Enable CORS for all routes
