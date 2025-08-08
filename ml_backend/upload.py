@@ -1,34 +1,37 @@
 from flask import Blueprint, request, jsonify
 from PIL import Image
 from io import BytesIO
-import numpy as np
 import base64
-import torch
+import numpy as np
 
-from model import model, transform
+from model import get_model_and_transform
 
 upload_bp = Blueprint('upload', __name__)
 
 @upload_bp.route('/api/v1/upload_image', methods=['POST'])
 def upload_image():
-    if 'image' not in request.files:
-        return jsonify({'error': 'No image part in the request'}), 400
-    file = request.files['image']
-    img = Image.open(file.stream).convert('RGB')
+    try:
+        if 'image' not in request.files:
+            return jsonify({'error': 'No image part in the request'}), 400
 
-    #Extract features
-    img_tensor = transform(img).unsqueeze(0) # Transforms to size (1, 3, 224, 224)
+        file = request.files['image']
+        img = Image.open(file.stream).convert('RGB')
 
-    # Ensure the model is in evaluation mode
-    with torch.no_grad():
-        features = model(img_tensor).squeeze().numpy()
+        model, transform = get_model_and_transform()
+        img_tensor = transform(img).unsqueeze(0)
 
-    #Convert to base64
-    buffer = BytesIO()
-    img.save(buffer, format="JPEG")
-    img_base64 = base64.b64encode(buffer.getvalue()).decode()
-    return jsonify({
-        'vector': features.tolist(),
-        'preview': f"data:image/jpeg;base64,{img_base64}"
-    }), 200
+        import torch
+        with torch.no_grad():
+            features = model(img_tensor).squeeze().numpy()
 
+        buffer = BytesIO()
+        img.save(buffer, format="JPEG")
+        img_base64 = base64.b64encode(buffer.getvalue()).decode()
+
+        return jsonify({
+            'vector': features.tolist(),
+            'preview': f"data:image/jpeg;base64,{img_base64}"
+        }), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

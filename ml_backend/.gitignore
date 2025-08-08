@@ -35,3 +35,4 @@ uploads/
 *.log
 
 venv/**
+embeddings/**
