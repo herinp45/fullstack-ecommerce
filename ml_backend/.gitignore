@@ -33,3 +33,5 @@ uploads/
 
 # Logs
 *.log
+
+venv/**

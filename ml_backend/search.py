@@ -36,7 +36,7 @@ def search_image():
         vector = model(input_tensor).squeeze().numpy().astype('float32')
 
     # Run FAISS search
-    D, I = index.search(np.expand_dims(vector, axis=0), k=5)
+    D, I = index.search(np.expand_dims(vector, axis=0), k=3)  # Search for top 3 results
     results = [product_ids[i] for i in I[0]]
 
     return jsonify({"results": results})
