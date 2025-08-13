@@ -36,3 +36,4 @@ uploads/
 
 venv/**
 embeddings/**
+venv_clean/**

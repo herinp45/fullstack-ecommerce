@@ -10,6 +10,7 @@ import SearchResults from "./pages/SearchResults";
 import CheckOut from "./pages/CheckOut";
 import CheckOutResultPage from "./pages/CheckOutResultPage";
 import Home from "./pages/Home";
+import ImageSearch from "./pages/ImageSearch";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 {/* Define your routes here */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/image-search" element={<ImageSearch />} />
                 <Route path="/checkout" element={<PrivateRoute>
                     <CheckOut />
                 </PrivateRoute>

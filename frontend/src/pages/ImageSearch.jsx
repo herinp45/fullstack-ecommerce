@@ -2,9 +2,6 @@ import Alert from "../components/Alert";
 import Spinner from "../components/Spinner";
 import { useState } from "react";
 import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../context/AuthContext";
-
 
 function ImageSearch() {
     const [file, setFile] = useState(null);
@@ -31,12 +28,8 @@ function ImageSearch() {
         formData.append("image", file);
 
         try {
-            // const token = localStorage.getItem("authToken");
             const response = await axios.post("/api/v1/products/image-search", formData, {
-                headers: {
-                    // Authorization: `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data",
-                },
+                headers: { "Content-Type": "multipart/form-data" },
             });
             setSearchResults(response.data.results || []);
             setAlertMessage("Search completed successfully.");
@@ -49,29 +42,72 @@ function ImageSearch() {
         }
     }
 
-  return (
+    return (
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center py-10 px-4">
+            {/* Card Section */}
+            <div className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                    Image Search
+                </h1>
 
-    <div className="flex flex-col items-center justify-center h-screen">
-        {alertMessage && (<Alert type={alertType} message={alertMessage} />)}
-      <input type={"file"} accept="image/*"
-             onChange={handleFileChange} className="mb-4" />
-        <button className="px-4 py-2 bg-blue-600 text-white rounded"
-        onClick={handleImageSearch}>Search</button>
-        <div className="mt-8 text-gray-600">
-            {loading ? (
-                <Spinner />
-            ) : (
-                <div>
-                    {searchResults.map((url, i) => (
-                        <div key={i} className="mb-4">
-                            {url}
-                        </div>
-                    ))}
+                {alertMessage && (
+                    <Alert
+                        type={alertType}
+                        message={alertMessage}
+                        onClose={() => setAlertMessage("")}
+                    />
+                )}
+
+                <div className="flex flex-col sm:flex-row items-center gap-4">
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        className="block w-full sm:w-auto border border-gray-300 dark:border-gray-600 rounded-lg p-2 bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                    <button
+                        className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
+                        onClick={handleImageSearch}
+                        disabled={loading}
+                    >
+                        {loading ? "Searching..." : "Search"}
+                    </button>
+                </div>
+            </div>
+
+            {/* Results Section Below Card */}
+            <div className="w-full max-w-4xl mt-8">
+                {searchResults.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                        {searchResults.map((url, i) => (
+                            <div
+                                key={i}
+                                className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition"
+                            >
+                                <img
+                                    src={url}
+                                    alt={`Result ${i + 1}`}
+                                    className="w-full h-48 object-cover"
+                                />
+                                <div className="p-2 text-xs text-gray-500 dark:text-gray-400 truncate">
+                                    {url}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-gray-500 dark:text-gray-400 text-sm text-center">
+                        No results yet. Upload an image to start searching.
+                    </p>
+                )}
+            </div>
+            {loading && (
+                <div className="flex justify-center py-4">
+                    <Spinner />
                 </div>
             )}
         </div>
-    </div>
-  );
+    );
 }
 
 export default ImageSearch;
