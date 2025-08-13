@@ -15,6 +15,7 @@ function ImageSearch() {
     }
 
     async function handleImageSearch() {
+        setSearchResults([]); // Clear previous results
         if (!file) {
             setAlertMessage("Please select an image file.");
             setAlertType("error");
@@ -28,7 +29,7 @@ function ImageSearch() {
         formData.append("image", file);
 
         try {
-            const response = await axios.post("/api/v1/products/image-search", formData, {
+            const response = await axios.post("http://127.0.0.1:5000/api/v1/search-image", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             setSearchResults(response.data.results || []);
