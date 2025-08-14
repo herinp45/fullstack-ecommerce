@@ -44,20 +44,20 @@ function ImageSearch() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center py-10 px-4">
+        <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col items-center py-10 px-4">
+            {/* Alert Messages */}
+            {alertMessage && (
+                <Alert
+                    type={alertType}
+                    message={alertMessage}
+                    onClose={() => setAlertMessage("")}
+                />
+            )}
             {/* Card Section */}
             <div className="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
                 <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
                     Image Search
                 </h1>
-
-                {alertMessage && (
-                    <Alert
-                        type={alertType}
-                        message={alertMessage}
-                        onClose={() => setAlertMessage("")}
-                    />
-                )}
 
                 <div className="flex flex-col sm:flex-row items-center gap-4">
                     <input
@@ -75,6 +75,11 @@ function ImageSearch() {
                     </button>
                 </div>
             </div>
+
+            {/* Loading Spinner */}
+            {loading && (
+                <Spinner />
+            )}
 
             {/* Results Section Below Card */}
             <div className="w-full max-w-4xl mt-8">
@@ -102,11 +107,7 @@ function ImageSearch() {
                     </p>
                 )}
             </div>
-            {loading && (
-                <div className="flex justify-center py-4">
-                    <Spinner />
-                </div>
-            )}
+
         </div>
     );
 }
