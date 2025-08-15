@@ -28,7 +28,8 @@ for path in image_paths:
         vec = model(input_tensor).squeeze().cpu().numpy()
     print("Embedding vector shape:", vec.shape)
     vectors.append(vec)
-    ids.append(path)
+    # Store the image filename without the directory
+    ids.append(os.path.basename(path))
 
 vectors_np = np.vstack(vectors).astype('float32')
 print(f"Vector shape: {vectors_np.shape}")
