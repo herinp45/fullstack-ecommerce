@@ -2,11 +2,14 @@ package com.herin.ecommerce.controller;
 
 import com.herin.ecommerce.dto.ProductDTO.ProductRequestDTO;
 import com.herin.ecommerce.dto.ProductDTO.ProductResponseDTO;
+import org.springframework.http.*;
 import com.herin.ecommerce.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +21,7 @@ public class ProductController {
     /**
      * Product repository
      */
-    private ProductService productService;
+    private final ProductService productService;
 
     /**
      * Constructor
@@ -76,6 +79,23 @@ public class ProductController {
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
+    }
+
+    /**
+     *
+     */
+    @PostMapping("/search-by-image")
+    public ResponseEntity<?> searchProductsByImage(@RequestParam("image")
+                                                                          MultipartFile image) {
+        List<ProductResponseDTO> products = null;
+        try {
+            products = productService.searchProductsByImage(image);
+        }
+        catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error processing image search");
+        }
+        return ResponseEntity.ok(products);
     }
 
 }
