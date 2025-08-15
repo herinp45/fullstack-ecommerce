@@ -6,15 +6,21 @@ import com.herin.ecommerce.mapper.ProductMapper;
 import com.herin.ecommerce.model.ProductEntity;
 import com.herin.ecommerce.repository.CartItemRepository;
 import com.herin.ecommerce.repository.ProductRepository;
+import com.stripe.model.tax.Registration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -124,4 +130,28 @@ public class ProductService {
         return productMapper.mapToDTO(existing);
     }
 
+    public List<ProductResponseDTO> searchProductsByImage(MultipartFile image) throws IOException {
+        String pythonUrl = "http://localhost:5000/api/v1/products/search-by-image";
+        // Call the Python service to get the product IDs
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("image", new MultipartInputStreamFileResource(image.getInputStream(), image.getOriginalFilename()));
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+        // Use RestTemplate to send the request
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Map> responseEntity = restTemplate.postForEntity(pythonUrl, requestEntity, Map.class);
+
+        if (responseEntity.getStatusCode() != HttpStatus.OK) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to search products by image");
+        }
+        String matchedNames = (String) responseEntity.getBody().get("result");
+
+        return productRepository.findByImageUrlContainingIgnoreCase(matchedNames, PageRequest.of(0, 10))
+                .stream()
+                .map(productMapper::mapToDTO)
+                .toList();
+    }
 }
