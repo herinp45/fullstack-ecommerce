@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ProductService {
@@ -129,28 +130,11 @@ public class ProductService {
         return productMapper.mapToDTO(existing);
     }
 
-    public List<ProductResponseDTO> searchProductsByImage(MultipartFile image) throws IOException {
-        String pythonUrl = "http://localhost:5000/api/v1/products/search-by-image";
-        // Call the Python service to get the product IDs
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-
-        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("image", new MultipartInputStreamFileResource(image.getInputStream(), image.getOriginalFilename()));
-        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
-
-        // Use RestTemplate to send the request
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Map> responseEntity = restTemplate.postForEntity(pythonUrl, requestEntity, Map.class);
-
-        if (responseEntity.getStatusCode() != HttpStatus.OK) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to search products by image");
-        }
-        String matchedNames = (String) responseEntity.getBody().get("result");
-
-        return productRepository.findByImageUrlContainingIgnoreCase(matchedNames, PageRequest.of(0, 10))
+    public ProductResponseDTO searchProductsByImage(String image) throws IOException {
+        return productRepository.findByImageUrlContainingIgnoreCase(image, PageRequest.of(0, 1))
                 .stream()
+                .findFirst()
                 .map(productMapper::mapToDTO)
-                .toList();
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No products found with the given image"));
     }
 }

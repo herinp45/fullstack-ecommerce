@@ -86,16 +86,8 @@ public class ProductController {
      */
     @PostMapping("/search-by-image")
     public ResponseEntity<?> searchProductsByImage(@RequestParam("image")
-                                                                          MultipartFile image) {
-        List<ProductResponseDTO> products = null;
-        try {
-            products = productService.searchProductsByImage(image);
-        }
-        catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error processing image search");
-        }
-        return ResponseEntity.ok(products);
+                                                                          String image) throws IOException {
+        return ResponseEntity.ok(productService.searchProductsByImage(image));
     }
 
 }
