@@ -27,5 +27,14 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
      * @param pageable Pageable instance
      * @return Page<ProductEntity> list of products
      */
-    Page<ProductEntity> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrCategoryContainingIgnoreCase(String name, String description, String category, Pageable pageable);
+    Page<ProductEntity> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCaseOrCategoryContainingIgnoreCase
+    (String name, String description, String category, Pageable pageable);
+
+    /**
+     * Find products by image URL
+     * @param imageUrl String image URL of the product
+     * @param pageable Pageable instance
+     * @return Page<ProductEntity> list of products
+     */
+    Page<ProductEntity> findByImageUrlContainingIgnoreCase(String imageUrl, Pageable pageable);
 }
