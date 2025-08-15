@@ -53,13 +53,13 @@ def search_image():
         return jsonify({"error": "Invalid query vector dtype, expected float32"}), 400
 
     try:
-        D, I = index.search(np.expand_dims(vector, axis=0), k=3)
+        D, I = index.search(np.expand_dims(vector, axis=0), 1)  # search top 1 result
     except AssertionError as e:
         return jsonify({"error": "Search vector dimension mismatch"}), 400
     except Exception as e:
         return jsonify({"error": "Internal server error during search"}), 500
 
-    results = [product_ids[i] for i in I[0] if i < len(product_ids)]
+    result = product_ids[I[0][0]] if I.size > 0 else None
 
 
-    return jsonify({"results": results})
+    return jsonify({"result": result})
