@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.List;
@@ -81,13 +82,18 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
-    /**
-     *
-     */
-    @PostMapping("/search-by-image")
-    public ResponseEntity<?> searchProductsByImage(@RequestParam("image")
-                                                                          String image) throws IOException {
-        return ResponseEntity.ok(productService.searchProductsByImage(image));
+    public static class ImageRequest {
+        public String image;
     }
+
+    @PostMapping("/search-by-image")
+    public ResponseEntity<?> searchProductByImage(@RequestBody ImageRequest request) throws IOException {
+        ProductResponseDTO product = productService.searchProductsByImage(request.image);
+        if (product == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No products found with the given image");
+        }
+        return ResponseEntity.ok(product);
+    }
+
 
 }
