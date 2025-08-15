@@ -30,14 +30,40 @@ function ImageSearch() {
         formData.append("image", file);
 
         try {
-            const response = await axios.post("http://127.0.0.1:5000/api/v1/search-image",
-                formData, {
-                headers: { "Content-Type": "multipart/form-data" },
-            });
-            setSearchResult(response.data.results || null);
+            // 1️⃣ Send image to Python backend
+            const pythonRes = await axios.post(
+                "http://127.0.0.1:5000/api/v1/search-image",
+                formData,
+                { headers: { "Content-Type": "multipart/form-data" } }
+            );
+
+            if (!pythonRes.data || !pythonRes.data.result) {
+                setAlertMessage("No results found from Python backend.");
+                setAlertType("error");
+                return;
+            }
+            console.log("Python response:", pythonRes.data);
+            const matchedNames = {image: pythonRes.data.result}; // array of image names
+
+            // 2️⃣ Send matched names to Spring Boot to get product entities
+            const springRes = await axios.post(
+                "http://localhost:8082/api/v1/products/search-by-image",
+                matchedNames,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                    },
+                }
+            );
+            console.log("Spring response:", springRes.data);
+
+            setSearchResult(springRes.data || []);
             setAlertMessage("Search completed successfully.");
             setAlertType("success");
-        } catch (error) {
+        }
+        catch (error) {
+            console.error(error);
             setAlertMessage(error.message || "An error occurred during the search.");
             setAlertType("error");
         } finally {
@@ -79,28 +105,22 @@ function ImageSearch() {
             </div>
 
             {/* Loading Spinner */}
-            {loading && (
-                <Spinner />
-            )}
+            {loading && <Spinner />}
 
             {/* Results Section Below Card */}
-            {searchResult && searchResult.length > 0 ? (
-                searchResult.map((product) => (
+            {searchResult != null ? (
                     <ProductCard
-                        key={product.id}
-                        id={product.id}
-                        name={product.name}
-                        img={product.imageUrl}
-                        price={product.price}
-                        description={product.description}
+                        id={searchResult.id}
+                        name={searchResult.name}
+                        img={searchResult.imageUrl}
+                        price={searchResult.price}
+                        description={searchResult.description}
                     />
-                ))
             ) : (
-                <p className="text-gray-500 dark:text-gray-400 text-sm text-center">
+                <p className="text-gray-500 dark:text-gray-400 text-sm text-center mt-4">
                     No results yet. Upload an image to start searching.
                 </p>
             )}
-
         </div>
     );
 }
