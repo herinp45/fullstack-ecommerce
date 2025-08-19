@@ -9,7 +9,7 @@ from model import get_model_and_transform
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # path to current file
 product_dir = os.path.join(BASE_DIR, 'static')
 
-image_paths = [os.path.join(product_dir, f) for f in os.listdir(product_dir) if f.endswith('.jpg')]
+image_paths = [os.path.join(product_dir, f) for f in os.listdir(product_dir) if f.endswith('.webp') or f.endswith('.jpg') or f.endswith('.png')]
 
 print(f"Number of images: {len(image_paths)}")
 
@@ -44,4 +44,4 @@ faiss.write_index(index, "embeddings/index.faiss")
 with open("embeddings/ids.pkl", "wb") as f:
     pickle.dump(ids, f)
 
-print("✅ FAISS index built in CPU mode and saved.")
+print("FAISS index built in CPU mode and saved.")
