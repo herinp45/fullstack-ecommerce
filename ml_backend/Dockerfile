@@ -3,8 +3,9 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy the requirements file and install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirement.txt .
+RUN pip install --no-cache-dir torch==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir -r requirement.txt
 
 # Copy the application code
 COPY . .

@@ -1,0 +1,33 @@
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environment
+venv/
+venv_clean/
+.env
+
+# Ignore local dev files
+*.log
+*.DS_Store
+.idea/
+.vscode/
+
+# Ignore tests (if not needed in prod)
+tests/
+
+# Ignore Git files
+.git
+.gitignore
+
+# Ignore Docker files
+Dockerfile
+docker-compose.yml
+
+# Ignore images
+static/
+ml_backend.iml
+
+
