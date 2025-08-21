@@ -97,6 +97,9 @@ function Navbar() {
                         <Link to="/products" className="text-gray-800 dark:text-white hover:text-blue-600 hover:dark:text-blue-400">
                             Products
                         </Link>
+                        <Link to={"/image-search"} className="text-gray-800 dark:text-white hover:text-blue-600 hover:dark:text-blue-400">
+                            Image Search
+                        </Link>
                         <button
                             onClick={toggleDarkMode}
                             className="w-6 h-6 text-gray-800 dark:text-white hover:text-blue-600 hover:dark:text-blue-400"

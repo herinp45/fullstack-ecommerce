@@ -19,7 +19,6 @@ function App() {
                 {/* Define your routes here */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/image-search" element={<ImageSearch />} />
                 <Route path="/checkout" element={<PrivateRoute>
                     <CheckOut />
                 </PrivateRoute>
@@ -31,6 +30,7 @@ function App() {
                     <Route path="/products" element={<PrivateRoute><ProductList /></PrivateRoute>} />
                     <Route path="/product/:id" element={<PrivateRoute><ProductDetailPage /></PrivateRoute>} />
                     <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
+                    <Route path="/image-search" element={<PrivateRoute><ImageSearch /></PrivateRoute>} />
                     <Route path="/search" element={<PrivateRoute><SearchResults /></PrivateRoute>} />
                     <Route path="/success" element={<PrivateRoute><CheckOutResultPage success={true} /></PrivateRoute>} />
                     <Route path="/cancel" element={<PrivateRoute><CheckOutResultPage success={false} /></PrivateRoute>} />
