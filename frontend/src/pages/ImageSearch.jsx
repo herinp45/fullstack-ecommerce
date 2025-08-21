@@ -30,9 +30,9 @@ function ImageSearch() {
         formData.append("image", file);
 
         try {
-            // 1️⃣ Send image to Python backend
+            // Send image to Python backend
             const pythonRes = await axios.post(
-                "http://127.0.0.1:5000/api/v1/search-image",
+                "http://localhost:5000/api/v1/search-image",
                 formData,
                 { headers: { "Content-Type": "multipart/form-data" } }
             );
@@ -45,7 +45,7 @@ function ImageSearch() {
             console.log("Python response:", pythonRes.data);
             const matchedNames = {image: pythonRes.data.result}; // array of image names
 
-            // 2️⃣ Send matched names to Spring Boot to get product entities
+            // Send matched names to Spring Boot to get product entities
             const springRes = await axios.post(
                 "http://localhost:8082/api/v1/products/search-by-image",
                 matchedNames,
