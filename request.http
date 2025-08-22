@@ -10,15 +10,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA3M
 
 ###
 
-POST http://18.222.238.25:8082/api/v1/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMzIiLCJpYXQiOjE3NTMxMjQ3NzgsImV4cCI6MTc1MzEyODM3OH0.hEFFT5NGW0NJ8H6D7_thcfWFZc6p_zc-dHsyuI5iHlE
+POST http://localhost:8082/api/v1/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMzgiLCJpYXQiOjE3NTU4NzgyMjcsImV4cCI6MTc1NTg4MTgyN30.ZQGhl3jLV7eIT6eETB7ez0AosOLFeNcCe1XuZN7_XoE
 Content-Type: application/json
 
 {
   "name": "Nike Air Max White",
   "description": "Step into comfort and style with the Nike Air Max White sneakers. Designed with breathable mesh, responsive cushioning, and a sleek silhouette, these shoes offer all-day support whether you're on a run or hitting the streets. The minimalist white finish pairs effortlessly with any outfit.",
   "price": 129.99,
-  "imageUrl": "/assets/nike_shoe_white.jpg",
+  "imageUrl": "/assets/nike_shoe_white.webp",
   "category": "footwear",
   "quantity": 40
 }
@@ -56,13 +56,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA3M
 
 ## Register
 
-POST http://3.144.164.160:8082//api/v1/auth/register
+POST http://localhost:8082//api/v1/auth/register
 Content-Type: application/json
 
 
 {
-  "username": "a32",
-  "email": "bademail22@gmail.com",
+  "username": "a38",
+  "email": "bade22@gmail.com",
   "password": "123@patLe"
 }
 
@@ -70,11 +70,11 @@ Content-Type: application/json
 
 ###Login
 
-POST http://3.14.88.36:8082//api/v1/auth/login
+POST http://localhost:8082//api/v1/auth/login
 Content-Type: application/json
 
 {
-"identifier": "a32",
+"identifier": "a38",
 "password": "123@patLe"
 }
 
