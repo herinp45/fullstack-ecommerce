@@ -21,7 +21,7 @@ public class CORSConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://my-frontendecom-bucket.s3-website.us-east-2.amazonaws.com ",
+                        .allowedOrigins("http://my-frontendecom-bucket.s3-website.us-east-2.amazonaws.com",
                                         "http://localhost:3000") // Add your frontend URL here
                         .allowedMethods("GET", "POST", "PUT", "DELETE","PATCH", "OPTIONS")
                         .allowedHeaders("*")
