@@ -109,13 +109,17 @@ function ImageSearch() {
 
             {/* Results Section Below Card */}
             {searchResult != null ? (
-                    <ProductCard
-                        id={searchResult.id}
-                        name={searchResult.name}
-                        img={searchResult.imageUrl}
-                        price={searchResult.price}
-                        description={searchResult.description}
-                    />
+                <div className="mt-8 w-full flex justify-center">
+                    <div className="w-full max-w-sm">
+                        <ProductCard
+                            id={searchResult.id}
+                            name={searchResult.name}
+                            img={searchResult.imageUrl}
+                            price={searchResult.price}
+                            description={searchResult.description}
+                        />
+                    </div>
+                </div>
             ) : (
                 <p className="text-gray-500 dark:text-gray-400 text-sm text-center mt-4">
                     No results yet. Upload an image to start searching.
