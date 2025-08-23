@@ -7,7 +7,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,16 +21,37 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
 
 
+    /**
+     * Service for handling JWT operations such as extraction and validation.
+     */
     private final JWTService jwtService;
 
+    /**
+     * Application context for retrieving beans.
+     */
     private final ApplicationContext context;
 
+    /**
+     * Constructs a JwtFilter with the specified JWTService and ApplicationContext.
+     *
+     * @param jwtService the service for handling JWT operations
+     * @param context    the application context for retrieving beans
+     */
     @Autowired
     public JwtFilter(JWTService jwtService, ApplicationContext context) {
         this.jwtService = jwtService;
         this.context = context;
     }
 
+    /**
+     * Filters incoming HTTP requests to validate JWT tokens and set authentication in the security context.
+     *
+     * @param request     the incoming HTTP request
+     * @param response    the HTTP response
+     * @param filterChain the filter chain to pass the request and response to the next filter
+     * @throws ServletException if an error occurs during filtering
+     * @throws IOException      if an I/O error occurs during filtering
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
