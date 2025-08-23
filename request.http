@@ -5,23 +5,26 @@ GET https://examples.http-client.intellij.net/get
 ###
 
 ### GET request to findAll Product
-GET http://localhost:8082/api/v1/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA3MTMyOTcsImV4cCI6MTc1MDcxNjg5N30.Gt8JYTnNHCFB7JCj43goQCjnDRCc_uUayVPvZBuOzyU
+GET http://18.222.63.154:8082/api/v1/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMzgiLCJpYXQiOjE3NTU5ODE1OTUsImV4cCI6MTc1NTk4NTE5NX0.XuAlwMec-Hfk_qKZ1kAQr8OI36Q3zMYzDOJ00JJnw-A
 
 ###
 
-POST http://localhost:8082/api/v1/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMzgiLCJpYXQiOjE3NTU4NzgyMjcsImV4cCI6MTc1NTg4MTgyN30.ZQGhl3jLV7eIT6eETB7ez0AosOLFeNcCe1XuZN7_XoE
+POST http://18.222.63.154:8082/api/v1/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMzgiLCJpYXQiOjE3NTU5ODE1OTUsImV4cCI6MTc1NTk4NTE5NX0.XuAlwMec-Hfk_qKZ1kAQr8OI36Q3zMYzDOJ00JJnw-A
 Content-Type: application/json
 
 {
-  "name": "Nike Air Max White",
-  "description": "Step into comfort and style with the Nike Air Max White sneakers. Designed with breathable mesh, responsive cushioning, and a sleek silhouette, these shoes offer all-day support whether you're on a run or hitting the streets. The minimalist white finish pairs effortlessly with any outfit.",
-  "price": 129.99,
-  "imageUrl": "/assets/nike_shoe_white.webp",
-  "category": "footwear",
-  "quantity": 40
+  "name": "ASUS VivoBook 15 White",
+  "description": "Experience performance and style with the ASUS VivoBook 15 in White. Featuring a vibrant Full HD display, Intel Core processor, and ultra-fast SSD storage, this laptop is built for productivity, creativity, and entertainment. The slim, lightweight design with a sleek white finish makes it perfect for both work and travel. Enjoy powerful performance in a modern design that stands out wherever you go.",
+  "price": 749.99,
+  "imageUrl": "/assets/asus_laptop_white.webp",
+  "category": "laptops",
+  "quantity": 15
 }
+
+
+
 
 
 
@@ -48,8 +51,8 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8082/api/v1/products/19
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsaXBpNDUiLCJpYXQiOjE3NTA3MTM0OTcsImV4cCI6MTc1MDcxNzA5N30.rrSNqXT-EJEAtl5FKxXXT9E3Fr1TnM97SAruVo0HUuE
+DELETE http://18.222.63.154:8082/api/v1/products/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMzgiLCJpYXQiOjE3NTU5ODE1OTUsImV4cCI6MTc1NTk4NTE5NX0.XuAlwMec-Hfk_qKZ1kAQr8OI36Q3zMYzDOJ00JJnw-A
 
 
 ### User
@@ -70,7 +73,7 @@ Content-Type: application/json
 
 ###Login
 
-POST http://localhost:8082//api/v1/auth/login
+POST http://18.222.63.154:8082//api/v1/auth/login
 Content-Type: application/json
 
 {
