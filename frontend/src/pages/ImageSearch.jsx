@@ -32,7 +32,7 @@ function ImageSearch() {
         try {
             // Send image to Python backend
             const pythonRes = await axios.post(
-                "http://52.14.39.204:5000/api/v1/search-image",
+                "http://18.222.63.154:5000/api/v1/search-image",
                 formData,
                 { headers: { "Content-Type": "multipart/form-data" } }
             );
@@ -47,7 +47,7 @@ function ImageSearch() {
 
             // Send matched names to Spring Boot to get product entities
             const springRes = await axios.post(
-                "http://52.14.39.204:8082/api/v1/products/search-by-image",
+                "http://18.222.63.154:8082/api/v1/products/search-by-image",
                 matchedNames,
                 {
                     headers: {
