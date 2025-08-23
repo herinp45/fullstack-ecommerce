@@ -36,7 +36,7 @@ function ProductCard({ id, img, description, name, price }) {
                 </p>
 
                 {/* pushes button to bottom */}
-                <div className="mt-4 mb-4">
+                <div className="mt-6 mb-2">
                     <AddToCartControls id={id} />
                 </div>
             </div>
